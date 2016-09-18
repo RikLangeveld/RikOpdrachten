@@ -3,9 +3,6 @@ using System.Collections;
 
 public class angleToMousePosition : MonoBehaviour {
 
-
-	public float speed = 5f;
-
 	public float offSet = 0f;
 
 	void Update(){

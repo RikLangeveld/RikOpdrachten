@@ -3,30 +3,18 @@ using System.Collections;
 
 public class MoveCamara : MonoBehaviour {
 
-    public angleToMousePosition arm;
-    public GameObject GM;
-   
-
+    public float moveSpeed = 0.5f;
 	// Update is called once per frame
-	void FixedUpdate () {
-        if (transform.position.x < -173)
+	void Update () {
+        if (transform.position.x < -516)
         {
-            Debug.Log("check");
-            transform.Translate(1, 0, 0);
+            transform.Translate(moveSpeed, 0, 0);
         }
         else
         {
-            activateGame();
+            GameMaster.gm.setLevelActive = true;
         }
 
     }
 
-    public void activateGame()
-    {
-        arm.GetComponent<angleToMousePosition>().enabled = true;
-        arm.GetComponent<Weapon>().enabled = true;
-        AudioSource audio = GM.GetComponent<AudioSource>();
-        audio.Stop();
-    
-    }
 }

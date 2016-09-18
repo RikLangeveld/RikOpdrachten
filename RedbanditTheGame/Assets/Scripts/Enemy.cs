@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 
+    float aimTime;
+
     [System.Serializable]
     public class EnemyStats
     {
