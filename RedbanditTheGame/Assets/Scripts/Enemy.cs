@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class Enemy : MonoBehaviour {
 
     float aimTime;
+
+    public int targetRotation;
+    public int currentRotation;
 
     [System.Serializable]
     public class EnemyStats
@@ -21,4 +25,5 @@ public class Enemy : MonoBehaviour {
             GameMaster.KillEnemy(this);
         }
     }
+
 }

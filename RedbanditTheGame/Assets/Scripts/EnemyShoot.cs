@@ -4,7 +4,7 @@ using System.Collections;
 public class EnemyShoot : MonoBehaviour {
 
     public float fireRate = 0f;
-    public int damage = 10;
+    public float damage = 10;
     public LayerMask whatToHit;
     public Transform BulletTrailPrefab;
     public Transform hitPrefab;
@@ -77,6 +77,7 @@ public class EnemyShoot : MonoBehaviour {
             if (hit.collider.gameObject.tag == "Player")
             {
                 Debug.Log("We Hit " + hit.collider.name + " and did " + damage + " damage");
+                GameMaster.gm.playerDamage(damage);
             }
         }
 

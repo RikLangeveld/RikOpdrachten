@@ -18,6 +18,10 @@ public class GameMaster : MonoBehaviour {
 
     private float timer = 0;
 
+    //Alle Variabelen die de speler zelf beinvloeden worden hier opgeslagen. Op Deze manier is er makkelijker bij te komen, en ze zijn toch static.
+
+    float healt = 20;
+
     void Start()
     {
         if (gm == null)
@@ -57,5 +61,30 @@ public class GameMaster : MonoBehaviour {
         audio.Stop();
 
         setEnemiesActive = true;
+    }
+
+    /*
+     * Een functie voor het damage van de speler. 
+     * Als de health van de player 0 is dan wordt het event playerDeath aangeroepen.
+     */
+    public void playerDamage(float damage)
+    {
+        healt -= 10;
+
+        Debug.Log("de speler heeft nog " + healt + " health");
+        
+        if (healt <= 0)
+        {
+            playerDeath();
+        }
+    }
+
+    /*
+     * Het event dat alles regelt als de speler zijn health op is.
+     */
+
+    public void playerDeath()
+    {
+
     }
 }
