@@ -6,13 +6,10 @@ public class Enemy : MonoBehaviour {
 
     float aimTime;
 
-    public int targetRotation;
-    public int currentRotation;
-
     [System.Serializable]
     public class EnemyStats
     {
-        public int Health = 100;
+        public int Health = 10;
     }
 
     public EnemyStats stats = new EnemyStats();

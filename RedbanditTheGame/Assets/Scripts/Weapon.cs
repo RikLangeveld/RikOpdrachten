@@ -19,6 +19,8 @@ public class Weapon : MonoBehaviour {
     float timeToFire = 0;
 	Transform firePoint;
 
+    public bool canShoot;
+
 	// Use this for initialization
 	void Start () {
 
@@ -35,20 +37,22 @@ public class Weapon : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-
-        if (fireRate == 0)
+        if (canShoot)
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (fireRate == 0)
             {
-                Shoot();
+                if (Input.GetButtonDown("Fire1"))
+                {
+                    Shoot();
+                }
             }
-        }
-        else
-        {
-            if (Input.GetButton("Fire1") && Time.time > timeToFire)
+            else
             {
-                timeToFire = Time.time + 1 / fireRate;
-                Shoot();
+                if (Input.GetButton("Fire1") && Time.time > timeToFire)
+                {
+                    timeToFire = Time.time + 1 / fireRate;
+                    Shoot();
+                }
             }
         }
 	}

@@ -5,15 +5,14 @@ using UnityEngine.UI;
 public class MoveAngleToPlayer : MonoBehaviour {
 
     public float offSet = 0f;
-    public GameObject player;
+    GameObject player;
 
     //Snelheid dat hij draait. 
-    public float speed = 1;
+    public float turnSpeed = 1;
 
     public float timeUntilShoot = 30;
 
     float rotZ;
-    Vector3 difference;
     Quaternion rotation;
 
     private bool alreadyActivated = false;
@@ -25,6 +24,8 @@ public class MoveAngleToPlayer : MonoBehaviour {
 
     public void Start()
     {
+        player = GameObject.Find("Player");
+
         // subtracting the position of the enemy from the player postion (richtings vector bepalen)
         Vector3 difference = player.transform.position - transform.position;
 
@@ -48,20 +49,10 @@ public class MoveAngleToPlayer : MonoBehaviour {
 
         if (GameMaster.setEnemiesActive)
         {
-            /*
-            // subtracting the position of the enemy from the player postion (richtings vector bepalen)
-            difference = player.transform.position - transform.position;
 
-            difference.Normalize();
+            timeUntilShoot -= turnSpeed;
 
-            // find the angle in degrees.
-            rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg + offSet;
-            Quaternion rotation = Quaternion.AngleAxis(rotZ, Vector3.forward);
-            */
-
-            timeUntilShoot -= speed;
-
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, speed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, turnSpeed * Time.deltaTime);
 
             if (timeUntilShoot <= 0 && !alreadyActivated)
             {
