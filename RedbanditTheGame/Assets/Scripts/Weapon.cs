@@ -65,11 +65,13 @@ public class Weapon : MonoBehaviour {
         {
             Debug.DrawLine(firePointPosition, hit.point, Color.red);
 
-            Enemy enemy = hit.collider.GetComponent<Enemy>();
-            if ( enemy != null)
+            if (hit.collider.gameObject.tag == "Enemy")
             {
-                Debug.Log("We Hit " + hit.collider.name + " and did " + damage + " damage");
-                enemy.DamageEnemy(damage);
+                hitOnEnemy(hit);
+            }
+            else if (hit.collider.gameObject.tag == "ShootItem")
+            {
+                hit.rigidbody.AddForceAtPosition(new Vector2(mousePosition.x - firePointPosition.x, mousePosition.y - firePointPosition.y) * 60, hit.point);
             }
         }
 
@@ -125,5 +127,23 @@ public class Weapon : MonoBehaviour {
         float size = Random.Range(0.6f, 0.9f);
         clone.localScale = new Vector3 (size, size, size);
         Destroy(clone.gameObject, 0.02f);
+    }
+
+    public void hitOnEnemy(RaycastHit2D hit)
+    {
+        Enemy enemy = hit.collider.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            Debug.Log("We Hit " + hit.collider.name + " and did " + damage + " damage");
+            enemy.DamageEnemy(damage);
+        }
+    }
+
+    public void hitOnItem(RaycastHit2D hit)
+    {
+        GameObject item = hit.collider.gameObject;
+
+       Rigidbody2D rb = item.gameObject.GetComponent<Rigidbody2D>();
+        rb.AddForce(Vector3.forward * 300);
     }
 }
