@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour {
     public Transform MuzzleFlashPrefab;
 
     public AudioClip impact;
+    public AudioClip audioReload;
     AudioSource audio;
 
     float timeToSpawnEffect = 0;
@@ -20,6 +21,14 @@ public class Weapon : MonoBehaviour {
 	Transform firePoint;
 
     public bool canShoot;
+    bool reloading = false;
+    public int reloadTime = 90;
+    int reloadTimer = 0;
+
+    //munition in gun
+    int magazijnSize;
+    int bulletsInGun;
+    
 
 	// Use this for initialization
 	void Start () {
@@ -32,12 +41,26 @@ public class Weapon : MonoBehaviour {
         }
 
         audio = GetComponent<AudioSource>();
-	}
+        bulletsInGun = 6;
+        magazijnSize = 6;
+
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (canShoot)
+        if (reloading)
+        {
+            reloadTimer++;
+
+            if (reloadTimer > reloadTime)
+            {
+                reloading = false;
+                reloadTimer = 0;
+            }
+        }
+
+        if (canShoot && !reloading && bulletsInGun > 0)
         {
             if (fireRate == 0)
             {
@@ -55,10 +78,22 @@ public class Weapon : MonoBehaviour {
                 }
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.R) && bulletsInGun < magazijnSize && !reloading) 
+        {
+
+            reloading = true;
+            audio.PlayOneShot(audioReload, 0.7f);
+
+            canShoot = false;
+            this.bulletsInGun += GameMaster.gm.reload(magazijnSize, bulletsInGun);
+        } 
 	}
 
     void Shoot ()
     {
+        bulletsInGun -= 1;
+
         // Zorgt ervoor dat de positie van de muis wordt omgezet naar de positie binnen de camera.
         Vector2 mousePosition = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
         Vector2 firePointPosition = new Vector2(firePoint.position.x, firePoint.position.y);

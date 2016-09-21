@@ -19,3 +19,4 @@ C:\Users\rik\Desktop\RikOpdrachten\RedbanditTheGame\Temp\bin\Debug\UnityEngine.N
 C:\Users\rik\Desktop\RikOpdrachten\RedbanditTheGame\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 C:\Users\rik\Desktop\RikOpdrachten\RedbanditTheGame\obj\Debug\Assembly-CSharp.dll
 C:\Users\rik\Desktop\RikOpdrachten\RedbanditTheGame\obj\Debug\Assembly-CSharp.pdb
+C:\Users\rik\Desktop\RikOpdrachten\RedbanditTheGame\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb
