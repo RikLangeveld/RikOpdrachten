@@ -5,10 +5,13 @@ public class Weapon : MonoBehaviour {
 
 	public float fireRate = 0f;
 	public int damage = 10;
+    public int bulletSpeed;
+
 	public LayerMask whatToHit;
     public Transform BulletTrailPrefab;
     public Transform hitPrefab;
     public Transform MuzzleFlashPrefab;
+    public GameObject bullet;
 
     public AudioClip impact;
     public AudioClip audioReload;
@@ -93,94 +96,39 @@ public class Weapon : MonoBehaviour {
     void Shoot ()
     {
         bulletsInGun -= 1;
+        Effect();
 
         // Zorgt ervoor dat de positie van de muis wordt omgezet naar de positie binnen de camera.
         Vector2 mousePosition = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
         Vector2 firePointPosition = new Vector2(firePoint.position.x, firePoint.position.y);
-        RaycastHit2D hit = Physics2D.Raycast (firePointPosition, mousePosition - firePointPosition, 1000000, whatToHit);
 
-        
-        if (hit.collider != null)
-        {
-            Debug.DrawLine(firePointPosition, hit.point, Color.red);
+        //bepaal de richting en daarvan de normaal vector.
+        Vector2 direction = mousePosition - firePointPosition;
+        Vector2 directionNormal = direction.normalized;
 
-            if (hit.collider.gameObject.tag == "Enemy")
-            {
-                hitOnEnemy(hit);
-            }
-            else if (hit.collider.gameObject.tag == "ShootItem")
-            {
-                hit.rigidbody.AddForceAtPosition(new Vector2(mousePosition.x - firePointPosition.x, mousePosition.y - firePointPosition.y) * 60, hit.point);
-            }
-        }
+        // In dit stuk code wordt de bullet gemaakt en wordt de snelheid mee gegeven.
+        GameObject clone = (GameObject)Instantiate(bullet, (new Vector2(firePoint.position.x, firePoint.position.y) + direction.normalized * 6), Quaternion.Euler(directionNormal));
+        Rigidbody2D clonerb = clone.GetComponent<Rigidbody2D>();
+        clonerb.velocity = direction.normalized * bulletSpeed;
 
-        if (Time.time >= timeToSpawnEffect)
-        {
-            Vector3 hitPos;
-            Vector3 hitNormal;
-
-            if (hit.collider == null)
-            {
-                hitPos = (mousePosition - firePointPosition) * 1000;
-                hitNormal = new Vector3(9999, 9999, 9999);
-            }
-
-            else
-            {
-                hitPos = hit.point;
-                hitNormal = hit.normal;
-            }
-
-
-            Effect(hitPos, hitNormal);
-            timeToSpawnEffect = Time.time + 1 / effectSpawnRate;
-        }
 
     }
 
-    void Effect(Vector3 hitPos, Vector3 hitNormal)
+    void Effect()
     {
         // play the shoot sound
         audio.PlayOneShot(impact, 0.7f);
-
-        Transform trail = (Transform)Instantiate(BulletTrailPrefab, firePoint.position, firePoint.rotation);
-        LineRenderer lr = trail.GetComponent<LineRenderer>();
-
-        if (lr != null)
-        {
-            // SET POSITIONS
-            lr.SetPosition(0, firePoint.position);
-            lr.SetPosition(1, hitPos);
-        }
-
-        Destroy(trail.gameObject, 5f);
-
-        if (hitNormal != new Vector3(9999, 9999, 9999))
-        {
-           Transform hitParticle = (Transform)Instantiate(hitPrefab, hitPos, Quaternion.FromToRotation (Vector3.right, hitNormal) );
-            Destroy(hitParticle.gameObject, 1f);
-        }
 
         Transform clone = (Transform)Instantiate(MuzzleFlashPrefab, firePoint.position, firePoint.rotation);
         clone.parent = firePoint;
         float size = Random.Range(0.6f, 0.9f);
         clone.localScale = new Vector3 (size, size, size);
-        Destroy(clone.gameObject, 0.02f);
-    }
-
-    public void hitOnEnemy(RaycastHit2D hit)
-    {
-        Enemy enemy = hit.collider.GetComponent<Enemy>();
-        if (enemy != null)
-        {
-            Debug.Log("We Hit " + hit.collider.name + " and did " + damage + " damage");
-            enemy.DamageEnemy(damage);
-        }
+        Destroy(clone.gameObject, 0.04f);
     }
 
     public void hitOnItem(RaycastHit2D hit)
     {
-        GameObject item = hit.collider.gameObject;
+       GameObject item = hit.collider.gameObject;
 
        Rigidbody2D rb = item.gameObject.GetComponent<Rigidbody2D>();
         rb.AddForce(Vector3.forward * 300);
