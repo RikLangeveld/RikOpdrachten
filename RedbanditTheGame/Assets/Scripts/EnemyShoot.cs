@@ -62,46 +62,47 @@ public class EnemyShoot : MonoBehaviour {
 
     void Shoot()
     {
-        Vector2 playerPosition = new Vector2(player.transform.position.x, player.transform.position.y);
-        Vector2 firePointPosition = new Vector2(firePoint.position.x, firePoint.position.y);
-        Debug.Log(playerPosition - firePointPosition);
-        RaycastHit2D hit = Physics2D.Raycast(firePointPosition, playerPosition - firePointPosition, 1000000, whatToHit);
 
-        Debug.DrawLine(firePointPosition, (playerPosition - firePointPosition) * 100);
+            Vector2 playerPosition = new Vector2(player.transform.position.x, player.transform.position.y);
+            Vector2 firePointPosition = new Vector2(firePoint.position.x, firePoint.position.y);
+            Debug.Log(playerPosition - firePointPosition);
+            RaycastHit2D hit = Physics2D.Raycast(firePointPosition, playerPosition - firePointPosition, 1000000, whatToHit);
 
-        if (hit.collider != null)
-        {
-            Debug.DrawLine(firePointPosition, hit.point, Color.red);
+            Debug.DrawLine(firePointPosition, (playerPosition - firePointPosition) * 100);
+
+            if (hit.collider != null)
+            {
+                Debug.DrawLine(firePointPosition, hit.point, Color.red);
 
             
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                Debug.Log("We Hit " + hit.collider.name + " and did " + damage + " damage");
-                GameMaster.gm.playerDamage(damage);
-            }
-        }
-
-        if (Time.time >= timeToSpawnEffect)
-        {
-            Vector3 hitPos;
-            Vector3 hitNormal;
-
-            if (hit.collider == null)
-            {
-                hitPos = (playerPosition - firePointPosition) * 1000;
-                hitNormal = new Vector3(9999, 9999, 9999);
+                if (hit.collider.gameObject.tag == "Player")
+                {
+                    Debug.Log("We Hit " + hit.collider.name + " and did " + damage + " damage");
+                    GameMaster.gm.playerDamage(damage);
+                }
             }
 
-            else
+            if (Time.time >= timeToSpawnEffect)
             {
-                hitPos = hit.point;
-                hitNormal = hit.normal;
+                Vector3 hitPos;
+                Vector3 hitNormal;
+
+                if (hit.collider == null)
+                {
+                    hitPos = (playerPosition - firePointPosition) * 1000;
+                    hitNormal = new Vector3(9999, 9999, 9999);
+                }
+
+                else
+                {
+                    hitPos = hit.point;
+                    hitNormal = hit.normal;
+                }
+
+
+                Effect(hitPos, hitNormal);
+                timeToSpawnEffect = Time.time + 1 / effectSpawnRate;
             }
-
-
-            Effect(hitPos, hitNormal);
-            timeToSpawnEffect = Time.time + 1 / effectSpawnRate;
-        }
 
     }
 

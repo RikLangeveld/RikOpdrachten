@@ -99,7 +99,7 @@ public class Weapon : MonoBehaviour {
         Vector2 firePointPosition = new Vector2(firePoint.position.x, firePoint.position.y);
         RaycastHit2D hit = Physics2D.Raycast (firePointPosition, mousePosition - firePointPosition, 1000000, whatToHit);
 
-        Debug.DrawLine(firePointPosition, (mousePosition - firePointPosition)*100);
+        
         if (hit.collider != null)
         {
             Debug.DrawLine(firePointPosition, hit.point, Color.red);
@@ -153,7 +153,7 @@ public class Weapon : MonoBehaviour {
             lr.SetPosition(1, hitPos);
         }
 
-        Destroy(trail.gameObject, 0.04f);
+        Destroy(trail.gameObject, 5f);
 
         if (hitNormal != new Vector3(9999, 9999, 9999))
         {
