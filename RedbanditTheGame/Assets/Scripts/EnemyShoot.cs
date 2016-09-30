@@ -5,16 +5,20 @@ public class EnemyShoot : MonoBehaviour {
 
     public float fireRate = 0f;
     public float damage = 10;
+    public float bulletSpeed = 10f;
+    public float shootTimer = 10f;
+
     public LayerMask whatToHit;
     public Transform BulletTrailPrefab;
     public Transform hitPrefab;
     public Transform MuzzleFlashPrefab;
+    public GameObject bulletEnemy;
 
+    [HideInInspector]
     public bool timeToShoot = false;
 
     // In de start functie wordt deze gevuld met de player zodat de raycast juist wordt gevult.
     GameObject player;
-
 
     // Audio variabelen. 
     public AudioClip impact;
@@ -24,18 +28,9 @@ public class EnemyShoot : MonoBehaviour {
     public float effectSpawnRate = 10;
 
     float timeToFire = 0;
+    float shootTimerStart;
+
     Transform firePoint;
-
-    void Update()
-    {
-        if (timeToShoot)
-        {
-            Shoot();
-            timeToShoot = false;
-        }
-
-        
-    }
 
     // Use this for initialization
     void Start()
@@ -56,6 +51,20 @@ public class EnemyShoot : MonoBehaviour {
         }
 
         audio = GetComponent<AudioSource>();
+
+        shootTimerStart = shootTimer;
+    }
+
+    void Update()
+    {
+        shootTimer -= Time.deltaTime;
+
+        if (timeToShoot && shootTimer < 0)
+        {
+            Shoot();
+            shootTimer = shootTimerStart;
+        }
+
     }
 
 
@@ -65,7 +74,10 @@ public class EnemyShoot : MonoBehaviour {
 
             Vector2 playerPosition = new Vector2(player.transform.position.x, player.transform.position.y);
             Vector2 firePointPosition = new Vector2(firePoint.position.x, firePoint.position.y);
-            Debug.Log(playerPosition - firePointPosition);
+
+            Vector2 direction = playerPosition - firePointPosition;
+            Vector2 directionNormal = direction.normalized;   
+
             RaycastHit2D hit = Physics2D.Raycast(firePointPosition, playerPosition - firePointPosition, 1000000, whatToHit);
 
             Debug.DrawLine(firePointPosition, (playerPosition - firePointPosition) * 100);
@@ -74,43 +86,36 @@ public class EnemyShoot : MonoBehaviour {
             {
                 Debug.DrawLine(firePointPosition, hit.point, Color.red);
 
-            
+                /* Als de speler in geraakt wordt door de raycast moet er een bullet worden gemaakt.  */
                 if (hit.collider.gameObject.tag == "Player")
-                {
-                    Debug.Log("We Hit " + hit.collider.name + " and did " + damage + " damage");
-                    GameMaster.gm.playerDamage(damage);
-                }
-            }
+                    {
 
-            if (Time.time >= timeToSpawnEffect)
-            {
-                Vector3 hitPos;
-                Vector3 hitNormal;
+                    Effect();
 
-                if (hit.collider == null)
-                {
-                    hitPos = (playerPosition - firePointPosition) * 1000;
-                    hitNormal = new Vector3(9999, 9999, 9999);
-                }
+                    GameObject clone = (GameObject)Instantiate(bulletEnemy, (new Vector2(firePoint.position.x, firePoint.position.y) + directionNormal * 6), Quaternion.Euler(directionNormal));
+                    Rigidbody2D clonerb = clone.GetComponent<Rigidbody2D>();
+                    clonerb.velocity = directionNormal * bulletSpeed;
 
-                else
-                {
-                    hitPos = hit.point;
-                    hitNormal = hit.normal;
-                }
-
-
-                Effect(hitPos, hitNormal);
-                timeToSpawnEffect = Time.time + 1 / effectSpawnRate;
+                    }
             }
 
     }
 
-    void Effect(Vector3 hitPos, Vector3 hitNormal)
+    void Effect()
     {
         // play the shoot sound
         audio.PlayOneShot(impact, 0.7f);
 
+        Transform clone = (Transform)Instantiate(MuzzleFlashPrefab, firePoint.position, firePoint.rotation);
+        clone.parent = firePoint;
+        float size = Random.Range(0.6f, 0.9f);
+        clone.localScale = new Vector3(size, size, size);
+        Destroy(clone.gameObject, 0.04f);
+
+
+        // Dit is het oude effect dat gebruikt werdt toen er nog lijnen gemaakt moesten worden. Wil het 
+        // nog ff bewaren als referntie kader.
+        /*
         Transform trail = (Transform)Instantiate(BulletTrailPrefab, firePoint.position, firePoint.rotation);
         LineRenderer lr = trail.GetComponent<LineRenderer>();
 
@@ -134,5 +139,6 @@ public class EnemyShoot : MonoBehaviour {
         float size = Random.Range(0.6f, 0.9f);
         clone.localScale = new Vector3(size, size, size);
         Destroy(clone.gameObject, 0.02f);
+        */
     }
 }

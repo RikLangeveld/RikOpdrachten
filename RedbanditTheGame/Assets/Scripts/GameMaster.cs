@@ -28,6 +28,7 @@ public class GameMaster : MonoBehaviour {
 
     float healt = 20;
 
+
     void Start()
     {
         if (gm == null)
@@ -121,5 +122,11 @@ public class GameMaster : MonoBehaviour {
     void SetBulletStackUI()
     {
         bulletStackText.text =  stackBullets.ToString();
+    }
+
+    public static bool IsVisibleToCamera(Transform transform)
+    {
+        Vector3 visTest = Camera.main.WorldToViewportPoint(transform.position);
+        return (visTest.x >= 0 && visTest.y >= 0) && (visTest.x <= 1 && visTest.y <= 1) && visTest.z >= 0;
     }
 }

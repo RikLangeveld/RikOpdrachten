@@ -17,14 +17,15 @@ public class MoveAngleToPlayer : MonoBehaviour {
 
     private bool alreadyActivated = false;
 
-    // variabelen voor de bar.
-    public Image shootBar;
-    float fullBarAmount;
-
 
     public void Start()
     {
         player = GameObject.Find("Player");
+
+    }
+
+    // Update is called once per frame
+    void Update () {
 
         // subtracting the position of the enemy from the player postion (richtings vector bepalen)
         Vector3 difference = player.transform.position - transform.position;
@@ -40,28 +41,14 @@ public class MoveAngleToPlayer : MonoBehaviour {
 
         difference.Normalize();
 
-        fullBarAmount = timeUntilShoot;
-
-    }
-
-    // Update is called once per frame
-    void Update () {
-
         if (GameMaster.setEnemiesActive)
         {
 
-            timeUntilShoot -= turnSpeed;
-
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, turnSpeed * Time.deltaTime);
 
-            if (timeUntilShoot <= 0 && !alreadyActivated)
-            {
-                EnemyShoot enemyShoot = GetComponent<EnemyShoot>();
-                enemyShoot.timeToShoot = true;
-                alreadyActivated = true;
-            }
-
-            shootBar.fillAmount = timeUntilShoot/fullBarAmount;
+            EnemyShoot enemyShoot = GetComponent<EnemyShoot>();
+            enemyShoot.timeToShoot = true;
+            alreadyActivated = true;
 
         }
     }

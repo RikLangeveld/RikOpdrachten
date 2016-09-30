@@ -18,6 +18,10 @@ public class Bullet : MonoBehaviour {
         {
             HitOnEnemy(hit);
         }
+        else if (hit.tag == "player")
+        {
+            Debug.Log("checkerTheCheckCheck");
+        }
         else
         {
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
