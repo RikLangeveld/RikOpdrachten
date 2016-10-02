@@ -1,32 +1,33 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour {
 
     public static GameMaster gm;
     public GameObject playerArm;
     public Text bulletStackText;
+    public Image healthBar;
     public Canvas canvas;
 
     AudioSource audio;
 
     // sets all the enemies on active
     public static bool setEnemiesActive = false;
-
     public bool setLevelActive = false;
-
     public float waitToStart = 10;
-
     private float timer = 0;
 
     //Curency
 
     public int stackBullets = 0;
 
-    //Alle Variabelen die de speler zelf beinvloeden worden hier opgeslagen. Op Deze manier is er makkelijker bij te komen, en ze zijn toch static.
+    //Alle Variabelen die de speler zelf beinvloeden worden hier opgeslagen. Op Deze manier is er makkelijker bij te komen.
 
-    float healt = 20;
+    public float Playerhealt = 100;
+
+    private float maxHealth;
 
 
     void Start()
@@ -34,6 +35,7 @@ public class GameMaster : MonoBehaviour {
         if (gm == null)
         {
             gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
+            maxHealth = Playerhealt;
         }
 
         audio = GetComponent<AudioSource>();
@@ -59,11 +61,6 @@ public class GameMaster : MonoBehaviour {
         }
     }
 
-    public static void KillEnemy(Enemy enemy)
-    {
-        Destroy(enemy.gameObject);
-    }
-
     public void activateGame()
     {
 
@@ -80,11 +77,11 @@ public class GameMaster : MonoBehaviour {
      */
     public void playerDamage(float damage)
     {
-        healt -= 10;
+        Playerhealt -= damage;
 
-        Debug.Log("de speler heeft nog " + healt + " health");
+        healthBar.fillAmount = 1 * Playerhealt / maxHealth; 
         
-        if (healt <= 0)
+        if (Playerhealt <= 0)
         {
             playerDeath();
         }
@@ -96,9 +93,14 @@ public class GameMaster : MonoBehaviour {
 
     public void playerDeath()
     {
-
+        loadCurrentScene();
     }
-
+    
+    public void loadCurrentScene()
+    {
+        int scene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(scene, LoadSceneMode.Single);
+    }
 
     public int reload(int magazijnSize, int bulletsInGun)
     {
@@ -117,6 +119,12 @@ public class GameMaster : MonoBehaviour {
             SetBulletStackUI();
             return 0;
         }
+    }
+
+    public void AddBulletsToStack(int bullets)
+    {
+        stackBullets += bullets;
+        SetBulletStackUI();
     }
 
     void SetBulletStackUI()
