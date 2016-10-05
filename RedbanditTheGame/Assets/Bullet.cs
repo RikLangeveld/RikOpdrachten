@@ -17,7 +17,6 @@ public class Bullet : MonoBehaviour {
     {
         justOutofGun = true;
         Invoke("ChangeJustOutOfGun", 0.1f);
-        Debug.Log("check1");
     }
 
     public void OnCollisionEnter2D(Collision2D col)
@@ -31,7 +30,7 @@ public class Bullet : MonoBehaviour {
             HitOnPlayer(hit);
         else if (hit.tag == "Bullet" && justOutofGun && hit.GetComponent<Bullet>().justOutofGun == true)
         { 
-            Debug.Log("check");
+            //Do Nothing
         }
         else
         {

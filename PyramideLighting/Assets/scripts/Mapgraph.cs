@@ -55,4 +55,27 @@ public class Mapgraph : MonoBehaviour {
 
         this.tiles[row + col].transform.position = new Vector3(10 * row, yOffset, 10 * col);
     }
+
+    public void Wall(bool torch, string side)
+    {
+        Instantiate(wall);
+
+        if (torch)
+        {
+            switch (side)
+            {
+                case ("North"):
+                    break;
+
+                case ("East"):
+                    break;
+
+                case ("South"):
+                    break;
+                case ("West"):
+                    break;
+
+            }
+        }
+    }
 }
