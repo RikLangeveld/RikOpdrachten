@@ -13,14 +13,17 @@ public class GameMaster : MonoBehaviour {
 
     AudioSource audio;
 
+    public AudioClip hurt; 
+
     // sets all the enemies on active
     public static bool setEnemiesActive = false;
     public bool setLevelActive = false;
     public float waitToStart = 10;
-    private float timer = 0;
+
+    private float timerStartGame = 0;
+    private float timerHurtSound = 0;
 
     //Curency
-
     public int stackBullets = 0;
 
     //Alle Variabelen die de speler zelf beinvloeden worden hier opgeslagen. Op Deze manier is er makkelijker bij te komen.
@@ -49,16 +52,18 @@ public class GameMaster : MonoBehaviour {
     {
         if (setLevelActive)
         {
-            timer += Time.deltaTime;
+            timerStartGame += Time.deltaTime;
         }
 
-        if (timer > waitToStart)
+        if (timerStartGame > waitToStart)
         {
             setLevelActive = false;
-            timer = 0;
-
+            timerStartGame = 0;
             activateGame();
         }
+
+        //Timers
+        timerHurtSound--;
     }
 
     public void activateGame()
@@ -66,7 +71,7 @@ public class GameMaster : MonoBehaviour {
 
         playerArm.GetComponent<angleToMousePosition>().enabled = true;
         playerArm.GetComponent<Weapon>().enabled = true;
-        audio.Stop();
+        //audio.Stop();
 
         setEnemiesActive = true;
     }
@@ -77,6 +82,13 @@ public class GameMaster : MonoBehaviour {
      */
     public void playerDamage(float damage)
     {
+       
+        if (timerHurtSound < 0)
+        {
+            audio.PlayOneShot(hurt, 1f);
+            timerHurtSound = 10;  
+        }
+
         Playerhealt -= damage;
 
         healthBar.fillAmount = 1 * Playerhealt / maxHealth; 

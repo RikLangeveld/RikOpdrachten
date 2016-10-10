@@ -7,6 +7,8 @@ public class Bullet : MonoBehaviour {
 
     public int damage;
 
+    public GameObject bulletInpact;
+
 
     private bool justOutofGun;
 
@@ -27,10 +29,19 @@ public class Bullet : MonoBehaviour {
         if (hit.tag == "Enemy")
             HitOnEnemy(hit);
         else if (hit.tag == "Player")
+        {
             HitOnPlayer(hit);
+        }
         else if (hit.tag == "Bullet" && justOutofGun && hit.GetComponent<Bullet>().justOutofGun == true)
         { 
             //Do Nothing
+        }
+        else if (hit.tag == "Bullet")
+        {
+            GameObject bulletInpact = Instantiate(this.bulletInpact);
+            bulletInpact.transform.position = transform.position;
+            Destroy(this.gameObject);
+
         }
         else
         {

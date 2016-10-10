@@ -35,7 +35,6 @@ public class Enemy : MonoBehaviour {
 
         if (random > 3)
         {
-            Debug.Log("check");
            GameObject clone = Instantiate(bulletPickUpp);
            clone.gameObject.transform.position = transform.position;
         }

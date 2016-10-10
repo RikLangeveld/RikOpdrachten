@@ -40,6 +40,7 @@ public class PlayerController2D : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Space) && extraJumps > 0)
         {
             extraJumps--;
+            rb2D.velocity = new Vector2(rb2D.velocity.x, 0); ;
             rb2D.AddForce(new Vector2(0, jumpHeight * 100));
         }
 
