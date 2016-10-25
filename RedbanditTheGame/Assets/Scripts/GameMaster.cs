@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -7,13 +8,14 @@ public class GameMaster : MonoBehaviour {
 
     public static GameMaster gm;
     public GameObject playerArm;
-    public Text bulletStackText;
     public Image healthBar;
     public Canvas canvas;
 
     AudioSource audio;
 
-    public AudioClip hurt; 
+    public AudioClip hurt;
+
+    public List<GameObject> Bullets = new List<GameObject>();
 
     // sets all the enemies on active
     public static bool setEnemiesActive = false;
@@ -23,8 +25,7 @@ public class GameMaster : MonoBehaviour {
     private float timerStartGame = 0;
     private float timerHurtSound = 0;
 
-    //Curency
-    public int stackBullets = 0;
+    public string currentBulletType = "stackBullets";
 
     //Alle Variabelen die de speler zelf beinvloeden worden hier opgeslagen. Op Deze manier is er makkelijker bij te komen.
 
@@ -43,9 +44,6 @@ public class GameMaster : MonoBehaviour {
 
         audio = GetComponent<AudioSource>();
 
-
-        //UI waardes
-        SetBulletStackUI();
     }
 
     void Update()
@@ -70,7 +68,6 @@ public class GameMaster : MonoBehaviour {
     {
 
         playerArm.GetComponent<angleToMousePosition>().enabled = true;
-        playerArm.GetComponent<Weapon>().enabled = true;
         //audio.Stop();
 
         setEnemiesActive = true;
@@ -114,11 +111,50 @@ public class GameMaster : MonoBehaviour {
         SceneManager.LoadScene(scene, LoadSceneMode.Single);
     }
 
-    public int reload(int magazijnSize, int bulletsInGun)
+    /*
+    public int reload(int magazijnSize, int bulletsInGun, string bulletType)
     {
 
-        int neededBullets = magazijnSize - bulletsInGun;
+        int neededBullets;
 
+        neededBullets = magazijnSize - bulletsInGun;
+
+        switch (bulletType)
+        {
+            case ("NormalBullet"):
+                return ReloadNormalBullet(neededBullets);
+
+            case ("GravityBullet"):
+                return ReloadGravityBullet(neededBullets);
+                
+            case ("StrongBullet"):
+                return ReloadStrongBullet(neededBullets);
+            default:
+                Debug.Log("De Bullet die meegegeven wordt aan de reload functie van de GM komt niet overeen met een van de bullet types.");
+                return 0;
+
+
+        }
+    }
+    */
+
+    /* Verplaatst naar player
+    public void AddBulletsToStack(int bullets)
+    {
+        stackBullets += bullets;
+        SetBulletStackUI();
+    }
+    */
+
+    public static bool IsVisibleToCamera(Transform transform)
+    {
+        Vector3 visTest = Camera.main.WorldToViewportPoint(transform.position);
+        return (visTest.x >= 0 && visTest.y >= 0) && (visTest.x <= 1 && visTest.y <= 1) && visTest.z >= 0;
+    }
+
+    /*
+    public int ReloadNormalBullet(int neededBullets)
+    {
         if (this.stackBullets >= neededBullets)
         {
             stackBullets -= neededBullets;
@@ -131,22 +167,6 @@ public class GameMaster : MonoBehaviour {
             SetBulletStackUI();
             return 0;
         }
+        */
     }
 
-    public void AddBulletsToStack(int bullets)
-    {
-        stackBullets += bullets;
-        SetBulletStackUI();
-    }
-
-    void SetBulletStackUI()
-    {
-        bulletStackText.text =  stackBullets.ToString();
-    }
-
-    public static bool IsVisibleToCamera(Transform transform)
-    {
-        Vector3 visTest = Camera.main.WorldToViewportPoint(transform.position);
-        return (visTest.x >= 0 && visTest.y >= 0) && (visTest.x <= 1 && visTest.y <= 1) && visTest.z >= 0;
-    }
-}

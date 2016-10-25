@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿/*
+using UnityEngine;
 using System.Collections;
 
 public class Weapon : MonoBehaviour {
@@ -15,6 +16,7 @@ public class Weapon : MonoBehaviour {
 
     public AudioClip impact;
     public AudioClip audioReload;
+    public string bulletType;
     AudioSource audio;
 
     float timeToSpawnEffect = 0;
@@ -37,6 +39,7 @@ public class Weapon : MonoBehaviour {
 	void Start () {
 
         firePoint = transform.FindChild("firePoint");
+        bulletType = "NormalBullet";
 
         if (firePoint == null)
         {
@@ -89,7 +92,7 @@ public class Weapon : MonoBehaviour {
             audio.PlayOneShot(audioReload, 0.7f);
 
             canShoot = false;
-            this.bulletsInGun += GameMaster.gm.reload(magazijnSize, bulletsInGun);
+            this.bulletsInGun += GameMaster.gm.reload(magazijnSize, bulletsInGun, "NormalBullet");
         } 
 	}
 
@@ -106,12 +109,17 @@ public class Weapon : MonoBehaviour {
         Vector2 direction = mousePosition - firePointPosition;
         Vector2 directionNormal = direction.normalized;
 
+        CreateNormalBullet(direction, directionNormal);
+
+    }
+
+    void CreateNormalBullet(Vector2 direction, Vector2 directionNormal)
+    {
         // In dit stuk code wordt de bullet gemaakt en wordt de snelheid mee gegeven.
         GameObject clone = (GameObject)Instantiate(bullet, (new Vector2(firePoint.position.x, firePoint.position.y) + direction.normalized * 6), Quaternion.Euler(directionNormal));
         Rigidbody2D clonerb = clone.GetComponent<Rigidbody2D>();
         clonerb.velocity = direction.normalized * bulletSpeed;
-
-
+        Debug.Log(clonerb.velocity);
     }
 
     void Effect()
@@ -134,3 +142,4 @@ public class Weapon : MonoBehaviour {
         rb.AddForce(Vector3.forward * 300);
     }
 }
+*/

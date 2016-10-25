@@ -130,6 +130,8 @@ public class EnemyShoot1 : MonoBehaviour {
             GameObject clone = (GameObject)Instantiate(bulletEnemy, (new Vector2(firePoint.position.x, firePoint.position.y) + directionNormal * 6), Quaternion.Euler(directionNormal));
             Rigidbody2D clonerb = clone.GetComponent<Rigidbody2D>();
             clonerb.velocity = (directionNormal + new Vector2(spread, spread)) * bulletSpeed;
+            GameMaster.gm.Bullets.Add(clone);
+            clone.GetComponent<Bullet>().id = GameMaster.gm.Bullets.Count;
     }
 
 

@@ -87,7 +87,7 @@ public class OldShootScript : MonoBehaviour {
             audio.PlayOneShot(audioReload, 0.7f);
 
             canShoot = false;
-            this.bulletsInGun += GameMaster.gm.reload(magazijnSize, bulletsInGun);
+           // this.bulletsInGun += GameMaster.gm.reload(magazijnSize, bulletsInGun, "NormalBullet");
         }
     }
 

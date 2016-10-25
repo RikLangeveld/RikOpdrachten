@@ -7,7 +7,7 @@ public class PickUpBullets : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
-            GameMaster.gm.AddBulletsToStack(6);
+            //GameMaster.gm.AddBulletsToStack(6);
 
             Destroy(this.gameObject);
         }

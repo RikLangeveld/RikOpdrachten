@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour {
 
     public GameObject bulletInpact;
 
+    public int id;
 
     private bool justOutofGun;
 
@@ -40,7 +41,7 @@ public class Bullet : MonoBehaviour {
         {
             GameObject bulletInpact = Instantiate(this.bulletInpact);
             bulletInpact.transform.position = transform.position;
-            Destroy(this.gameObject);
+            Destroy();
 
         }
         else
@@ -48,7 +49,7 @@ public class Bullet : MonoBehaviour {
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
             rb.gravityScale = 5;
             rb.velocity = rb.velocity / 4;
-            Destroy(this.gameObject, 1f);
+            Destroy();
         }
     }
 
@@ -59,19 +60,25 @@ public class Bullet : MonoBehaviour {
     {
         Enemy enemy = hit.GetComponent<Enemy>();
         enemy.DamageEnemy(damage);
+        Destroy();
 
-        Destroy(this.gameObject);
     }
 
     void HitOnPlayer(GameObject hit)
     {
         GameMaster.gm.playerDamage(damage);
+        Destroy();
 
-        Destroy(this.gameObject);
     }
 
     public void ChangeJustOutOfGun()
     {
         justOutofGun = false;
+    }
+
+    public void Destroy()
+    {
+        Destroy(this.gameObject);
+        GameMaster.gm.Bullets.Remove(this.gameObject);
     }
 }
