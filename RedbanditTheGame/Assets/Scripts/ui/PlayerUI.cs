@@ -21,8 +21,9 @@ public class PlayerUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	public void UpdateBulletStacksUI () {
-        gravityBulletStackText.text = playerWeapon.GravityBulletStack.ToString();
-        strongBulletStackText.text =  playerWeapon.StrongBulletStack.ToString();
+        
+        gravityBulletStackText.text = playerWeapon.BulletStack[(int)PlayerWeapon.BulletType.GravityBullet].ToString();
+        strongBulletStackText.text =  playerWeapon.BulletStack[(int)PlayerWeapon.BulletType.StrongBullet].ToString();
     }
 
     public void UpdateBulletSelectBorder(float adjustXPosition) {

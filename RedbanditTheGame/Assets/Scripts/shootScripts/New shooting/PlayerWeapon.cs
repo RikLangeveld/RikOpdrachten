@@ -9,6 +9,7 @@ public class PlayerWeapon : MonoBehaviour {
         StrongBullet,
         GravityBullet
     }
+
     public GameObject MuzzleFlashPrefab;
 
     public GameObject firePoint;
@@ -17,14 +18,16 @@ public class PlayerWeapon : MonoBehaviour {
 
     public AudioClip SwitchBulletType;
     public AudioClip impact;
+    public AudioClip stackEmpty;
 
     public GameObject gravityBullet;
 
-    BulletType currentBullettype = BulletType.NormalBullet;
+    public BulletType currentBullettype = BulletType.NormalBullet;
 
     AudioSource audio;
 
-    public int StrongBulletStack, GravityBulletStack;
+    //Bullets staan op volgorde van de BulletTypes in de Enum.
+    public int[] BulletStack = new int[3];
     public float fireSpeed = 1;
 
     int Magazine;
@@ -37,6 +40,12 @@ public class PlayerWeapon : MonoBehaviour {
     {
         playerUI = GetComponent<PlayerUI>();
         audio = GetComponent<AudioSource>();
+
+        BulletStack[(int)BulletType.NormalBullet] = 9999;
+        BulletStack[(int)BulletType.StrongBullet] = 3;
+        BulletStack[(int)BulletType.GravityBullet] = 3;
+
+        playerUI.UpdateBulletStacksUI();
 
         if (firePoint == null)
         {
@@ -56,22 +65,32 @@ public class PlayerWeapon : MonoBehaviour {
     }
     void Shoot()
     {
-        Effect();
+        
+        if (CheckBulletsInStack())
+        {   
+            //sound en visueel effect
+            Effect();
 
-        // Zorgt ervoor dat de positie van de muis wordt omgezet naar de positie binnen de camera.
-        Vector2 mousePosition = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
-        Vector2 firePointPosition = new Vector2(firePoint.transform.position.x, firePoint.transform.position.y);
+            BulletStack[(int)currentBullettype]--;
+            playerUI.UpdateBulletStacksUI();
 
-        //bepaal de richting en daarvan de normaal vector.
-        Vector2 direction = mousePosition - firePointPosition;
-        Vector2 directionNormal = direction.normalized;
+            // Zorgt ervoor dat de positie van de muis wordt omgezet naar de positie binnen de camera.
+            Vector2 mousePosition = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+            Vector2 firePointPosition = new Vector2(firePoint.transform.position.x, firePoint.transform.position.y);
 
-        CreateNormalBullet(direction, directionNormal, currentBullettype);
-        /*
-        */
+            //bepaal de richting en daarvan de normaal vector.
+            Vector2 direction = mousePosition - firePointPosition;
+            Vector2 directionNormal = direction.normalized;
+
+            CreateBullet(direction, directionNormal, currentBullettype);
+        }
+        else
+        {
+            audio.PlayOneShot(stackEmpty, 1f);
+        }
     }
 
-    void CreateNormalBullet(Vector2 direction, Vector2 directionNormal, BulletType bulletType)
+    void CreateBullet(Vector2 direction, Vector2 directionNormal, BulletType bulletType)
     {
         GameObject clone;
         switch (currentBullettype)
@@ -94,6 +113,15 @@ public class PlayerWeapon : MonoBehaviour {
         Rigidbody2D clonerb = clone.GetComponent<Rigidbody2D>();
         clonerb.velocity = direction.normalized * clone.GetComponent<Bullet>().bulletSpeed;
         Debug.Log(clonerb.velocity);
+    }
+
+    bool CheckBulletsInStack()
+    {
+        if (BulletStack[(int)currentBullettype] > 0)
+            return true;
+
+        else
+            return false;
     }
 
     BulletType switchBulletType(BulletType currentBulletType)
