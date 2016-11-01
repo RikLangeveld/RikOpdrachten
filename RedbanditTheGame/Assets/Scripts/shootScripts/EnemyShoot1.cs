@@ -100,10 +100,11 @@ public class EnemyShoot1 : MonoBehaviour {
 
         Debug.DrawLine(firePointPosition, (playerPosition - firePointPosition) * 100);
 
-        if (hit.collider != null)
+        if (hit.collider != null && hit.collider.gameObject.tag == "Player")
         {
 
             Debug.DrawLine(firePointPosition, hit.point, Color.red);
+            Debug.Log(hit.collider.gameObject.tag);
 
             /* Als de speler in geraakt wordt door de raycast moet er een bullet worden gemaakt.  */
             if (hit.collider.gameObject.tag == "Player")

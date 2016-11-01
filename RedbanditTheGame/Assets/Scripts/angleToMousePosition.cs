@@ -3,7 +3,11 @@ using System.Collections;
 
 public class angleToMousePosition : MonoBehaviour {
 
-	public float offSet = 0f;
+    public PlayerWeapon playerWeapon;
+
+
+    public float offSet = 0f;
+    
 
 	void Update(){
 
@@ -20,6 +24,12 @@ public class angleToMousePosition : MonoBehaviour {
             // find the angle in degrees.
             float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0f, 0f, rotZ + offSet);
+
+            playerWeapon.gunInFrontOfPlayer = true;
+        }
+        else
+        {
+            playerWeapon.gunInFrontOfPlayer = false;
         }
 }
 

@@ -32,10 +32,13 @@ public class PlayerWeapon : MonoBehaviour {
     public float fireSpeed = 1;
     public float normalBulletRegainSpeed = 1;
 
+    public bool gunInFrontOfPlayer;
+
     int Magazine;
 
     private float fireTimer;
     private float regainNormalBulletsTimer;
+
 
     PlayerUI playerUI;
 
@@ -44,7 +47,7 @@ public class PlayerWeapon : MonoBehaviour {
         playerUI = GetComponent<PlayerUI>();
         audio = GetComponent<AudioSource>();
 
-        BulletStack[(int)BulletType.NormalBullet] = 90;
+        BulletStack[(int)BulletType.NormalBullet] = 10;
         BulletStack[(int)BulletType.StrongBullet] = 0;
         BulletStack[(int)BulletType.GravityBullet] = 0;
 
@@ -60,7 +63,7 @@ public class PlayerWeapon : MonoBehaviour {
     {
         currentBullettype = switchBulletType(currentBullettype);
 
-        if (Input.GetButton("Fire1") && Time.time > fireTimer)
+        if (Input.GetButton("Fire1") && Time.time > fireTimer && gunInFrontOfPlayer)
         {
             fireTimer = Time.time + 1 / fireSpeed;
             Shoot();
@@ -69,7 +72,7 @@ public class PlayerWeapon : MonoBehaviour {
         if (Time.time > regainNormalBulletsTimer)
         {
             regainNormalBulletsTimer = Time.time + 1 / normalBulletRegainSpeed;
-            if (BulletStack[(int)BulletType.NormalBullet] < 99)
+            if (BulletStack[(int)BulletType.NormalBullet] < 10)
             {
                 BulletStack[(int)BulletType.NormalBullet]++;
                 playerUI.UpdateBulletStacksUI();

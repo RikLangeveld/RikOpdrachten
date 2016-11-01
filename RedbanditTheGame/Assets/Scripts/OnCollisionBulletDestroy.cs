@@ -6,7 +6,7 @@ public class OnCollisionBulletDestroy : MonoBehaviour {
 	// Use this for initialization
 	void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Bullet"))
+        if (col.CompareTag("BlueBullet"))
         Destroy(this.gameObject);
     }
 }

@@ -31,7 +31,7 @@ public class GameMaster : MonoBehaviour {
 
     public float Playerhealt = 100;
 
-    private float maxHealth;
+    public float maxHealth;
 
 
     void Start()
@@ -79,7 +79,8 @@ public class GameMaster : MonoBehaviour {
      */
     public void playerDamage(float damage)
     {
-       
+        Debug.Log("hoi");
+
         if (timerHurtSound < 0)
         {
             audio.PlayOneShot(hurt, 1f);
@@ -88,12 +89,18 @@ public class GameMaster : MonoBehaviour {
 
         Playerhealt -= damage;
 
-        healthBar.fillAmount = 1 * Playerhealt / maxHealth; 
-        
+        UpdateHealthUI();
+
         if (Playerhealt <= 0)
         {
             playerDeath();
         }
+    }
+
+    public void UpdateHealthUI()
+    {
+        Debug.Log(healthBar.fillAmount);
+        healthBar.fillAmount = Playerhealt / maxHealth;
     }
 
     /*

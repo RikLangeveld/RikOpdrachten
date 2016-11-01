@@ -16,8 +16,9 @@ public class GravityPull : MonoBehaviour {
             Vector2 direction = Position - gameObjectPosition;
             Vector2 directionNormal = direction.normalized;
 
-            if (other.attachedRigidbody && Mathf.Abs(other.attachedRigidbody.velocity.x) < 100 && Mathf.Abs(other.attachedRigidbody.velocity.y) < 100)
-                other.GetComponent<Rigidbody2D>().AddForce(directionNormal * 100000);
+            //&& Mathf.Abs(other.attachedRigidbody.velocity.x) < 100 && Mathf.Abs(other.attachedRigidbody.velocity.y) < 100
+            if (other.attachedRigidbody)
+                other.GetComponent<Rigidbody2D>().AddForce(directionNormal * 20000);
                 //other.attachedRigidbody.velocity += directionNormal * 10000;
         }
 

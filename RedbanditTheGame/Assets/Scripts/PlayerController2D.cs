@@ -50,6 +50,7 @@ public class PlayerController2D : MonoBehaviour {
         isGrounded = (Physics2D.OverlapCircle(groundPointLeft.position, radius, groundMask) ||
                       Physics2D.OverlapCircle(groundPointRight.position, radius, groundMask) ||
                       Physics2D.OverlapCircle(groundPointMiddle.position, radius, groundMask));
+
         if (isGrounded)
         {
             graphics.GetComponent<Animator>().SetBool("isJumping", false);
