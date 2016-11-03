@@ -11,8 +11,6 @@ public class Enemy : MonoBehaviour {
     public float health = 30;
     public Image healthBar;
 
-    public GameObject bulletPickUpp;
-
     public void Start()
     {
         maxHealth = health;
