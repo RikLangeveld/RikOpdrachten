@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Vector;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -27,6 +28,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -34,9 +36,22 @@ import static com.kingsmap.rik.kingsmap.R.layout.activity_map;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    GoogleMap mMap;
+    public static boolean useTerainMode;
+
+    public static GoogleMap mMap;
     private static final int ERROR_DIALOG_REQUEST = 9001;
-    private static final double ABISKO_LAT = 68.349751, ABISO_LNG = 18.831246, KINGSTRAIL_LAT = 67.621841, KINGSTRAIL_LNG = 18.107538;
+    private static final double
+            ABISKO_LAT = 68.349751, ABISO_LNG = 18.831246,
+            KINGSTRAIL_LAT = 67.621841, KINGSTRAIL_LNG = 18.107538,
+            ABISKOJAURE_LAT = 68.286149, ABISKOJAURE_LNG =18.591220,
+            Alesjaurestugorna_LAT = 68.138411, Alesjaurestugorna_LNG = 18.414098,
+            Tjäktjapasset_LAT = 68.018885, Tjäktjapasset_LNG = 18.246111,
+            Sälka_LAT = 67.933416, Sälka_LNG = 18.149969,
+            //Signi hut mist nog.
+            Kaitumjaure_LAT = 67.746860, Kaitumjaure_LNG = 18.295732;
+
+
+
 
     /*
     0 = Abisko
@@ -45,13 +60,23 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private final double SHELTERS_LAT[] = new double[]
             {
                     ABISKO_LAT,
-                    KINGSTRAIL_LAT
+                    //KINGSTRAIL_LAT,
+                    ABISKOJAURE_LAT,
+                    Alesjaurestugorna_LAT,
+                    Tjäktjapasset_LAT,
+                    Sälka_LAT,
+                    Kaitumjaure_LAT
             };
 
     private final double SHELTERS_LNG[] = new double[]
             {
                     ABISO_LNG,
-                    KINGSTRAIL_LNG
+                    //KINGSTRAIL_LNG,
+                    ABISKOJAURE_LNG,
+                    Alesjaurestugorna_LNG,
+                    Tjäktjapasset_LNG,
+                    Sälka_LNG,
+                    Kaitumjaure_LNG
             };
 
     private List<Marker> markers = new ArrayList<>();
@@ -75,6 +100,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         {
             setContentView(R.layout.activity_main);
         }
+
+
     }
 
     @Override
@@ -92,6 +119,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         switch (item.getItemId())
         {
             case R.id.item_share:
+                Intent intent = new Intent(this, Settings.class);
+                startActivity(intent);
                 Toast.makeText(MainActivity.this, "Share", Toast.LENGTH_SHORT).show();
                 return (true);
             case R.id.item_delete:
@@ -100,8 +129,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
+
+
 
     public boolean servicesOK() {
 
@@ -133,7 +163,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.setMapType(googleMap.MAP_TYPE_TERRAIN);
+
+        //Set the style of the map
+        MapStyleOptions style = MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style);
+        googleMap.setMapStyle(style);
+
+        if (useTerainMode)
+        {
+            mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+        }
+        else
+        {
+            mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        }
 
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
         {
