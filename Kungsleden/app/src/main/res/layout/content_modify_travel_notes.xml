@@ -15,76 +15,75 @@
     tools:showIn="@layout/activity_modify_travel_notes">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:showDividers="beginning|end"
-        card_view:cardBackgroundColor="@color/cardview_light_background"
+        app:cardBackgroundColor="@color/cardview_light_background"
         card_view:cardCornerRadius="8dp"
-        card_view:cardElevation="8dp"
-        android:id="@+id/cardView">
+        card_view:cardElevation="8dp">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="vertical"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            >
+            android:orientation="vertical">
 
             <TextView
-                android:text="Title"
+                android:id="@+id/addTitleV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/cardView"
                 android:layout_alignParentStart="true"
-                android:textSize="20sp"
+                android:layout_below="@+id/cardView"
                 android:layout_marginTop="10dp"
-                android:id="@+id/addTitleV" />
+                android:text="Title"
+                android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/modifyTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:layout_below="@+id/addTitle"
                 android:layout_alignParentStart="true"
-                android:id="@+id/modifyTitle" />
+                android:layout_below="@+id/addTitle"
+                android:ems="10"
+                android:inputType="textPersonName" />
 
             <TextView
-                android:text="Status"
+                android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:layout_below="@+id/editText2"
                 android:layout_alignStart="@+id/editText2"
-                android:id="@+id/textView3" />
+                android:layout_below="@+id/editText2"
+                android:text="Status"
+                android:textSize="20sp" />
 
             <Spinner
+                android:id="@+id/modifyStatusSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textView3"
                 android:layout_alignParentStart="true"
-                android:id="@+id/modifyStatusSpinner" />
+                android:layout_below="@+id/textView3" />
 
             <TextView
-                android:text="Notes"
+                android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/spinner"
                 android:layout_alignStart="@+id/textView3"
-                android:textSize="20sp"
-                android:id="@+id/textView4" />
+                android:layout_below="@+id/spinner"
+                android:text="Notes"
+                android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/modifyNotes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:layout_below="@+id/textView4"
                 android:layout_alignStart="@+id/textView4"
-                android:id="@+id/modifyNotes"
-                android:layout_marginBottom="10dp"/>
+                android:layout_below="@+id/textView4"
+                android:layout_marginBottom="10dp"
+                android:ems="10"
+                android:inputType="textPersonName" />
 
 
         </LinearLayout>
