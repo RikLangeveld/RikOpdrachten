@@ -8,6 +8,7 @@ import java.util.Vector;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +32,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.internal.IPolylineDelegate;
+import com.google.android.gms.vision.barcode.Barcode;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import static com.kingsmap.rik.kingsmap.R.layout.activity_map;
 
@@ -48,15 +56,40 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             Tjäktjapasset_LAT = 68.018885, Tjäktjapasset_LNG = 18.246111,
             Sälka_LAT = 67.933416, Sälka_LNG = 18.149969,
             //Signi hut mist nog.
-            Kaitumjaure_LAT = 67.746860, Kaitumjaure_LNG = 18.295732;
+            Kaitumjaure_LAT = 67.746860, Kaitumjaure_LNG = 18.295732,
+            Teusajaure_LAT = 67.69531, Teusajaure_LNG = 18.15554,
+            Vakkotavare_LAT =67.58189, Vakkotavare_LNG = 18.10153,
+            Saltoluokta_LAT = 67.39418, Saltoluokta_LNG = 18.52007,
+            Sitojaure_LAT = 67.23205, Sitojaure_LNG = 18.44093,
+            Aktse_LAT = 67.14855, Aktse_LNG = 18.30592,
+            Pårte_LAT = 67.04329, Pårte_LNG = 17.94308,
+            Kvikkjokk_LAT = 66.95362, Kvikkjokk_LNG = 17.71955,
+            Ammarnäs_LAT = 65.95735, Ammarnäs_LNG = 16.20635,
+            Aigert_LAT = 65.94134, Aigert_LNG = 16.09472,
+            Serve_LAT = 65.97226, Serve_LNG = 15.76426,
+            Tärnasjö_LAT = 65.98882, Tärnasjö_LNG = 15.49727,
+            Syter_LAT = 65.89275, Syter_LNG = 15.39667,
+            Viterskalet_LAT = 65.88502, Viterskalet_LNG = 15.15836,
+            Hemavan_LAT = 65.81733, Hemavan_LNG = 15.09059;
 
 
 
 
-    /*
-    0 = Abisko
-    1 = Kingstrail
-     */
+    //Teusajaure 67.69531, 18.15554
+    //Vakkotavare 67.58189, 18.10153
+    //Saltoluokta 67.39418, 18.52007
+    //Sitojaure 67.23205, 18.44093
+    //Aktse 67.14855, 18.30592
+    //Pårte 67.04329, 17.94308
+    //Kvikkjokk 66.95362, 17.71955
+    //Ammarnäs 65.95761, 16.20378
+    //Aigert 65.94133, 16.09472
+    //Serve 65.97226, 15.76426
+    //Tärnasjö 65.98882, 15.49727
+    //Syter 65.89275, 15.39667
+    //Viterskalet 65.88502, 15.15836
+    //Hemavan 65.81733, 15.09059
+
     private final double SHELTERS_LAT[] = new double[]
             {
                     ABISKO_LAT,
@@ -65,7 +98,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     Alesjaurestugorna_LAT,
                     Tjäktjapasset_LAT,
                     Sälka_LAT,
-                    Kaitumjaure_LAT
+                    Kaitumjaure_LAT,
+                    Teusajaure_LAT,
+                    Vakkotavare_LAT,
+                    Saltoluokta_LAT,
+                    Sitojaure_LAT,
+                    Aktse_LAT,
+                    Pårte_LAT,
+                    Kvikkjokk_LAT,
+                    Ammarnäs_LAT,
+                    Aigert_LAT,
+                    Serve_LAT,
+                    Tärnasjö_LAT,
+                    Syter_LAT,
+                    Viterskalet_LAT,
+                    Hemavan_LAT
             };
 
     private final double SHELTERS_LNG[] = new double[]
@@ -76,7 +123,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     Alesjaurestugorna_LNG,
                     Tjäktjapasset_LNG,
                     Sälka_LNG,
-                    Kaitumjaure_LNG
+                    Kaitumjaure_LNG,
+                    Teusajaure_LNG,
+                    Vakkotavare_LNG,
+                    Saltoluokta_LNG,
+                    Sitojaure_LNG,
+                    Aktse_LNG,
+                    Pårte_LNG,
+                    Kvikkjokk_LNG,
+                    Ammarnäs_LNG,
+                    Aigert_LNG,
+                    Serve_LNG,
+                    Tärnasjö_LNG,
+                    Syter_LNG,
+                    Viterskalet_LNG,
+                    Hemavan_LNG
             };
 
     private List<Marker> markers = new ArrayList<>();
@@ -100,8 +161,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         {
             setContentView(R.layout.activity_main);
         }
-
-
     }
 
     @Override
@@ -195,15 +254,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-    /*
-    Add a marker on the map
-     */
+    /* Add a marker on the map */
     private void AddMarker(double lat, double lng)
     {
         MarkerOptions options = new MarkerOptions()
                 .title("Hut")
                 .position(new LatLng(lat,lng))
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cabin_map_marker));
 
         options.snippet("Informatie over de hut");
         markers.add( mMap.addMarker(options));
