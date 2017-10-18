@@ -16,7 +16,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     TravelNotesContract.TravelNotesEntry.COLUMN_NAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
                     + TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TITLE + " TEXT, "
                     + TravelNotesContract.TravelNotesEntry.COLUMN_NAME_DATE + " TEXT, "
-                    + TravelNotesContract.TravelNotesEntry.COLUMN_NAME_STATUS + " TEXT, "
+                    + TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TRAIL + " TEXT, "
                     + TravelNotesContract.TravelNotesEntry.COLUMN_NAME_NOTES + " TEXT )";
 
     //Constructor

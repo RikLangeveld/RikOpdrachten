@@ -7,14 +7,14 @@ public class TravelNotes implements Serializable {
     private int id;
     private String title;
     private String dateAdded; // String, since you cannot save date/time values in SQLite
-    private String gameStatus;
+    private String trail;
     private String notes;
 
-    public TravelNotes(int id, String title, String dateAdded, String gameStatus, String notes) {
+    public TravelNotes(int id, String title, String dateAdded, String trail, String notes) {
         this.id = id;
         this.title = title;
         this.dateAdded = dateAdded;
-        this.gameStatus = gameStatus;
+        this.trail = trail;
         this.notes = notes;
     }
 
@@ -47,11 +47,11 @@ public class TravelNotes implements Serializable {
     }
 
     public String getTravelNotesStatus() {
-        return gameStatus;
+        return trail;
     }
 
-    public void setTravelNotesStatus(String gameStatus) {
-        this.gameStatus = gameStatus;
+    public void setTravelNotesStatus(String trail) {
+        this.trail = trail;
     }
 
     public String getNotes() {

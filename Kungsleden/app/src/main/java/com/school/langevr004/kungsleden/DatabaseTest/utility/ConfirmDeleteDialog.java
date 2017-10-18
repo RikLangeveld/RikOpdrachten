@@ -33,14 +33,12 @@ public class ConfirmDeleteDialog extends DialogFragment {
                 .setPositiveButton(positiveButton, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        // Activate method onDialogPositiveClick inside implementing class
                         mListener.onDialogPositiveClick(ConfirmDeleteDialog.this);
                     }
                 })
                 .setNegativeButton(R.string.dialog_travel_note_deletion_negative, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        // Activate method onDialogNegativeClick inside implementing class
                         mListener.onDialogNegativeClick(ConfirmDeleteDialog.this);
                     }
                 });

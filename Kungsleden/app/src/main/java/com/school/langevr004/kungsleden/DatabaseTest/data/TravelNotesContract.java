@@ -2,10 +2,6 @@ package com.school.langevr004.kungsleden.DatabaseTest.data;
 
 import android.provider.BaseColumns;
 
-/**
- * Created by Remy on 28-9-2017.
- */
-
 public final class TravelNotesContract {
     // To prevent someone from accidentally instantiating the contract class,
     // make the constructor private.
@@ -19,7 +15,7 @@ public final class TravelNotesContract {
         public static final String COLUMN_NAME_ID = "id";
         public static final String COLUMN_NAME_TITLE = "title";
         public static final String COLUMN_NAME_DATE = "date";
-        public static final String COLUMN_NAME_STATUS = "status";
+        public static final String COLUMN_NAME_TRAIL = "status";
         public static final String COLUMN_NAME_NOTES = "notes";
     }
 }

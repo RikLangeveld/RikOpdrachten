@@ -21,11 +21,11 @@ public class DataSource {
     private Context mContext;
     private SQLiteDatabase mDatabase;
     private DBHelper mDBHelper;
-    private String[] GAMES_ALL_COLUMNS = {
+    private String[] TRAVEL_NOTES_ALL_COLUMNS = {
             TravelNotesContract.TravelNotesEntry.COLUMN_NAME_ID,
             TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TITLE,
             TravelNotesContract.TravelNotesEntry.COLUMN_NAME_DATE,
-            TravelNotesContract.TravelNotesEntry.COLUMN_NAME_STATUS,
+            TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TRAIL,
             TravelNotesContract.TravelNotesEntry.COLUMN_NAME_NOTES };
 
 
@@ -48,7 +48,7 @@ public class DataSource {
         ContentValues values = new ContentValues();
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TITLE, travelNotes.getTitle());
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_DATE, travelNotes.getDateAdded());
-        values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_STATUS, travelNotes.getTravelNotesStatus());
+        values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TRAIL, travelNotes.getTravelNotesStatus());
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_NOTES, travelNotes.getNotes());
         // Inserting Row
         mDatabase.insert(TravelNotesContract.TravelNotesEntry.TABLE_NAME, null, values);
@@ -61,7 +61,7 @@ public class DataSource {
         ContentValues values = new ContentValues();
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TITLE, travelNotes.getTitle());
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_DATE, travelNotes.getDateAdded());
-        values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_STATUS, travelNotes.getTravelNotesStatus());
+        values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TRAIL, travelNotes.getTravelNotesStatus());
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_NOTES, travelNotes.getNotes());
 
         mDatabase.update(TravelNotesContract.TravelNotesEntry.TABLE_NAME, values, TravelNotesContract.TravelNotesEntry.COLUMN_NAME_ID + "= ?", new String[]{String.valueOf(travelNotes.getId())});
@@ -69,7 +69,7 @@ public class DataSource {
     }
 
     public Cursor getAllGames() {
-        return mDatabase.query(TravelNotesContract.TravelNotesEntry.TABLE_NAME, GAMES_ALL_COLUMNS, null, null, null, null, null);
+        return mDatabase.query(TravelNotesContract.TravelNotesEntry.TABLE_NAME, TRAVEL_NOTES_ALL_COLUMNS, null, null, null, null, null);
     }
 
     public List<TravelNotes> getTravelNotes()
@@ -81,7 +81,7 @@ public class DataSource {
                 TravelNotesContract.TravelNotesEntry.COLUMN_NAME_ID + ',' +
                 TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TITLE + ',' +
                 TravelNotesContract.TravelNotesEntry.COLUMN_NAME_DATE + ',' +
-                TravelNotesContract.TravelNotesEntry.COLUMN_NAME_STATUS + ',' +
+                TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TRAIL + ',' +
                 TravelNotesContract.TravelNotesEntry.COLUMN_NAME_NOTES +
                 " FROM " + TravelNotesContract.TravelNotesEntry.TABLE_NAME;
 
@@ -96,7 +96,7 @@ public class DataSource {
                 travelNotes.setId(cursor.getInt(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_ID)));
                 travelNotes.setTitle(cursor.getString(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TITLE)));
                 travelNotes.setDateAdded(cursor.getString(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_DATE)));
-                travelNotes.setTravelNotesStatus(cursor.getString(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_STATUS)));
+                travelNotes.setTravelNotesStatus(cursor.getString(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TRAIL)));
                 travelNotes.setNotes(cursor.getString(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_NOTES)));
                 travelNotesList.add(travelNotes);
 

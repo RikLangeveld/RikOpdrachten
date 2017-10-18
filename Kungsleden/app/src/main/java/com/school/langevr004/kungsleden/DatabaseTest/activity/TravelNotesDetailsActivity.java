@@ -35,9 +35,9 @@ public class TravelNotesDetailsActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         //Get the travelNotes from the intent, which was passed as parameter
         this.travelNotes = (TravelNotes) getIntent().getSerializableExtra("selectedTravelNotes");
-        setGameViews();
+        setTravelNotesViews();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.action_modify_game);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.action_modify_travel_notes);
         fab.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -56,11 +56,11 @@ public class TravelNotesDetailsActivity extends AppCompatActivity
     {
         super.onActivityResult(requestCode, resultCode, data);
         travelNotes = (TravelNotes) data.getSerializableExtra("selectedGame");
-        setGameViews();
+        setTravelNotesViews();
     }
 
 
-    public void setGameViews(){
+    public void setTravelNotesViews(){
         title = (TextView)findViewById(R.id.detailTitle);
         status = (TextView)findViewById(R.id.detailStatusB);
         date = (TextView)findViewById(R.id.detailDateB);
@@ -76,7 +76,7 @@ public class TravelNotesDetailsActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu)
     {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_game_details, menu);
+        getMenuInflater().inflate(R.menu.menu_travel_notes_details, menu);
         return true;
     }
 
@@ -112,7 +112,7 @@ public class TravelNotesDetailsActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item)
     {
         int id = item.getItemId();
-        if (id == R.id.action_delete_game)
+        if (id == R.id.action_delete_travel_notes)
         {
             // Show the ConfirmDeleteDialog
             android.app.DialogFragment dialog = new ConfirmDeleteDialog();

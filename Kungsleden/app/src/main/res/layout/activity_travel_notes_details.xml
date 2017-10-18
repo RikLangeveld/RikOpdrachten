@@ -23,7 +23,7 @@
     <include layout="@layout/content_travel_notes_details" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/action_modify_game"
+        android:id="@+id/action_modify_travel_notes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

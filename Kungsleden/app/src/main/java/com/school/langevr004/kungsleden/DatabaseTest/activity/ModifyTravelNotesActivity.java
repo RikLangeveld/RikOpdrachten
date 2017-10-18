@@ -84,7 +84,7 @@ public class ModifyTravelNotesActivity extends AppCompatActivity
     void modifyTravelNotes() {
         // Get the input from the Views
         String title = titleInput.getText().toString();
-        String gameStatus = statusSpinner.getSelectedItem().toString();
+        String trail = statusSpinner.getSelectedItem().toString();
         String notes = notesInput.getText().toString();
 
         if ((title != null) && title.isEmpty()) {
@@ -95,7 +95,7 @@ public class ModifyTravelNotesActivity extends AppCompatActivity
         } else {
             // Update the travelNotes with the new data
             travelNotes.setTitle(title);
-            travelNotes.setTravelNotesStatus(gameStatus);
+            travelNotes.setTravelNotesStatus(trail);
             travelNotes.setNotes(notes);
 
             // Create a DataSource object, and pass it the context of this activity
@@ -173,7 +173,6 @@ public class ModifyTravelNotesActivity extends AppCompatActivity
     public void onDialogPositiveClick(DialogFragment dialog)
     {
         Intent previousActivity = new Intent(this, TravelNotesDetailsActivity.class);
-        //Sending the origional data to GameDetailActivity
         previousActivity.putExtra("selectedGame", travelNotes);
         setResult(1000, previousActivity);
         finish();

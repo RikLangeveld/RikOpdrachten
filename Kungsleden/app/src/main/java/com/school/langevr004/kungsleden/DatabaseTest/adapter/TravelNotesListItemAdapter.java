@@ -46,7 +46,7 @@ public class TravelNotesListItemAdapter extends RecyclerView.Adapter<TravelNotes
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.single_game_item, parent, false);
+                .inflate(R.layout.single_travel_notes_item, parent, false);
         return new ViewHolder(itemView);
     }
     @Override
@@ -69,13 +69,11 @@ public class TravelNotesListItemAdapter extends RecyclerView.Adapter<TravelNotes
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(context, TravelNotesDetailsActivity.class);
-// Get the correct game based on which listitem got clicked, and put it as parameter in the intent
             TravelNotes selectedTravelNotes = getItem(getAdapterPosition());
             intent.putExtra("selectedTravelNotes", selectedTravelNotes);
-// Open TravelNotesDetailsActivity
             context.startActivity(intent);
-
         }
+
         public void populateRow(TravelNotes travelNotes) {
             title.setText(travelNotes.getTitle());
             status.setText(travelNotes.getTravelNotesStatus());
