@@ -24,7 +24,6 @@ public class DataSource {
     private String[] GAMES_ALL_COLUMNS = {
             TravelNotesContract.TravelNotesEntry.COLUMN_NAME_ID,
             TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TITLE,
-            TravelNotesContract.TravelNotesEntry.COLUMN_NAME_PLATFORM,
             TravelNotesContract.TravelNotesEntry.COLUMN_NAME_DATE,
             TravelNotesContract.TravelNotesEntry.COLUMN_NAME_STATUS,
             TravelNotesContract.TravelNotesEntry.COLUMN_NAME_NOTES };
@@ -48,7 +47,6 @@ public class DataSource {
         open();
         ContentValues values = new ContentValues();
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TITLE, travelNotes.getTitle());
-        values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_PLATFORM, travelNotes.getPlatform());
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_DATE, travelNotes.getDateAdded());
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_STATUS, travelNotes.getTravelNotesStatus());
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_NOTES, travelNotes.getNotes());
@@ -62,7 +60,6 @@ public class DataSource {
         open();
         ContentValues values = new ContentValues();
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TITLE, travelNotes.getTitle());
-        values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_PLATFORM, travelNotes.getPlatform());
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_DATE, travelNotes.getDateAdded());
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_STATUS, travelNotes.getTravelNotesStatus());
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_NOTES, travelNotes.getNotes());
@@ -83,7 +80,6 @@ public class DataSource {
         String selectQuery = "SELECT  " +
                 TravelNotesContract.TravelNotesEntry.COLUMN_NAME_ID + ',' +
                 TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TITLE + ',' +
-                TravelNotesContract.TravelNotesEntry.COLUMN_NAME_PLATFORM + ',' +
                 TravelNotesContract.TravelNotesEntry.COLUMN_NAME_DATE + ',' +
                 TravelNotesContract.TravelNotesEntry.COLUMN_NAME_STATUS + ',' +
                 TravelNotesContract.TravelNotesEntry.COLUMN_NAME_NOTES +
@@ -99,7 +95,6 @@ public class DataSource {
                 TravelNotes travelNotes = new TravelNotes();
                 travelNotes.setId(cursor.getInt(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_ID)));
                 travelNotes.setTitle(cursor.getString(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TITLE)));
-                travelNotes.setPlatform(cursor.getString(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_PLATFORM)));
                 travelNotes.setDateAdded(cursor.getString(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_DATE)));
                 travelNotes.setTravelNotesStatus(cursor.getString(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_STATUS)));
                 travelNotes.setNotes(cursor.getString(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_NOTES)));

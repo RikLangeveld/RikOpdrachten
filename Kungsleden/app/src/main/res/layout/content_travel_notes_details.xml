@@ -50,33 +50,7 @@
                 android:layout_marginBottom="10dp">
 
                 <TextView
-                    android:text="@string/platform"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:id="@+id/detailPlatformA"
-                    android:textColor="#000000"
-                    android:textSize="20sp"/>
-
-                <TextView
-                    android:text="PlatformAnswer"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:id="@+id/detailPlatformB"
-                    android:textColor="#000000"
-                    android:textSize="20sp"/>
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="3"
-                android:layout_marginBottom="10dp">
-
-                <TextView
-                    android:text="@string/status"
+                    android:text="@string/trail"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"

@@ -52,24 +52,6 @@
                 android:id="@+id/modifyTitle" />
 
             <TextView
-                android:text="Platform"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/addTitle"
-                android:layout_alignStart="@+id/textView"
-                android:textSize="20sp"
-                android:id="@+id/addPlatformV" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:layout_below="@+id/addPlatform"
-                android:layout_alignStart="@+id/addPlatform"
-                android:id="@+id/modifyPlatform" />
-
-            <TextView
                 android:text="Status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

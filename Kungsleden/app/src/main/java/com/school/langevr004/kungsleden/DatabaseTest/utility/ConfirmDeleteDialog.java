@@ -9,30 +9,16 @@ import android.os.Bundle;
 
 import com.school.langevr004.kungsleden.R;
 
-
-/**
- * Created by Remy on 26-9-2017.
- */
-
-
 public class ConfirmDeleteDialog extends DialogFragment {
- /* The activity that creates an instance of this dialog fragment must
-  * implement this interface in order to receive event callbacks.
-  * Each method passes the DialogFragment in case the host needs to query it. */
 
-    // Use this instance of the interface to deliver action events
     ConfirmDeleteDialogListener mListener;
 
-    // Override the Fragment.onAttach() method to instantiate the ConfirmDeleteDialogListener
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        // Verify that the host activity implements the callback interface
         try {
-            // Instantiate the ConfirmDeleteDialogListener so we can send events to the host
             mListener = (ConfirmDeleteDialogListener) activity;
         } catch (ClassCastException e) {
-            // The activity doesn't implement the interface, throw exception
             throw new ClassCastException(activity.toString()
                     + " must implement ConfirmDeleteDialogListener");
         }

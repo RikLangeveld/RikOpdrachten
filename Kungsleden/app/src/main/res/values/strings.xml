@@ -5,8 +5,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="title">Title</string>
-    <string name="platform">Platform</string>
-    <string name="status">Status</string>
+    <string name="trail">Trail</string>
     <string name="date_added">Date added</string>
     <string name="notes">Notes</string>
     <string name="dialog_travel_notes_deletion_positive">Delete</string>
@@ -18,9 +17,7 @@
     <string name="delete_travel_note">Delete travel note</string>
     <string name="delete_travel_notes">Delete travel notes</string>
     <string name="title_is_required">Title is required!</string>
-    <string name="platform_is_required">Platform is required!</string>
     <string name="title_field_is_empty">Title field is empty</string>
-    <string name="platform_field_is_empty">Platform field is empty</string>
     <string name="travel_note_has_been_added">Travel note has been added</string>
     <string name="travel_note_has_been_modified">Travel note has been modified</string>
     <string name="title_screen_main">Travel notes Backlog Manager</string>

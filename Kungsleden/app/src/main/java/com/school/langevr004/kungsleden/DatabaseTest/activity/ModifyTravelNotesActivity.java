@@ -29,7 +29,6 @@ public class ModifyTravelNotesActivity extends AppCompatActivity
 
     private TravelNotes travelNotes;
     private EditText titleInput;
-    private EditText platformInput;
     private Spinner statusSpinner;
     private EditText notesInput;
     private ArrayAdapter statusAdapter;
@@ -65,11 +64,9 @@ public class ModifyTravelNotesActivity extends AppCompatActivity
     private void setTravelNotesView()
     {
         titleInput = (EditText)findViewById(R.id.modifyTitle);
-        platformInput = (EditText)findViewById(R.id.modifyPlatform);
         statusSpinner = (Spinner)findViewById(R.id.modifyStatusSpinner);
         notesInput = (EditText)findViewById(R.id.modifyNotes);
         titleInput.setText(travelNotes.getTitle());
-        platformInput.setText(travelNotes.getPlatform());
         notesInput.setText(travelNotes.getNotes());
     }
 
@@ -87,7 +84,6 @@ public class ModifyTravelNotesActivity extends AppCompatActivity
     void modifyTravelNotes() {
         // Get the input from the Views
         String title = titleInput.getText().toString();
-        String platform = platformInput.getText().toString();
         String gameStatus = statusSpinner.getSelectedItem().toString();
         String notes = notesInput.getText().toString();
 
@@ -96,15 +92,9 @@ public class ModifyTravelNotesActivity extends AppCompatActivity
             // That the title field is empty
             ModifyTravelNotesActivity.setErrorText(titleInput, getString(R.string.title_is_required));
             showToast(getString(R.string.title_field_is_empty));
-        } else if ((platform != null) && platform.isEmpty()) {
-            // Make EditText platformInput display an error message, and display a toast
-            // That the platform field is empty
-            ModifyTravelNotesActivity.setErrorText(platformInput, getString(R.string.platform_is_required));
-            showToast(getString(R.string.platform_field_is_empty));
         } else {
             // Update the travelNotes with the new data
             travelNotes.setTitle(title);
-            travelNotes.setPlatform(platform);
             travelNotes.setTravelNotesStatus(gameStatus);
             travelNotes.setNotes(notes);
 

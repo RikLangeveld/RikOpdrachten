@@ -24,7 +24,6 @@ import java.util.Date;
 public class AddTravelNotesActivity extends AppCompatActivity {
 
     EditText titleInput;
-    EditText platformInput;
     EditText notesInput;
     Spinner statusSpinner;
 
@@ -36,7 +35,6 @@ public class AddTravelNotesActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         titleInput = (EditText)findViewById(R.id.addTitle);
-        platformInput = (EditText)findViewById(R.id.addPlatform);
         notesInput = (EditText)findViewById(R.id.addNotes);
         statusSpinner = (Spinner)findViewById(R.id.statusSpinner);
 
@@ -62,7 +60,6 @@ public class AddTravelNotesActivity extends AppCompatActivity {
         String curDate = AddTravelNotesActivity.getSimpleCurrentDate();
         // Retrieve the input from the user
         String title = titleInput.getText().toString();
-        String platform = platformInput.getText().toString();
         String TravelNotesStatus = statusSpinner.getSelectedItem().toString();
         String notes = notesInput.getText().toString();
         if ((title != null) && title.isEmpty()) {
@@ -70,16 +67,11 @@ public class AddTravelNotesActivity extends AppCompatActivity {
             // That the title field is empty
             AddTravelNotesActivity.setErrorText(titleInput, getString(R.string.title_is_required));
             showToast(getString(R.string.title_field_is_empty));
-        } else if ((platform != null) && platform.isEmpty()) {
-            // Make EditText platformInput display an error message, and display a toast
-            // That the platform field is empty
-            AddTravelNotesActivity.setErrorText(platformInput, getString(R.string.platform_is_required));
-            showToast(getString(R.string.platform_field_is_empty));
         } else {
             // Create a DBCRUD object, and pass it the context of this activity
             DataSource dataSource = new DataSource(this);
             // Make a travelNotes object based on the input. The correct id will be set in DBCRUD.saveTravelNotes()
-            TravelNotes travelNotes = new TravelNotes(-1, title, platform, curDate, TravelNotesStatus, notes);
+            TravelNotes travelNotes = new TravelNotes(-1, title, curDate, TravelNotesStatus, notes);
             // Save the travelNotes to the Database
             dataSource.saveTravelNotes(travelNotes);
             // Notify the user with a toast that the travelNotes has been added

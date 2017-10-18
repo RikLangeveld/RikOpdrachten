@@ -23,14 +23,10 @@ public class TravelNotesDetailsActivity extends AppCompatActivity
 
     private TravelNotes travelNotes;
     private TextView title;
-    private TextView platform;
     private TextView status;
     private TextView date;
     private TextView notes;
 
-    /*Open TravelNotesDetailsActivity.java, declare a TravelNotes object and five TextView objects.
-    Call them title, platform, status, date and notes. Inside a separate method (called from ‘onCreate’ of course), initialize the TextViews.
-    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +55,6 @@ public class TravelNotesDetailsActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
-        //Set the TravelNotes Card with updated travelNotes
         travelNotes = (TravelNotes) data.getSerializableExtra("selectedGame");
         setGameViews();
     }
@@ -67,13 +62,11 @@ public class TravelNotesDetailsActivity extends AppCompatActivity
 
     public void setGameViews(){
         title = (TextView)findViewById(R.id.detailTitle);
-        platform = (TextView)findViewById(R.id.detailPlatformB);
         status = (TextView)findViewById(R.id.detailStatusB);
         date = (TextView)findViewById(R.id.detailDateB);
         notes = (TextView)findViewById(R.id.detailNotesB);
 
         title.setText(travelNotes.getTitle().toString());
-        platform.setText(travelNotes.getPlatform().toString());
         status.setText(travelNotes.getTravelNotesStatus().toString());
         date.setText(travelNotes.getDateAdded().toString());
         notes.setText(travelNotes.getNotes().toString());
