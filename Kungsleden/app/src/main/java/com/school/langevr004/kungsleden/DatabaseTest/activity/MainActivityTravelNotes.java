@@ -29,7 +29,7 @@ import java.util.List;
 public class MainActivityTravelNotes extends AppCompatActivity
         implements ConfirmDeleteDialog.ConfirmDeleteDialogListener
 {
-    private RecyclerView gameListView;
+    private RecyclerView travelNotesListView;
     private TravelNotesListItemAdapter mAdapter;
     private List<TravelNotes> mTravelNotes;
 
@@ -41,16 +41,16 @@ public class MainActivityTravelNotes extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        gameListView = (RecyclerView) findViewById(R.id.travelNotesList);
+        travelNotesListView = (RecyclerView) findViewById(R.id.travelNotesList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-        gameListView.setLayoutManager(mLayoutManager);
-        gameListView.setHasFixedSize(true);
+        travelNotesListView.setLayoutManager(mLayoutManager);
+        travelNotesListView.setHasFixedSize(true);
 
         //Adding ItemAnimator
         RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
         itemAnimator.setAddDuration(100L);
         itemAnimator.setRemoveDuration(100L);
-        gameListView.setItemAnimator(itemAnimator);
+        travelNotesListView.setItemAnimator(itemAnimator);
 
         //Adding Gestures, this makes you possible to swipe and move cards inside the ListView
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP
@@ -58,33 +58,28 @@ public class MainActivityTravelNotes extends AppCompatActivity
         {
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                // Swap the Cards
+
                 Collections.swap(mTravelNotes, viewHolder.getAdapterPosition(), target.getAdapterPosition());
-                // Notify com.example.test.gamesbacklog.adapter Content has changed
                 mAdapter.updateList(mTravelNotes);
                 mAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
-                // Create a DataSource object, and pass it the context of this activity
+
                 DataSource dataSource = new DataSource(MainActivityTravelNotes.this);
-                // Delete the list of games from Database
                 dataSource.deleteAll();
-                for (TravelNotes game : mTravelNotes) {
-                    dataSource.saveTravelNotes(game);
+                for (TravelNotes travelNotes : mTravelNotes) {
+                    dataSource.saveTravelNotes(travelNotes);
                 }
                 return true;
             }
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                //Remove swiped item from list and notify the RecyclerView
-                // Create a DataSource object, and pass it the context of this activity
-                DataSource dataSource = new DataSource(MainActivityTravelNotes.this);
-                // Delete the list of games from Database
-                dataSource.deleteGame(mTravelNotes.get(viewHolder.getAdapterPosition()).getId());
 
-                // Remove game from temporary list
+                DataSource dataSource = new DataSource(MainActivityTravelNotes.this);
+
+                dataSource.deleteTravelNotes(mTravelNotes.get(viewHolder.getAdapterPosition()).getId());
+
                 mTravelNotes.remove(viewHolder.getAdapterPosition());
 
-                // Notify com.example.test.gamesbacklog.adapter Content has changed
                 mAdapter.updateList(mTravelNotes);
                 mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
                 mAdapter.notifyItemRangeChanged(viewHolder.getAdapterPosition(), mTravelNotes.size());
@@ -100,7 +95,7 @@ public class MainActivityTravelNotes extends AppCompatActivity
         };
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
-        itemTouchHelper.attachToRecyclerView(gameListView);
+        itemTouchHelper.attachToRecyclerView(travelNotesListView);
         //updateUI();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -146,11 +141,11 @@ public class MainActivityTravelNotes extends AppCompatActivity
 
     private void updateUI() {
         DataSource dataSource = new DataSource(this);
-        // Get the list of games from Database
-        mTravelNotes = dataSource.getGames();
+
+        mTravelNotes = dataSource.getTravelNotes();
         if (mAdapter == null) {
             mAdapter = new TravelNotesListItemAdapter(mTravelNotes, this);
-            gameListView.setAdapter(mAdapter);
+            travelNotesListView.setAdapter(mAdapter);
         } else {
             mAdapter.updateList(mTravelNotes);
             mAdapter.notifyDataSetChanged();
@@ -160,12 +155,9 @@ public class MainActivityTravelNotes extends AppCompatActivity
     @Override
     public void onDialogPositiveClick(DialogFragment dialog)
     {
-        //User clicked on the confirm button of the Dialog, delete the game from Database
         DataSource dataSource = new DataSource(this);
-        //Delete all games
         dataSource.deleteAll();
-        //Games have been deleted, go back to the MainActivityTravelNotes
-        showGameDeletedToast();
+        showTravelNotesDeletedToast();
         finish();
     }
 
@@ -175,7 +167,7 @@ public class MainActivityTravelNotes extends AppCompatActivity
         //Do nothing, Dialog will disappear
     }
 
-    private void showGameDeletedToast()
+    private void showTravelNotesDeletedToast()
     {
         Context context = getApplicationContext();
         String text = getString(R.string.games_deleted);

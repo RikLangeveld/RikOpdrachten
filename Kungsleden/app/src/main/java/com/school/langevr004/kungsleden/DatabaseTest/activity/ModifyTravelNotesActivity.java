@@ -35,23 +35,21 @@ public class ModifyTravelNotesActivity extends AppCompatActivity
     private ArrayAdapter statusAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_travel_notes);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Get the selected travelNotes that we've sent from TravelNotesDetailsActivity
         Intent intent = getIntent();
         travelNotes = (TravelNotes) intent.getSerializableExtra("selectedGame");
-        setGameView();
-        //Create on ArrayAdapter using the string array and a default spinner layout
+        setTravelNotesView();
         statusAdapter = ArrayAdapter.createFromResource(this,
                 R.array.game_status, android.R.layout.simple_spinner_item);
 
-        // Specify the layout to use when the list of choices appears
+
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //Set the com.example.test.gamesbacklog.adapter to the spinner
         statusSpinner.setAdapter(statusAdapter);
         setSpinnerPosition(statusAdapter);
 
@@ -64,13 +62,12 @@ public class ModifyTravelNotesActivity extends AppCompatActivity
         });
     }
 
-    private void setGameView() {
-        //declare textfields
+    private void setTravelNotesView()
+    {
         titleInput = (EditText)findViewById(R.id.modifyTitle);
         platformInput = (EditText)findViewById(R.id.modifyPlatform);
         statusSpinner = (Spinner)findViewById(R.id.modifyStatusSpinner);
         notesInput = (EditText)findViewById(R.id.modifyNotes);
-        //Set travelNotes data in edit textfields
         titleInput.setText(travelNotes.getTitle());
         platformInput.setText(travelNotes.getPlatform());
         notesInput.setText(travelNotes.getNotes());
@@ -78,10 +75,10 @@ public class ModifyTravelNotesActivity extends AppCompatActivity
 
 
     private void setSpinnerPosition(ArrayAdapter adapter){
-        if (!travelNotes.getGameStatus().equals(null)){
+        if (!travelNotes.getTravelNotesStatus().equals(null)){
             //Gets the position of the correct spinner item by comparing
             //which item of the Spinner matches with the gameStatus
-            int spinnerPosition = adapter.getPosition(travelNotes.getGameStatus());
+            int spinnerPosition = adapter.getPosition(travelNotes.getTravelNotesStatus());
             //Display the correct gameStatus in the Spinner based on the found position
             statusSpinner.setSelection(spinnerPosition);
         }
@@ -108,12 +105,12 @@ public class ModifyTravelNotesActivity extends AppCompatActivity
             // Update the travelNotes with the new data
             travelNotes.setTitle(title);
             travelNotes.setPlatform(platform);
-            travelNotes.setGameStatus(gameStatus);
+            travelNotes.setTravelNotesStatus(gameStatus);
             travelNotes.setNotes(notes);
 
             // Create a DataSource object, and pass it the context of this activity
             DataSource datasource = new DataSource (this);
-            datasource.modifyGame(travelNotes);
+            datasource.modifyTravelNotes(travelNotes);
 
             //Notify the user of the success
             showToast(getString(R.string.game_has_been_modified));

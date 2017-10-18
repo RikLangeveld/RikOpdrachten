@@ -50,21 +50,21 @@ public class DataSource {
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TITLE, travelNotes.getTitle());
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_PLATFORM, travelNotes.getPlatform());
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_DATE, travelNotes.getDateAdded());
-        values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_STATUS, travelNotes.getGameStatus());
+        values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_STATUS, travelNotes.getTravelNotesStatus());
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_NOTES, travelNotes.getNotes());
         // Inserting Row
         mDatabase.insert(TravelNotesContract.TravelNotesEntry.TABLE_NAME, null, values);
         close(); // Closing database connection
     }
 
-    public void modifyGame(TravelNotes travelNotes) {
+    public void modifyTravelNotes(TravelNotes travelNotes) {
         // Open connection to write data
         open();
         ContentValues values = new ContentValues();
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TITLE, travelNotes.getTitle());
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_PLATFORM, travelNotes.getPlatform());
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_DATE, travelNotes.getDateAdded());
-        values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_STATUS, travelNotes.getGameStatus());
+        values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_STATUS, travelNotes.getTravelNotesStatus());
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_NOTES, travelNotes.getNotes());
 
         mDatabase.update(TravelNotesContract.TravelNotesEntry.TABLE_NAME, values, TravelNotesContract.TravelNotesEntry.COLUMN_NAME_ID + "= ?", new String[]{String.valueOf(travelNotes.getId())});
@@ -75,10 +75,7 @@ public class DataSource {
         return mDatabase.query(TravelNotesContract.TravelNotesEntry.TABLE_NAME, GAMES_ALL_COLUMNS, null, null, null, null, null);
     }
 
-
-
-
-    public List<TravelNotes> getGames() // Get all games
+    public List<TravelNotes> getTravelNotes()
     {
         //Open connection to read only
         mDatabase = mDBHelper.getReadableDatabase();
@@ -104,7 +101,7 @@ public class DataSource {
                 travelNotes.setTitle(cursor.getString(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TITLE)));
                 travelNotes.setPlatform(cursor.getString(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_PLATFORM)));
                 travelNotes.setDateAdded(cursor.getString(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_DATE)));
-                travelNotes.setGameStatus(cursor.getString(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_STATUS)));
+                travelNotes.setTravelNotesStatus(cursor.getString(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_STATUS)));
                 travelNotes.setNotes(cursor.getString(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_NOTES)));
                 travelNotesList.add(travelNotes);
 
@@ -115,7 +112,7 @@ public class DataSource {
         return travelNotesList;
     }
 
-    public void deleteGame(long user_Id) {
+    public void deleteTravelNotes(long user_Id) {
         open();
         // It's a good practice to use parameter ?, instead of concatenate string
         mDatabase.delete(TravelNotesContract.TravelNotesEntry.TABLE_NAME, TravelNotesContract.TravelNotesEntry.COLUMN_NAME_ID + " =?",

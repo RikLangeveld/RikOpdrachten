@@ -81,7 +81,7 @@ public class TravelNotesListItemAdapter extends RecyclerView.Adapter<TravelNotes
         public void populateRow(TravelNotes travelNotes) {
             title.setText(travelNotes.getTitle());
             platform.setText(travelNotes.getPlatform());
-            status.setText(travelNotes.getGameStatus());
+            status.setText(travelNotes.getTravelNotesStatus());
             date.setText(travelNotes.getDateAdded());
         }
     }

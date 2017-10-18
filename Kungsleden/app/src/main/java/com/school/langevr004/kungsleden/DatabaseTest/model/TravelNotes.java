@@ -56,11 +56,11 @@ public class TravelNotes implements Serializable {
         this.dateAdded = dateAdded;
     }
 
-    public String getGameStatus() {
+    public String getTravelNotesStatus() {
         return gameStatus;
     }
 
-    public void setGameStatus(String gameStatus) {
+    public void setTravelNotesStatus(String gameStatus) {
         this.gameStatus = gameStatus;
     }
 

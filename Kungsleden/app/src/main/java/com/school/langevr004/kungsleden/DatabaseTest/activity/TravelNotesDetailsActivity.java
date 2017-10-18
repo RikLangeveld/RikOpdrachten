@@ -74,7 +74,7 @@ public class TravelNotesDetailsActivity extends AppCompatActivity
 
         title.setText(travelNotes.getTitle().toString());
         platform.setText(travelNotes.getPlatform().toString());
-        status.setText(travelNotes.getGameStatus().toString());
+        status.setText(travelNotes.getTravelNotesStatus().toString());
         date.setText(travelNotes.getDateAdded().toString());
         notes.setText(travelNotes.getNotes().toString());
     }
@@ -94,9 +94,9 @@ public class TravelNotesDetailsActivity extends AppCompatActivity
         //User clicked on the confirm button of the Dialog, delete the travelNotes from Database
         DataSource datasource = new DataSource(this);
         //We only need the id of the travelNotes to delete it
-        datasource.deleteGame(travelNotes.getId());
+        datasource.deleteTravelNotes(travelNotes.getId());
         //TravelNotes has been deleted, go back to the MainActivityTravelNotes
-        showGameDeletedToast();
+        showTravelNotesDeletedToast();
         finish();
     }
 
@@ -106,7 +106,7 @@ public class TravelNotesDetailsActivity extends AppCompatActivity
         //Do nothing, Dialog will disappear
     }
 
-    private void showGameDeletedToast()
+    private void showTravelNotesDeletedToast()
     {
         Context context = getApplicationContext();
         String text = String.format("%s %s", travelNotes.getTitle(), getString(R.string.game_deleted));
