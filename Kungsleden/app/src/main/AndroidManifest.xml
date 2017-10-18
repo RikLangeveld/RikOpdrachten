@@ -38,10 +38,15 @@
             android:name=".DatabaseTest.activity.ModifyTravelNotesActivity"
             android:label="@string/title_activity_modify_travel_note"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-
-        <activity android:name=".cabinInfo" />
-        <activity android:name=".AllCabins" />
-        <activity android:name=".DatabaseTest.activity.MainActivityTravelNotes"></activity>
+        <activity
+            android:name=".cabinInfo"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".AllCabins"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".DatabaseTest.activity.MainActivityTravelNotes"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
     </application>
 
