@@ -56,13 +56,13 @@ public class TravelNotesListItemAdapter extends RecyclerView.Adapter<TravelNotes
     }
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView title;
-        private final TextView status;
+        private final TextView trail;
         private final TextView date;
         //initialize the variables
         public ViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.travelNotesTitle);
-            status = (TextView) view.findViewById(R.id.travelNotesStatus);
+            trail = (TextView) view.findViewById(R.id.travelNotesTrail);
             date = (TextView) view.findViewById(R.id.travelNotesDate);
             view.setOnClickListener(this);
         }
@@ -76,7 +76,7 @@ public class TravelNotesListItemAdapter extends RecyclerView.Adapter<TravelNotes
 
         public void populateRow(TravelNotes travelNotes) {
             title.setText(travelNotes.getTitle());
-            status.setText(travelNotes.getTravelNotesStatus());
+            trail.setText(travelNotes.getTravelNotesTrail());
             date.setText(travelNotes.getDateAdded());
         }
     }

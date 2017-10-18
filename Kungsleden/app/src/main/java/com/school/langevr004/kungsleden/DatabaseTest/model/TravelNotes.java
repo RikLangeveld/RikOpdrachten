@@ -46,11 +46,11 @@ public class TravelNotes implements Serializable {
         this.dateAdded = dateAdded;
     }
 
-    public String getTravelNotesStatus() {
+    public String getTravelNotesTrail() {
         return trail;
     }
 
-    public void setTravelNotesStatus(String trail) {
+    public void setTravelNotesTrail(String trail) {
         this.trail = trail;
     }
 

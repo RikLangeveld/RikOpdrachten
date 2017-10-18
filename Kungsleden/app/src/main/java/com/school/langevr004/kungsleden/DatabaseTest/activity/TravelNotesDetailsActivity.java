@@ -23,7 +23,7 @@ public class TravelNotesDetailsActivity extends AppCompatActivity
 
     private TravelNotes travelNotes;
     private TextView title;
-    private TextView status;
+    private TextView trail;
     private TextView date;
     private TextView notes;
 
@@ -62,12 +62,12 @@ public class TravelNotesDetailsActivity extends AppCompatActivity
 
     public void setTravelNotesViews(){
         title = (TextView)findViewById(R.id.detailTitle);
-        status = (TextView)findViewById(R.id.detailStatusB);
+        trail = (TextView)findViewById(R.id.detailTrailB);
         date = (TextView)findViewById(R.id.detailDateB);
         notes = (TextView)findViewById(R.id.detailNotesB);
 
         title.setText(travelNotes.getTitle().toString());
-        status.setText(travelNotes.getTravelNotesStatus().toString());
+        trail.setText(travelNotes.getTravelNotesTrail().toString());
         date.setText(travelNotes.getDateAdded().toString());
         notes.setText(travelNotes.getNotes().toString());
     }

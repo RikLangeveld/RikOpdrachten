@@ -45,7 +45,7 @@ public class ModifyTravelNotesActivity extends AppCompatActivity
         travelNotes = (TravelNotes) intent.getSerializableExtra("selectedGame");
         setTravelNotesView();
         statusAdapter = ArrayAdapter.createFromResource(this,
-                R.array.travel_notes_status, android.R.layout.simple_spinner_item);
+                R.array.travel_notes_trail, android.R.layout.simple_spinner_item);
 
 
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -72,10 +72,10 @@ public class ModifyTravelNotesActivity extends AppCompatActivity
 
 
     private void setSpinnerPosition(ArrayAdapter adapter){
-        if (!travelNotes.getTravelNotesStatus().equals(null)){
+        if (!travelNotes.getTravelNotesTrail().equals(null)){
             //Gets the position of the correct spinner item by comparing
             //which item of the Spinner matches with the gameStatus
-            int spinnerPosition = adapter.getPosition(travelNotes.getTravelNotesStatus());
+            int spinnerPosition = adapter.getPosition(travelNotes.getTravelNotesTrail());
             //Display the correct gameStatus in the Spinner based on the found position
             statusSpinner.setSelection(spinnerPosition);
         }
@@ -95,7 +95,7 @@ public class ModifyTravelNotesActivity extends AppCompatActivity
         } else {
             // Update the travelNotes with the new data
             travelNotes.setTitle(title);
-            travelNotes.setTravelNotesStatus(trail);
+            travelNotes.setTravelNotesTrail(trail);
             travelNotes.setNotes(notes);
 
             // Create a DataSource object, and pass it the context of this activity

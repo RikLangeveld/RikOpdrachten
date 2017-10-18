@@ -63,7 +63,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/detailStatusB"
+                    android:id="@+id/detailTrailB"
                     android:textColor="#000000"
                     android:textSize="20sp"/>
             </LinearLayout>

@@ -48,7 +48,7 @@ public class DataSource {
         ContentValues values = new ContentValues();
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TITLE, travelNotes.getTitle());
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_DATE, travelNotes.getDateAdded());
-        values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TRAIL, travelNotes.getTravelNotesStatus());
+        values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TRAIL, travelNotes.getTravelNotesTrail());
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_NOTES, travelNotes.getNotes());
         // Inserting Row
         mDatabase.insert(TravelNotesContract.TravelNotesEntry.TABLE_NAME, null, values);
@@ -61,7 +61,7 @@ public class DataSource {
         ContentValues values = new ContentValues();
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TITLE, travelNotes.getTitle());
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_DATE, travelNotes.getDateAdded());
-        values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TRAIL, travelNotes.getTravelNotesStatus());
+        values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TRAIL, travelNotes.getTravelNotesTrail());
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_NOTES, travelNotes.getNotes());
 
         mDatabase.update(TravelNotesContract.TravelNotesEntry.TABLE_NAME, values, TravelNotesContract.TravelNotesEntry.COLUMN_NAME_ID + "= ?", new String[]{String.valueOf(travelNotes.getId())});
@@ -96,7 +96,7 @@ public class DataSource {
                 travelNotes.setId(cursor.getInt(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_ID)));
                 travelNotes.setTitle(cursor.getString(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TITLE)));
                 travelNotes.setDateAdded(cursor.getString(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_DATE)));
-                travelNotes.setTravelNotesStatus(cursor.getString(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TRAIL)));
+                travelNotes.setTravelNotesTrail(cursor.getString(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TRAIL)));
                 travelNotes.setNotes(cursor.getString(cursor.getColumnIndex(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_NOTES)));
                 travelNotesList.add(travelNotes);
 

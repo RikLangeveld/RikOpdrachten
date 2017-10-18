@@ -31,7 +31,7 @@
     <string name="menu_action_cancel">Cancel</string>
 
     <!--String that we are going to use for the Spinner-->
-    <string-array name="travel_notes_status">
+    <string-array name="travel_notes_trail">
         <item>Kungsleden</item>
         <item>West Highland Way</item>
     </string-array>

@@ -25,7 +25,7 @@ public class AddTravelNotesActivity extends AppCompatActivity {
 
     EditText titleInput;
     EditText notesInput;
-    Spinner statusSpinner;
+    Spinner trailSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +36,15 @@ public class AddTravelNotesActivity extends AppCompatActivity {
 
         titleInput = (EditText)findViewById(R.id.addTitle);
         notesInput = (EditText)findViewById(R.id.addNotes);
-        statusSpinner = (Spinner)findViewById(R.id.statusSpinner);
+        trailSpinner = (Spinner)findViewById(R.id.trailSpinner);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter statusAdapter = ArrayAdapter.createFromResource(this,
-                R.array.travel_notes_status, android.R.layout.simple_spinner_item);
+        ArrayAdapter trailAdapter = ArrayAdapter.createFromResource(this,
+                R.array.travel_notes_trail, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
-        statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        trailAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        statusSpinner.setAdapter(statusAdapter);
+        trailSpinner.setAdapter(trailAdapter);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -60,7 +60,7 @@ public class AddTravelNotesActivity extends AppCompatActivity {
         String curDate = AddTravelNotesActivity.getSimpleCurrentDate();
         // Retrieve the input from the user
         String title = titleInput.getText().toString();
-        String TravelNotesStatus = statusSpinner.getSelectedItem().toString();
+        String TravelNotesTrail = trailSpinner.getSelectedItem().toString();
         String notes = notesInput.getText().toString();
         if ((title != null) && title.isEmpty()) {
             // Make EditText titleInput display an error message, and display a toast
@@ -71,7 +71,7 @@ public class AddTravelNotesActivity extends AppCompatActivity {
             // Create a DBCRUD object, and pass it the context of this activity
             DataSource dataSource = new DataSource(this);
             // Make a travelNotes object based on the input. The correct id will be set in DBCRUD.saveTravelNotes()
-            TravelNotes travelNotes = new TravelNotes(-1, title, curDate, TravelNotesStatus, notes);
+            TravelNotes travelNotes = new TravelNotes(-1, title, curDate, TravelNotesTrail, notes);
             // Save the travelNotes to the Database
             dataSource.saveTravelNotes(travelNotes);
             // Notify the user with a toast that the travelNotes has been added
