@@ -51,7 +51,7 @@ public class ConfirmDeleteDialog extends DialogFragment {
                         mListener.onDialogPositiveClick(ConfirmDeleteDialog.this);
                     }
                 })
-                .setNegativeButton(R.string.dialog_game_deletion_negative, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.dialog_travel_note_deletion_negative, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         // Activate method onDialogNegativeClick inside implementing class

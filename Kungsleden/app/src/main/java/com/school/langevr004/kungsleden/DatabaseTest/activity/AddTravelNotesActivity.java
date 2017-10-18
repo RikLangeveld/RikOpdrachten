@@ -42,7 +42,7 @@ public class AddTravelNotesActivity extends AppCompatActivity {
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter statusAdapter = ArrayAdapter.createFromResource(this,
-                R.array.game_status, android.R.layout.simple_spinner_item);
+                R.array.travel_notes_status, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -83,7 +83,7 @@ public class AddTravelNotesActivity extends AppCompatActivity {
             // Save the travelNotes to the Database
             dataSource.saveTravelNotes(travelNotes);
             // Notify the user with a toast that the travelNotes has been added
-            showToast(getString(R.string.game_has_been_added));
+            showToast(getString(R.string.travel_note_has_been_added));
 
             // Go back to MainActivityTravelNotes
             finish();

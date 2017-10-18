@@ -46,7 +46,7 @@ public class ModifyTravelNotesActivity extends AppCompatActivity
         travelNotes = (TravelNotes) intent.getSerializableExtra("selectedGame");
         setTravelNotesView();
         statusAdapter = ArrayAdapter.createFromResource(this,
-                R.array.game_status, android.R.layout.simple_spinner_item);
+                R.array.travel_notes_status, android.R.layout.simple_spinner_item);
 
 
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -113,7 +113,7 @@ public class ModifyTravelNotesActivity extends AppCompatActivity
             datasource.modifyTravelNotes(travelNotes);
 
             //Notify the user of the success
-            showToast(getString(R.string.game_has_been_modified));
+            showToast(getString(R.string.travel_note_has_been_modified));
 
             // Starting the previous Intent
             Intent previousActivity = new Intent(this, TravelNotesDetailsActivity.class);
@@ -170,8 +170,8 @@ public class ModifyTravelNotesActivity extends AppCompatActivity
             // Show the ConfirmDiscardDialog
             DialogFragment dialog = new ConfirmDeleteDialog();
             Bundle bundle = new Bundle();
-            bundle.putString("message", getString(R.string.dialog_game_discard));
-            bundle.putString("positiveButton", getString(R.string.dialog_game_modify_positive));
+            bundle.putString("message", getString(R.string.dialog_travel_note_discard));
+            bundle.putString("positiveButton", getString(R.string.dialog_travel_notes_modify_positive));
             dialog.setArguments(bundle);
             dialog.show(getFragmentManager(), "ConfirmDeleteDialog");
 

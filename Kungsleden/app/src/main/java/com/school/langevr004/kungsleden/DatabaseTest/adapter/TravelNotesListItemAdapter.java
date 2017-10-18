@@ -62,10 +62,10 @@ public class TravelNotesListItemAdapter extends RecyclerView.Adapter<TravelNotes
         //initialize the variables
         public ViewHolder(View view) {
             super(view);
-            title = (TextView) view.findViewById(R.id.gameTitle);
-            platform = (TextView) view.findViewById(R.id.gamePlatform);
-            status = (TextView) view.findViewById(R.id.gameStatus);
-            date = (TextView) view.findViewById(R.id.gameDate);
+            title = (TextView) view.findViewById(R.id.travelNotesTitle);
+            platform = (TextView) view.findViewById(R.id.travelNotesPlatform);
+            status = (TextView) view.findViewById(R.id.travelNotesStatus);
+            date = (TextView) view.findViewById(R.id.travelNotesDate);
             view.setOnClickListener(this);
         }
         @Override

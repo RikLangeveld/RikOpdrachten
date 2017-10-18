@@ -109,7 +109,7 @@ public class TravelNotesDetailsActivity extends AppCompatActivity
     private void showTravelNotesDeletedToast()
     {
         Context context = getApplicationContext();
-        String text = String.format("%s %s", travelNotes.getTitle(), getString(R.string.game_deleted));
+        String text = String.format("%s %s", travelNotes.getTitle(), getString(R.string.travel_note_deleted));
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
@@ -124,8 +124,8 @@ public class TravelNotesDetailsActivity extends AppCompatActivity
             // Show the ConfirmDeleteDialog
             android.app.DialogFragment dialog = new ConfirmDeleteDialog();
             Bundle bundle = new Bundle();
-            bundle.putString("message", getString(R.string.dialog_game_deletion_single));
-            bundle.putString("positiveButton", getString(R.string.dialog_game_deletion_positive));
+            bundle.putString("message", getString(R.string.dialog_travel_note_deletion_single));
+            bundle.putString("positiveButton", getString(R.string.dialog_travel_notes_deletion_positive));
             dialog.setArguments(bundle);
             dialog.show(getFragmentManager(), "ConfirmDeleteDialog");
         }

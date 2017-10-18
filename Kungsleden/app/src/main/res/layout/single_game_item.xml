@@ -28,7 +28,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:id="@+id/gameTitle"
+                android:id="@+id/travelNotesTitle"
                 android:textSize="30sp"
                 android:textColor="#000000"
                 android:textStyle="italic"
@@ -48,7 +48,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/gamePlatform"
+                    android:id="@+id/travelNotesPlatform"
                     />
 
                 <TextView
@@ -56,14 +56,14 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/gameStatus" />
+                    android:id="@+id/travelNotesStatus" />
 
                 <TextView
                     android:text="Date"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/gameDate" />
+                    android:id="@+id/travelNotesDate" />
 
             </LinearLayout>
         </LinearLayout>
