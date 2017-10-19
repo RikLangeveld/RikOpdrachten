@@ -103,6 +103,7 @@ public class GeoObject {
 
     private String mGeoName;
     private int mGeoImageName;
+
     public GeoObject(String mGeoName, int mGeoImageName) {
         this.mGeoName = mGeoName;
         this.mGeoImageName = mGeoImageName;

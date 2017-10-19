@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/editText2"
                 android:layout_below="@+id/editText2"
-                android:text="Status"
+                android:text="Trail"
                 android:textSize="20sp" />
 
             <Spinner

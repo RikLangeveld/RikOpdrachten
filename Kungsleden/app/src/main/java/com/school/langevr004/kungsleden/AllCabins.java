@@ -21,7 +21,7 @@ public class AllCabins extends AppCompatActivity {
         }
 
         RecyclerView mGeoRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2); //2 cells per row
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1); //2 cells per row
         mGeoRecyclerView.setLayoutManager(mLayoutManager);
         CabinObjectAdapter mAdapter = new CabinObjectAdapter(this, mGeoObjects);
         mGeoRecyclerView.setAdapter(mAdapter);
