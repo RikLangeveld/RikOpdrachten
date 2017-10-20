@@ -16,6 +16,10 @@ public class AllCabins extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_cabins);
 
+        //Vind de toolbar en zet de tekst, (Zetten van de tekst van de toolbar gebeurd in manifest)
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         List<GeoObject> mGeoObjects = new ArrayList<>();
         for (int i = 0; i < GeoObject.PRE_DEFINED_GEO_OBJECT_NAMES.length; i++) {
             mGeoObjects.add(new GeoObject(GeoObject.PRE_DEFINED_GEO_OBJECT_NAMES[i], GeoObject.PRE_DEFINED_GEO_OBJECT_IMAGE_IDS[i]));
