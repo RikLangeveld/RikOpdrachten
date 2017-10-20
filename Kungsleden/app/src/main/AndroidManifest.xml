@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
-            android:name="MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -31,23 +31,23 @@
             android:label="@string/title_activity_add_travel_note"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name= ".DatabaseTest.activity.TravelNotesDetailsActivity"
+            android:name=".DatabaseTest.activity.TravelNotesDetailsActivity"
             android:label="@string/title_activity_travel_note_details"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".DatabaseTest.activity.ModifyTravelNotesActivity"
             android:label="@string/title_activity_modify_travel_note"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".cabinInfo"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AllCabins"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:label="Cabins"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".DatabaseTest.activity.MainActivityTravelNotes"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
