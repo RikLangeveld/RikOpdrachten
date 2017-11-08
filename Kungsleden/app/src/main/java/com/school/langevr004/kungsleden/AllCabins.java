@@ -21,8 +21,8 @@ public class AllCabins extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         List<GeoObject> mGeoObjects = new ArrayList<>();
-        for (int i = 0; i < GeoObject.PRE_DEFINED_GEO_OBJECT_NAMES.length; i++) {
-            mGeoObjects.add(new GeoObject(GeoObject.PRE_DEFINED_GEO_OBJECT_NAMES[i], GeoObject.PRE_DEFINED_GEO_OBJECT_IMAGE_IDS[i]));
+        for (int i = 0; i < GeoObject.PRE_DEFINED_CABINS.length; i++) {
+            mGeoObjects.add(new GeoObject(GeoObject.PRE_DEFINED_CABINS[i].title, GeoObject.PRE_DEFINED_CABINS[i].imageCabin));
         }
 
         RecyclerView mGeoRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);

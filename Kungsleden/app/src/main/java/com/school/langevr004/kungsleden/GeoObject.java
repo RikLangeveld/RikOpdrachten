@@ -32,7 +32,7 @@ public class GeoObject {
             Viterskalet_LAT = 65.88502, Viterskalet_LNG = 15.15836,
             Hemavan_LAT = 65.81733, Hemavan_LNG = 15.09059;
 
-    public static final String[] PRE_DEFINED_GEO_OBJECT_NAMES = {
+    private static final String[] PRE_DEFINED_GEO_OBJECT_NAMES = {
             "Cabin Abisko",
             "Cabin ABISKOJAURE",
             "Cabin Alesjaurestugorna",
@@ -55,7 +55,7 @@ public class GeoObject {
             "Cabin Hemavan"
     };
 
-    public static final int[] PRE_DEFINED_GEO_OBJECT_IMAGE_IDS = {
+    private static final int[] PRE_DEFINED_GEO_OBJECT_IMAGE_IDS = {
             R.drawable.placeholder_cabin,
             R.drawable.abiskojaure,
             R.drawable.placeholder_cabin,
@@ -78,7 +78,7 @@ public class GeoObject {
             R.drawable.placeholder_cabin,
     };
 
-    public static final GeoPoint[] PRE_DEFINED_CABIN_OBJECT_POINT = {
+    private static final GeoPoint[] PRE_DEFINED_CABIN_OBJECT_POINT = {
             new GeoPoint(ABISKO_LAT, ABISO_LNG),
             new GeoPoint(ABISKOJAURE_LAT, ABISKOJAURE_LNG),
             new GeoPoint(Alesjaurestugorna_LAT, Alesjaurestugorna_LNG),

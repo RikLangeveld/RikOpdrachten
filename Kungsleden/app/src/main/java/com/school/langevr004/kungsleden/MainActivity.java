@@ -123,9 +123,9 @@ public class MainActivity extends AppCompatActivity {
         GeoPoint startPoint = new GeoPoint(Aktse_LAT, Aktse_LNG);
         mapController.setCenter(startPoint);
 
-        for (int i = 0; i < GeoObject.PRE_DEFINED_GEO_OBJECT_NAMES.length; i++)
+        for (int i = 0; i < GeoObject.PRE_DEFINED_CABINS.length; i++)
         {
-            placeMarker(GeoObject.PRE_DEFINED_CABIN_OBJECT_POINT[i], R.drawable.cabin_map_marker, GeoObject.PRE_DEFINED_GEO_OBJECT_NAMES[i], "empty", "empty");
+            placeMarker(GeoObject.PRE_DEFINED_CABINS[i].geoPoint, R.drawable.cabin_map_marker, GeoObject.PRE_DEFINED_CABINS[i].title, "empty", "empty");
         }
     }
 
