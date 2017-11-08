@@ -101,6 +101,10 @@ public class GeoObject {
             new GeoPoint(Hemavan_LAT, Hemavan_LNG),
     };
 
+    public static final Cabin[] PRE_DEFINED_CABINS = {
+            new Cabin(PRE_DEFINED_CABIN_OBJECT_POINT[0],PRE_DEFINED_GEO_OBJECT_NAMES[0], "description", PRE_DEFINED_GEO_OBJECT_IMAGE_IDS[0])
+    };
+
     private String mGeoName;
     private int mGeoImageName;
 
