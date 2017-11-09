@@ -19,7 +19,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     + TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TRAIL + " TEXT, "
                     + TravelNotesContract.TravelNotesEntry.COLUMN_NAME_NOTES + " TEXT )";
 
-    //Constructor
+    //Constructor voor het maken van de DBHelper
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }

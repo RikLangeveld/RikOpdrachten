@@ -29,6 +29,7 @@ public class DataSource {
             TravelNotesContract.TravelNotesEntry.COLUMN_NAME_NOTES };
 
 
+
     public DataSource(Context context) {
         mDBHelper = new DBHelper(context);
     }
@@ -107,15 +108,15 @@ public class DataSource {
         return travelNotesList;
     }
 
+    //Open de DB voert een Delere actie uit en sluit de connectie weer.
     public void deleteTravelNotes(long user_Id) {
         open();
-        // It's a good practice to use parameter ?, instead of concatenate string
         mDatabase.delete(TravelNotesContract.TravelNotesEntry.TABLE_NAME, TravelNotesContract.TravelNotesEntry.COLUMN_NAME_ID + " =?",
                 new String[]{Long.toString(user_Id)});
         close(); // Closing database connection
     }
 
-
+    //Open de DB voert een Delete all actie uit en sluit de connectie weer.
     public void deleteAll()
     {
         open();

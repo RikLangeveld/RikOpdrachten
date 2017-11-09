@@ -15,6 +15,7 @@ public class CabinObjectViewHolder extends RecyclerView.ViewHolder
     public ImageView geoImage;
     public View view;
 
+    //Constructor to save the refrence of a single item in the recyclerView
     public CabinObjectViewHolder(View itemView)
     {
         super(itemView);

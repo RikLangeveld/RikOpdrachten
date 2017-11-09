@@ -30,38 +30,41 @@ public class MainActivityTravelNotes extends AppCompatActivity
         implements ConfirmDeleteDialog.ConfirmDeleteDialogListener
 {
     private RecyclerView travelNotesListView;
-    private TravelNotesListItemAdapter mAdapter;
+    private TravelNotesListItemAdapter mTravelNotesListItemAdapter;
     private List<TravelNotes> mTravelNotes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        //Set activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_travel_notes);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Set de basis waarde van de RecyclerView
         travelNotesListView = (RecyclerView) findViewById(R.id.travelNotesList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         travelNotesListView.setLayoutManager(mLayoutManager);
         travelNotesListView.setHasFixedSize(true);
 
-        //Adding ItemAnimator
+        //Adding ItemAnimator voor de RecyclerView
         RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
         itemAnimator.setAddDuration(100L);
         itemAnimator.setRemoveDuration(100L);
         travelNotesListView.setItemAnimator(itemAnimator);
 
-        //Adding Gestures, this makes you possible to swipe and move cards inside the ListView
+        //Adding Gestures, dit maakt het mogelijk om items van de recyclerview te swipen
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP
                 | ItemTouchHelper.DOWN, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT)
         {
+            //Deze methode is er om het object van plaats te kunnen laten wisselen met degene er boven of onder.
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
 
                 Collections.swap(mTravelNotes, viewHolder.getAdapterPosition(), target.getAdapterPosition());
-                mAdapter.updateList(mTravelNotes);
-                mAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+                mTravelNotesListItemAdapter.updateList(mTravelNotes);
+                mTravelNotesListItemAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
 
                 DataSource dataSource = new DataSource(MainActivityTravelNotes.this);
                 dataSource.deleteAll();
@@ -71,6 +74,7 @@ public class MainActivityTravelNotes extends AppCompatActivity
                 return true;
             }
 
+            //Delete een item uit de Recycler view om objecten te verwijderen
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
 
@@ -80,12 +84,10 @@ public class MainActivityTravelNotes extends AppCompatActivity
 
                 mTravelNotes.remove(viewHolder.getAdapterPosition());
 
-                mAdapter.updateList(mTravelNotes);
-                mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
-                mAdapter.notifyItemRangeChanged(viewHolder.getAdapterPosition(), mTravelNotes.size());
+                mTravelNotesListItemAdapter.updateList(mTravelNotes);
+                mTravelNotesListItemAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                mTravelNotesListItemAdapter.notifyItemRangeChanged(viewHolder.getAdapterPosition(), mTravelNotes.size());
 
-                // Display toast with Feedback
-                //showToast(getString(R.string.swipe_delete));
                 Context context = getApplicationContext();
                 String text = String.format(getString(R.string.swipe_delete));
                 int duration = Toast.LENGTH_SHORT;
@@ -94,28 +96,29 @@ public class MainActivityTravelNotes extends AppCompatActivity
             }
         };
 
+        //This is a utility class to add swipe to dismiss and drag & drop support to RecyclerView.
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(travelNotesListView);
-        //updateUI();
 
+        //Onclick ga naar de AddTravelNotesActivity om objecten toe te voegen
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivityTravelNotes.this, AddTravelNotesActivity.class);
                 startActivity(intent);
-
             }
         });
     }
 
+    //Zet het menu voor de activity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
+    //onclick delete all the objects from the recyclerview
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -123,7 +126,7 @@ public class MainActivityTravelNotes extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_delete_all) {
-            // Show the ConfirmDeleteDialog
+            //ConfirmDeleteDialog box voor verwijderen
             DialogFragment dialog = new ConfirmDeleteDialog();
             Bundle bundle = new Bundle();
             bundle.putString("message", getString(R.string.dialog_travel_note_deletion_all));
@@ -139,19 +142,21 @@ public class MainActivityTravelNotes extends AppCompatActivity
         updateUI();
     }
 
+    //Update UI, get all the current travel notes
     private void updateUI() {
         DataSource dataSource = new DataSource(this);
 
         mTravelNotes = dataSource.getTravelNotes();
-        if (mAdapter == null) {
-            mAdapter = new TravelNotesListItemAdapter(mTravelNotes, this);
-            travelNotesListView.setAdapter(mAdapter);
+        if (mTravelNotesListItemAdapter == null) {
+            mTravelNotesListItemAdapter = new TravelNotesListItemAdapter(mTravelNotes, this);
+            travelNotesListView.setAdapter(mTravelNotesListItemAdapter);
         } else {
-            mAdapter.updateList(mTravelNotes);
-            mAdapter.notifyDataSetChanged();
+            mTravelNotesListItemAdapter.updateList(mTravelNotes);
+            mTravelNotesListItemAdapter.notifyDataSetChanged();
         }
     }
 
+    //Positive onclick confirmDeleteDialog Delete all travel notes
     @Override
     public void onDialogPositiveClick(DialogFragment dialog)
     {
@@ -161,10 +166,11 @@ public class MainActivityTravelNotes extends AppCompatActivity
         finish();
     }
 
+    //negative click onclick confirmDeleteDialog
     @Override
     public void onDialogNegativeClick(DialogFragment dialog)
     {
-        //Do nothing, Dialog will disappear
+        //Dialog venster verwijderd gebeurd niks
     }
 
     private void showTravelNotesDeletedToast()

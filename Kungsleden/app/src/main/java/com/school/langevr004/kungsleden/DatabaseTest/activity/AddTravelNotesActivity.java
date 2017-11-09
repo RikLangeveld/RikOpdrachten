@@ -57,6 +57,7 @@ public class AddTravelNotesActivity extends AppCompatActivity {
         });
     }
 
+
     void saveTravelNotes() {
         // Get the current date in numbered day-month-year format
         String curDate = AddTravelNotesActivity.getSimpleCurrentDate();
@@ -76,7 +77,7 @@ public class AddTravelNotesActivity extends AppCompatActivity {
             TravelNotes travelNotes = new TravelNotes(-1, title, curDate, TravelNotesTrail, notes);
             // Save the travelNotes to the Database
             dataSource.saveTravelNotes(travelNotes);
-            // Notify the user with a toast that the travelNotes has been added
+            // Stuur een bericht naar de gebruiker dat de note is toegevoegd
             showToast(getString(R.string.travel_note_has_been_added));
 
             // Go back to MainActivityTravelNotes
@@ -103,14 +104,14 @@ public class AddTravelNotesActivity extends AppCompatActivity {
     private static void setErrorText(EditText editText, String message) {
         // Get the color white in integer form
         int RGB = Color.argb(255, 255, 0, 0);
-// Object that contains the color white
+        // Object that contains the color white
         ForegroundColorSpan fgcspan = new ForegroundColorSpan(RGB);
-// Object that will hold the message, and makes it possible to change the color of the text
+        // Object that will hold the message, and makes it possible to change the color of the text
         SpannableStringBuilder ssbuilder = new SpannableStringBuilder(message);
-// Give the message from the first till the last character a white color.
-// The last '0' means that the message should not display additional behaviour
+        // Give the message from the first till the last character a white color.
+        // The last '0' means that the message should not display additional behaviour
         ssbuilder.setSpan(fgcspan, 0, message.length(), 0);
-// Make the EditText display the error message
+        // Make the EditText display the error message
         editText.setError(ssbuilder);
     }
 

@@ -1,9 +1,5 @@
 package com.school.langevr004.kungsleden.DatabaseTest.adapter;
 
-/**
- * Created by Remy on 26-9-2017.
- */
-
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
