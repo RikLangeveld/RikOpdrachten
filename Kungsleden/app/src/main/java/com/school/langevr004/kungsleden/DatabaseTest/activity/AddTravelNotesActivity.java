@@ -36,16 +36,14 @@ public class AddTravelNotesActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Zet alle refrences nodig voor de page
         titleInput = (EditText)findViewById(R.id.addTitle);
         notesInput = (EditText)findViewById(R.id.addNotes);
         trailSpinner = (Spinner)findViewById(R.id.trailSpinner);
 
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter trailAdapter = ArrayAdapter.createFromResource(this,
-                R.array.travel_notes_trail, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
+        // Create een ArrayAdapter met de lijst van lijt met trails, vervolgens wordt de layout gekozen die gebruikt moet worden.
+        ArrayAdapter trailAdapter = ArrayAdapter.createFromResource(this, R.array.travel_notes_trail, android.R.layout.simple_spinner_item);
         trailAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         trailSpinner.setAdapter(trailAdapter);
 
 
@@ -59,21 +57,20 @@ public class AddTravelNotesActivity extends AppCompatActivity {
 
 
     void saveTravelNotes() {
-        // Get the current date in numbered day-month-year format
+        //Sla de datum op om op te slaan waneer een note is gecreeërd
         String curDate = AddTravelNotesActivity.getSimpleCurrentDate();
-        // Retrieve the input from the user
+        //Sla de ingevoede data van de gebruiker op
         String title = titleInput.getText().toString();
         String TravelNotesTrail = trailSpinner.getSelectedItem().toString();
         String notes = notesInput.getText().toString();
         if ((title != null) && title.isEmpty()) {
-            // Make EditText titleInput display an error message, and display a toast
-            // That the title field is empty
+            // Zorgt dat je een title heb ingevoerd anders komt er een error message
             AddTravelNotesActivity.setErrorText(titleInput, getString(R.string.title_is_required));
             showToast(getString(R.string.title_field_is_empty));
         } else {
-            // Create a DBCRUD object, and pass it the context of this activity
+            // Create een DBCRUD object
             DataSource dataSource = new DataSource(this);
-            // Make a travelNotes object based on the input. The correct id will be set in DBCRUD.saveTravelNotes()
+            // maak een travelNotes object. (NOTE: de id wordt gezet in DBCRUD.saveTravelNotes())
             TravelNotes travelNotes = new TravelNotes(-1, title, curDate, TravelNotesTrail, notes);
             // Save the travelNotes to the Database
             dataSource.saveTravelNotes(travelNotes);
@@ -86,12 +83,12 @@ public class AddTravelNotesActivity extends AppCompatActivity {
     }
 
     private static String getSimpleCurrentDate() {
-        // Formatter that will convert dates into the day-month-year format
+        // Format dates
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         //Today's date, but with time included, which we don't want
-        Date today = new Date();
-        // Format.format returns a string
-        return format.format(today);
+        Date date = new Date();
+        // Format.format returns een string uit de dataformat class
+        return format.format(date);
     }
 
     private void showToast(String message) {
@@ -102,18 +99,10 @@ public class AddTravelNotesActivity extends AppCompatActivity {
     }
 
     private static void setErrorText(EditText editText, String message) {
-        // Get the color white in integer form
         int RGB = Color.argb(255, 255, 0, 0);
-        // Object that contains the color white
         ForegroundColorSpan fgcspan = new ForegroundColorSpan(RGB);
-        // Object that will hold the message, and makes it possible to change the color of the text
         SpannableStringBuilder ssbuilder = new SpannableStringBuilder(message);
-        // Give the message from the first till the last character a white color.
-        // The last '0' means that the message should not display additional behaviour
         ssbuilder.setSpan(fgcspan, 0, message.length(), 0);
-        // Make the EditText display the error message
         editText.setError(ssbuilder);
     }
-
-
 }
