@@ -8,6 +8,7 @@ import org.osmdroid.util.GeoPoint;
 
 public class GeoObject {
 
+    ///Coördinates van de hutten
     private static final double
             ABISKO_LAT = 68.349751, ABISO_LNG = 18.831246,
             KINGSTRAIL_LAT = 67.621841, KINGSTRAIL_LNG = 18.107538,
@@ -32,6 +33,7 @@ public class GeoObject {
             Viterskalet_LAT = 65.88502, Viterskalet_LNG = 15.15836,
             Hemavan_LAT = 65.81733, Hemavan_LNG = 15.09059;
 
+    //namen van de hutten
     private static final String[] PRE_DEFINED_GEO_OBJECT_NAMES = {
             "Cabin Abisko",
             "Cabin ABISKOJAURE",
@@ -55,6 +57,7 @@ public class GeoObject {
             "Cabin Hemavan"
     };
 
+    //omschijving van de hutten
     private static final int[] PRE_DEFINED_GEO_OBJECT_IMAGE_IDS = {
             R.drawable.placeholder_cabin,
             R.drawable.abiskojaure,
@@ -71,13 +74,14 @@ public class GeoObject {
             R.drawable.placeholder_cabin,
             R.drawable.placeholder_cabin,
             R.drawable.placeholder_cabin,
-            R.drawable.placeholder_cabin,
-            R.drawable.placeholder_cabin,
-            R.drawable.placeholder_cabin,
-            R.drawable.placeholder_cabin,
+            R.drawable.serve,
+            R.drawable.tarnasjo,
+            R.drawable.syter,
+            R.drawable.viterskalet,
             R.drawable.placeholder_cabin,
     };
 
+    //Geopoint samengesteld uit de coördinaten
     private static final GeoPoint[] PRE_DEFINED_CABIN_OBJECT_POINT = {
             new GeoPoint(ABISKO_LAT, ABISO_LNG),
             new GeoPoint(ABISKOJAURE_LAT, ABISKOJAURE_LNG),
@@ -101,6 +105,7 @@ public class GeoObject {
             new GeoPoint(Hemavan_LAT, Hemavan_LNG),
     };
 
+    //final objects van de Cabin class
     public static final Cabin[] PRE_DEFINED_CABINS = {
             new Cabin(PRE_DEFINED_CABIN_OBJECT_POINT[0],PRE_DEFINED_GEO_OBJECT_NAMES[0], "description", PRE_DEFINED_GEO_OBJECT_IMAGE_IDS[0]),
             new Cabin(PRE_DEFINED_CABIN_OBJECT_POINT[1],PRE_DEFINED_GEO_OBJECT_NAMES[1], "description", PRE_DEFINED_GEO_OBJECT_IMAGE_IDS[1]),
@@ -122,7 +127,6 @@ public class GeoObject {
             new Cabin(PRE_DEFINED_CABIN_OBJECT_POINT[17],PRE_DEFINED_GEO_OBJECT_NAMES[17], "description", PRE_DEFINED_GEO_OBJECT_IMAGE_IDS[17]),
             new Cabin(PRE_DEFINED_CABIN_OBJECT_POINT[18],PRE_DEFINED_GEO_OBJECT_NAMES[18], "description", PRE_DEFINED_GEO_OBJECT_IMAGE_IDS[18]),
             new Cabin(PRE_DEFINED_CABIN_OBJECT_POINT[19],PRE_DEFINED_GEO_OBJECT_NAMES[19], "description", PRE_DEFINED_GEO_OBJECT_IMAGE_IDS[19]),
-
     };
 
     private String mGeoName;

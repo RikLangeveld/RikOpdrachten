@@ -3,7 +3,6 @@ package com.school.langevr004.kungsleden;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,15 +31,16 @@ public class CabinObjectAdapter extends RecyclerView.Adapter<CabinObjectViewHold
         return new CabinObjectViewHolder(view);
     }
 
-
     @Override
     public void onBindViewHolder(final CabinObjectViewHolder holder, final int position) {
         // Gets a single item in the list from its position
         final GeoObject geoObject = listGeoObject.get(position);
+
         // The holder argument is used to reference the views inside the viewHolder
         // Populate the views with the data from the list
         holder.geoImage.setImageResource(geoObject.getmGeoImageName());
         holder.geoName.setText(geoObject.getmGeoName());
+
         // The whole layout is used for the onClickListener instead of individual views
         // inside the viewHolder
         holder.view.setOnClickListener(new View.OnClickListener() {

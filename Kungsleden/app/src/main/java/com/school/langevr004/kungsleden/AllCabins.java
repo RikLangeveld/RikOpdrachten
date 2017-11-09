@@ -26,7 +26,6 @@ public class AllCabins extends AppCompatActivity {
         for (int i = 0; i < GeoObject.PRE_DEFINED_CABINS.length; i++) {
             mGeoObjects.add(new GeoObject(GeoObject.PRE_DEFINED_CABINS[i].title, GeoObject.PRE_DEFINED_CABINS[i].imageCabin));
         }
-
         RecyclerView mGeoRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1); //2 cells per row
         mGeoRecyclerView.setLayoutManager(mLayoutManager);
