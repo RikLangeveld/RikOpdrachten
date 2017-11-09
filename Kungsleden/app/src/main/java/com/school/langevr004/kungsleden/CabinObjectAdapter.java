@@ -1,7 +1,9 @@
 package com.school.langevr004.kungsleden;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,8 @@ public class CabinObjectAdapter extends RecyclerView.Adapter<CabinObjectViewHold
 {
     private Context context;
     public List<GeoObject> listGeoObject;
+
+
     public CabinObjectAdapter(Context context, List<GeoObject> listGeoObject) {
         this.context = context;
         this.listGeoObject = listGeoObject;
@@ -43,6 +47,11 @@ public class CabinObjectAdapter extends RecyclerView.Adapter<CabinObjectViewHold
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, geoObject.getmGeoName() + " is selected",    Toast.LENGTH_SHORT).show();
+
+                //Create an Intent and specify which activity needs to be started.
+                Intent intent = new Intent(v.getContext(), cabinInfo.class);
+                intent.putExtra("cabinNumber", (byte) position);
+                context.startActivity(intent);
             }
         });
     }
