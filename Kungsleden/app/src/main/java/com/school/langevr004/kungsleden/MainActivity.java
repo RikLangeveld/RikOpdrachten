@@ -21,13 +21,15 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 
+/*
+Main activity, classe die de logic heeft van de startkaart en alle markers op het scherm zet.
+Ook het wisselen naar de andere activities wordt in deze classe geregeld
+ */
 public class MainActivity extends AppCompatActivity {
 
     private MapView mMap;
-    private final int START_ZOOM_LEVEL = 8;
-
-    //Start Coördinates map
-    private final double AKTSE_LAT = 67.14855, AKTSE_LNG = 18.30592;
+    private final int START_ZOOM_LEVEL = 8; //Level of zoom on the map on startup
+    private final double AKTSE_LAT = 67.14855, AKTSE_LNG = 18.30592; //Start Coördinates map
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override public void onCreate(Bundle savedInstanceState)
@@ -67,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         GeoPoint startPoint = new GeoPoint(AKTSE_LAT, AKTSE_LNG);
         mapController.setCenter(startPoint);
 
+        //Place all the markers on the map
         for (int i = 0; i < GeoObject.PRE_DEFINED_CABINS.length; i++)
         {
             placeMarker(GeoObject.PRE_DEFINED_CABINS[i], R.drawable.cabin_map_marker, GeoObject.PRE_DEFINED_CABINS[i].title, "", "", i);

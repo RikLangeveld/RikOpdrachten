@@ -2,8 +2,9 @@ package com.school.langevr004.kungsleden;
 
 import org.osmdroid.util.GeoPoint;
 
-/**
- * Created by langevr004 on 17-10-2017.
+/*
+ Class that holds all the information of the cabins that are displayed on the map. Being made up from cabin object (static) so it can
+ be accesed by whole project.
  */
 
 public class GeoObject {

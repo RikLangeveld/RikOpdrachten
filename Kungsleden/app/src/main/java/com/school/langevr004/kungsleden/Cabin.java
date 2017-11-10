@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable;
 import org.osmdroid.util.GeoPoint;
 
 /**
- * Created by langevr004 on 16-10-2017.
+ * Information of a single cabin (created in GeoObject project)
  */
 
 public class Cabin

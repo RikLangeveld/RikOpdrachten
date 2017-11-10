@@ -5,10 +5,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * Created by langevr004 on 17-10-2017.
- */
-
 public class CabinObjectViewHolder extends RecyclerView.ViewHolder
 {
     public TextView geoName;

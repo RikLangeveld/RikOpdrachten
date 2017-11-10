@@ -3,7 +3,6 @@ import java.io.Serializable;
 
 public class TravelNotes implements Serializable {
 
-    // Property help us to keep data
     private int id;
     private String title;
     private String dateAdded; // String, since you cannot save date/time values in SQLite

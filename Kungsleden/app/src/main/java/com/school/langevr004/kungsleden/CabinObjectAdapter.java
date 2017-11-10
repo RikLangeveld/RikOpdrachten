@@ -11,7 +11,7 @@ import android.widget.Toast;
 import java.util.List;
 
 /**
- * Created by langevr004 on 17-10-2017.
+ * Adapter to fill the recyclerview
  */
 
 public class CabinObjectAdapter extends RecyclerView.Adapter<CabinObjectViewHolder>

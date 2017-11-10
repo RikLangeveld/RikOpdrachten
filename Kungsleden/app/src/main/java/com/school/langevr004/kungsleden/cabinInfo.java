@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+/*
+Class to show information of a single item on the screen
+ */
 public class cabinInfo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
