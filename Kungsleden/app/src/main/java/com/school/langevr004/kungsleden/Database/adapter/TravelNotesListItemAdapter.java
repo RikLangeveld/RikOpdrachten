@@ -1,4 +1,4 @@
-package com.school.langevr004.kungsleden.DatabaseTest.adapter;
+package com.school.langevr004.kungsleden.Database.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.school.langevr004.kungsleden.DatabaseTest.activity.TravelNotesDetailsActivity;
-import com.school.langevr004.kungsleden.DatabaseTest.model.TravelNotes;
+import com.school.langevr004.kungsleden.Database.activity.TravelNotesDetailsActivity;
+import com.school.langevr004.kungsleden.Database.model.TravelNotes;
 import com.school.langevr004.kungsleden.R;
 
 import java.util.List;
@@ -47,13 +47,13 @@ public class TravelNotesListItemAdapter extends RecyclerView.Adapter<TravelNotes
     }
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        //Populate the row
         holder.populateRow(getItem(position));
     }
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView title;
         private final TextView trail;
         private final TextView date;
+
         //initialize the variables
         public ViewHolder(View view) {
             super(view);
@@ -62,6 +62,8 @@ public class TravelNotesListItemAdapter extends RecyclerView.Adapter<TravelNotes
             date = (TextView) view.findViewById(R.id.travelNotesDate);
             view.setOnClickListener(this);
         }
+
+        //onclick event om naar TravelNotesDetailsActivity van de huidige travel note te gaan.
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(context, TravelNotesDetailsActivity.class);

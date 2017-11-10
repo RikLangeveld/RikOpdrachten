@@ -11,9 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.school.langevr004.kungsleden.DatabaseTest.activity.MainActivityTravelNotes;
+import com.school.langevr004.kungsleden.Database.activity.MainActivityTravelNotes;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;

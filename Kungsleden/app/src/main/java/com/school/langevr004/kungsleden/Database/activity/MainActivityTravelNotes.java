@@ -1,4 +1,4 @@
-package com.school.langevr004.kungsleden.DatabaseTest.activity;
+package com.school.langevr004.kungsleden.Database.activity;
 
 
 import android.app.DialogFragment;
@@ -17,10 +17,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.school.langevr004.kungsleden.DatabaseTest.adapter.TravelNotesListItemAdapter;
-import com.school.langevr004.kungsleden.DatabaseTest.data.DataSource;
-import com.school.langevr004.kungsleden.DatabaseTest.model.TravelNotes;
-import com.school.langevr004.kungsleden.DatabaseTest.utility.ConfirmDeleteDialog;
+import com.school.langevr004.kungsleden.Database.adapter.TravelNotesListItemAdapter;
+import com.school.langevr004.kungsleden.Database.data.DataSource;
+import com.school.langevr004.kungsleden.Database.model.TravelNotes;
+import com.school.langevr004.kungsleden.Database.utility.ConfirmDeleteDialog;
 import com.school.langevr004.kungsleden.R;
 
 import java.util.Collections;

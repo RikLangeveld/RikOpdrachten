@@ -28,15 +28,15 @@
         </intent-filter>
     </activity>
     <activity
-        android:name=".DatabaseTest.activity.AddTravelNotesActivity"
+        android:name=".Database.activity.AddTravelNotesActivity"
         android:label="@string/title_activity_add_travel_note"
         android:theme="@style/AppTheme.NoActionBar" />
     <activity
-        android:name=".DatabaseTest.activity.TravelNotesDetailsActivity"
+        android:name=".Database.activity.TravelNotesDetailsActivity"
         android:label="@string/title_activity_travel_note_details"
         android:theme="@style/AppTheme.NoActionBar" />
     <activity
-        android:name=".DatabaseTest.activity.ModifyTravelNotesActivity"
+        android:name=".Database.activity.ModifyTravelNotesActivity"
         android:label="@string/title_activity_modify_travel_note"
         android:theme="@style/AppTheme.NoActionBar" />
     <activity
@@ -47,7 +47,7 @@
         android:label="Cabins"
         android:theme="@style/AppTheme.NoActionBar" />
     <activity
-        android:name=".DatabaseTest.activity.MainActivityTravelNotes"
+        android:name=".Database.activity.MainActivityTravelNotes"
         android:theme="@style/AppTheme.NoActionBar" />
 </application>
 

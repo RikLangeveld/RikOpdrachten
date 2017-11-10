@@ -1,24 +1,17 @@
-package com.school.langevr004.kungsleden.DatabaseTest.data;
+package com.school.langevr004.kungsleden.Database.data;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.school.langevr004.kungsleden.DatabaseTest.model.TravelNotes;
+import com.school.langevr004.kungsleden.Database.model.TravelNotes;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-/**
- * Created by Remy on 26-9-2017.
- */
-
 public class DataSource {
 
-    //Local variables and constants
-    private Context mContext;
     private SQLiteDatabase mDatabase;
     private DBHelper mDBHelper;
     private String[] TRAVEL_NOTES_ALL_COLUMNS = {
@@ -28,23 +21,21 @@ public class DataSource {
             TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TRAIL,
             TravelNotesContract.TravelNotesEntry.COLUMN_NAME_NOTES };
 
-
-
     public DataSource(Context context) {
         mDBHelper = new DBHelper(context);
     }
-    // Opens the database to use it
+    // Opens de database voor gebruik
     public void open()  {
         mDatabase = mDBHelper.getWritableDatabase();
     }
-    // Closes the database when you no longer need it
+    // Sluit de DB als hij niet meer gebruikt wordt
     public void close() {
         mDBHelper.close();
     }
 
     public void saveTravelNotes(TravelNotes travelNotes) {
 
-        // Open connection to write data
+        // Open de connectie om een nieuwe travel note in de db op te slaan
         open();
         ContentValues values = new ContentValues();
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TITLE, travelNotes.getTitle());
@@ -53,11 +44,11 @@ public class DataSource {
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_NOTES, travelNotes.getNotes());
         // Inserting Row
         mDatabase.insert(TravelNotesContract.TravelNotesEntry.TABLE_NAME, null, values);
-        close(); // Closing database connection
+        close(); // sluit de database connectie
     }
 
     public void modifyTravelNotes(TravelNotes travelNotes) {
-        // Open connection to write data
+        // Open connection om travel notes aan te passen
         open();
         ContentValues values = new ContentValues();
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_TITLE, travelNotes.getTitle());
@@ -66,16 +57,12 @@ public class DataSource {
         values.put(TravelNotesContract.TravelNotesEntry.COLUMN_NAME_NOTES, travelNotes.getNotes());
 
         mDatabase.update(TravelNotesContract.TravelNotesEntry.TABLE_NAME, values, TravelNotesContract.TravelNotesEntry.COLUMN_NAME_ID + "= ?", new String[]{String.valueOf(travelNotes.getId())});
-        mDatabase.close(); // Closing database connection
-    }
-
-    public Cursor getAllGames() {
-        return mDatabase.query(TravelNotesContract.TravelNotesEntry.TABLE_NAME, TRAVEL_NOTES_ALL_COLUMNS, null, null, null, null, null);
+        mDatabase.close(); // sluit database connectie
     }
 
     public List<TravelNotes> getTravelNotes()
     {
-        //Open connection to read only
+        //Open connectie om de data uit de database te lezen (read only)
         mDatabase = mDBHelper.getReadableDatabase();
 
         String selectQuery = "SELECT  " +
@@ -86,7 +73,6 @@ public class DataSource {
                 TravelNotesContract.TravelNotesEntry.COLUMN_NAME_NOTES +
                 " FROM " + TravelNotesContract.TravelNotesEntry.TABLE_NAME;
 
-        //User user = new User();
         List<TravelNotes> travelNotesList = new ArrayList<>();
 
         Cursor cursor = mDatabase.rawQuery(selectQuery, null);

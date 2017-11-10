@@ -1,4 +1,4 @@
-package com.school.langevr004.kungsleden.DatabaseTest.utility;
+package com.school.langevr004.kungsleden.Database.utility;
 
 import android.app.Activity;
 import android.app.AlertDialog;

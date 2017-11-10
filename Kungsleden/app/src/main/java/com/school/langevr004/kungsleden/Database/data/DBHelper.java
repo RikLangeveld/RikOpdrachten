@@ -1,4 +1,4 @@
-package com.school.langevr004.kungsleden.DatabaseTest.data;
+package com.school.langevr004.kungsleden.Database.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,7 +9,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "game.db";
     private static final int DATABASE_VERSION = 1;
 
-    // Creating the table
+    // String voor het maken van een Database
     private static final String DATABASE_CREATE =
             "CREATE TABLE " + TravelNotesContract.TravelNotesEntry.TABLE_NAME +
                     "(" +

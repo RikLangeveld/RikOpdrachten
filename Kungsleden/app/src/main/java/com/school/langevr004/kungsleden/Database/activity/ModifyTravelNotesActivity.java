@@ -1,4 +1,4 @@
-package com.school.langevr004.kungsleden.DatabaseTest.activity;
+package com.school.langevr004.kungsleden.Database.activity;
 
 import android.app.DialogFragment;
 import android.content.Context;
@@ -18,9 +18,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.school.langevr004.kungsleden.DatabaseTest.data.DataSource;
-import com.school.langevr004.kungsleden.DatabaseTest.model.TravelNotes;
-import com.school.langevr004.kungsleden.DatabaseTest.utility.ConfirmDeleteDialog;
+import com.school.langevr004.kungsleden.Database.data.DataSource;
+import com.school.langevr004.kungsleden.Database.model.TravelNotes;
+import com.school.langevr004.kungsleden.Database.utility.ConfirmDeleteDialog;
 import com.school.langevr004.kungsleden.R;
 
 public class ModifyTravelNotesActivity extends AppCompatActivity
@@ -75,8 +75,10 @@ public class ModifyTravelNotesActivity extends AppCompatActivity
         if (!travelNotes.getTravelNotesTrail().equals(null)){
             //Gets the position of the correct spinner item by comparing
             //which item of the Spinner matches with the gameStatus
+
+            //Pakt de juiste positie op de spinner item
             int spinnerPosition = adapter.getPosition(travelNotes.getTravelNotesTrail());
-            //Display the correct gameStatus in the Spinner based on the found position
+            //Laat de juiste spinner positie zien.
             statusSpinner.setSelection(spinnerPosition);
         }
     }

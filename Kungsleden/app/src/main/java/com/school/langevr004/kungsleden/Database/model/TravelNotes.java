@@ -1,4 +1,4 @@
-package com.school.langevr004.kungsleden.DatabaseTest.model;
+package com.school.langevr004.kungsleden.Database.model;
 import java.io.Serializable;
 
 public class TravelNotes implements Serializable {

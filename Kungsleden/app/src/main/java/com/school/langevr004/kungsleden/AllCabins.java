@@ -11,6 +11,9 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+Deze class (Activity) maakt met behulp van de CabinObjectAdapter een RecyclerView om alle cabins in de activity te krijgen.
+ */
 public class AllCabins extends AppCompatActivity {
 
     @Override

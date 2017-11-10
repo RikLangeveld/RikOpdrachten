@@ -1,4 +1,4 @@
-package com.school.langevr004.kungsleden.DatabaseTest.activity;
+package com.school.langevr004.kungsleden.Database.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,9 +12,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.school.langevr004.kungsleden.DatabaseTest.data.DataSource;
-import com.school.langevr004.kungsleden.DatabaseTest.model.TravelNotes;
-import com.school.langevr004.kungsleden.DatabaseTest.utility.ConfirmDeleteDialog;
+import com.school.langevr004.kungsleden.Database.data.DataSource;
+import com.school.langevr004.kungsleden.Database.model.TravelNotes;
+import com.school.langevr004.kungsleden.Database.utility.ConfirmDeleteDialog;
 import com.school.langevr004.kungsleden.R;
 
 public class TravelNotesDetailsActivity extends AppCompatActivity
@@ -33,7 +33,7 @@ public class TravelNotesDetailsActivity extends AppCompatActivity
         setContentView(R.layout.activity_travel_notes_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //Get the travelNotes from the intent, which was passed as parameter
+
         this.travelNotes = (TravelNotes) getIntent().getSerializableExtra("selectedTravelNotes");
         setTravelNotesViews();
 
@@ -75,7 +75,6 @@ public class TravelNotesDetailsActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_travel_notes_details, menu);
         return true;
     }
@@ -84,11 +83,11 @@ public class TravelNotesDetailsActivity extends AppCompatActivity
     @Override
     public void onDialogPositiveClick(android.app.DialogFragment dialog)
     {
-        //User clicked on the confirm button of the Dialog, delete the travelNotes from Database
+        //Als de user op confirm klikt wordt het object uit de db verwijderd.
         DataSource datasource = new DataSource(this);
-        //We only need the id of the travelNotes to delete it
+        //Pak de id van de travel note om het te verwijderen.
         datasource.deleteTravelNotes(travelNotes.getId());
-        //TravelNotes has been deleted, go back to the MainActivityTravelNotes
+        //na verwijderen gaat de scene terug naar mainActivityTravelNotes
         showTravelNotesDeletedToast();
         finish();
     }
@@ -114,7 +113,6 @@ public class TravelNotesDetailsActivity extends AppCompatActivity
         int id = item.getItemId();
         if (id == R.id.action_delete_travel_notes)
         {
-            // Show the ConfirmDeleteDialog
             android.app.DialogFragment dialog = new ConfirmDeleteDialog();
             Bundle bundle = new Bundle();
             bundle.putString("message", getString(R.string.dialog_travel_note_deletion_single));

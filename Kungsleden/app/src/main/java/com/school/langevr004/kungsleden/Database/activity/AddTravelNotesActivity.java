@@ -1,4 +1,4 @@
-package com.school.langevr004.kungsleden.DatabaseTest.activity;
+package com.school.langevr004.kungsleden.Database.activity;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -14,8 +14,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.school.langevr004.kungsleden.DatabaseTest.data.DataSource;
-import com.school.langevr004.kungsleden.DatabaseTest.model.TravelNotes;
+import com.school.langevr004.kungsleden.Database.data.DataSource;
+import com.school.langevr004.kungsleden.Database.model.TravelNotes;
 import com.school.langevr004.kungsleden.R;
 
 import java.text.SimpleDateFormat;
@@ -85,7 +85,6 @@ public class AddTravelNotesActivity extends AppCompatActivity {
     private static String getSimpleCurrentDate() {
         // Format dates
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        //Today's date, but with time included, which we don't want
         Date date = new Date();
         // Format.format returns een string uit de dataformat class
         return format.format(date);
