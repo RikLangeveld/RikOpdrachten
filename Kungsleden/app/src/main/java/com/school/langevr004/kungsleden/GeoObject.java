@@ -155,15 +155,18 @@ public class GeoObject {
     };
 
     private String mGeoName;
+    private String mCoördinates;
     private int mGeoImageName;
 
-    public GeoObject(String mGeoName, int mGeoImageName) {
+    public GeoObject(String mGeoName, String mCoördinates, int mGeoImageName) {
         this.mGeoName = mGeoName;
         this.mGeoImageName = mGeoImageName;
+        this.mCoördinates = mCoördinates;
     }
     public String getmGeoName() {
         return mGeoName;
     }
+    public String getmCoördinatesString(){return mCoördinates;}
     public void setmGeoName(String mGeoName) {
         this.mGeoName = mGeoName;
     }

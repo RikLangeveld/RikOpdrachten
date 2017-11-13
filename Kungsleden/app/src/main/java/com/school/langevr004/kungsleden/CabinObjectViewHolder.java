@@ -8,6 +8,7 @@ import android.widget.TextView;
 public class CabinObjectViewHolder extends RecyclerView.ViewHolder
 {
     public TextView geoName;
+    public TextView Coördinates;
     public ImageView geoImage;
     public View view;
 
@@ -17,6 +18,7 @@ public class CabinObjectViewHolder extends RecyclerView.ViewHolder
         super(itemView);
         geoName = (TextView)itemView.findViewById(R.id.cabinTextView);
         geoImage = (ImageView) itemView.findViewById(R.id.cabinImageView);
+        Coördinates = (TextView) itemView.findViewById(R.id.textViewLatLng);
         view = itemView;
     }
 }

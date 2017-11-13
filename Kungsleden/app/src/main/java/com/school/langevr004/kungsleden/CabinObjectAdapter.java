@@ -40,6 +40,7 @@ public class CabinObjectAdapter extends RecyclerView.Adapter<CabinObjectViewHold
         // Populate the views with the data from the list
         holder.geoImage.setImageResource(geoObject.getmGeoImageName());
         holder.geoName.setText(geoObject.getmGeoName());
+        holder.Coördinates.setText(geoObject.getmCoördinatesString());
 
         // The whole layout is used for the onClickListener instead of individual views
         // inside the viewHolder

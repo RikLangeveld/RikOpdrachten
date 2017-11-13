@@ -27,7 +27,10 @@ public class AllCabins extends AppCompatActivity {
 
         List<GeoObject> mGeoObjects = new ArrayList<>();
         for (int i = 0; i < GeoObject.PRE_DEFINED_CABINS.length; i++) {
-            mGeoObjects.add(new GeoObject(GeoObject.PRE_DEFINED_CABINS[i].title, GeoObject.PRE_DEFINED_CABINS[i].imageCabin));
+            mGeoObjects.add(
+                    new GeoObject(GeoObject.PRE_DEFINED_CABINS[i].title
+                    ,"Coördinates \n"  + GeoObject.PRE_DEFINED_CABINS[i].geoPoint.getLatitude() + "\n" + GeoObject.PRE_DEFINED_CABINS[i].geoPoint.getLatitude()
+                    ,GeoObject.PRE_DEFINED_CABINS[i].imageCabin));
         }
         RecyclerView mGeoRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1); //2 cells per row
