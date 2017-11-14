@@ -8,26 +8,10 @@
     <string name="trail">Trail</string>
     <string name="date_added">Date added</string>
     <string name="notes">Notes</string>
-    <string name="dialog_travel_notes_deletion_positive">Delete</string>
-    <string name="dialog_travel_notes_modify_positive">Discard</string>
-    <string name="travel_notes_has_been_modified_negative">Your changes have not been saved</string>
-    <string name="dialog_travel_note_deletion_negative">Cancel</string>
-    <string name="travel_note_deleted">Travel notes has been deleted</string>
-    <string name="travel_notes_deleted">All travel notes deleted</string>
-    <string name="delete_travel_note">Delete travel note</string>
-    <string name="delete_travel_notes">Delete travel notes</string>
-    <string name="title_is_required">Title is required!</string>
-    <string name="title_field_is_empty">Title field is empty</string>
-    <string name="travel_note_has_been_added">Travel note has been added</string>
-    <string name="travel_note_has_been_modified">Travel note has been modified</string>
-    <string name="title_screen_main">Travel notes Backlog Manager</string>
-    <string name="string_menu_delete_all">Delete All</string>
-    <string name="action_database_clear">Database Cleared</string>
-    <string name="dialog_travel_note_deletion_single">Are you sure you want to delete this travelNotes?</string>
-    <string name="dialog_travel_note_deletion_all">Are you sure you want to delete all travel notes?</string>
-    <string name="dialog_travel_note_discard">Are you sure you want to discard your changes?</string>
-    <string name="swipe_delete">travel note Deleted</string>
-    <string name="menu_action_cancel">Cancel</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+
 
     <!--String that we are going to use for the Spinner-->
     <string-array name="travel_notes_trail">
