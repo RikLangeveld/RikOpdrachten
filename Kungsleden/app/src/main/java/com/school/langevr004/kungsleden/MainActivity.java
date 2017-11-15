@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
 
+    private Toolbar mToolbar;
+
     private final int START_ZOOM_LEVEL = 8; //Level of zoom on the map on startup
     private final double AKTSE_LAT = 67.14855, AKTSE_LNG = 18.30592; //Start Coördinates map
 
@@ -48,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
         mMap.setMultiTouchControls(true);
         setMap();
 
+        mToolbar = (Toolbar) findViewById(R.id.nav_action);
+        setSupportActionBar(mToolbar);
+
         //initialize drawlayout
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.string.open,R.string.close );
@@ -56,6 +61,16 @@ public class MainActivity extends AppCompatActivity {
         mToggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        if (mToggle.onOptionsItemSelected(item))
+        {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void onResume()
