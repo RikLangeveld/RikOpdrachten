@@ -12,7 +12,6 @@
     <string name="close">Close</string>
 
 
-
     <!--String that we are going to use for the Spinner-->
     <string-array name="travel_notes_trail">
         <item>Kungsleden</item>
@@ -22,5 +21,8 @@
     <string name="title_activity_add_travel_note">Add Travel Note</string>
     <string name="title_activity_modify_travel_note">Modify Travel Note</string>
     <string name="title_activity_show_all_cabins">ShowAllCabins</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -61,6 +64,36 @@ public class MainActivity extends AppCompatActivity {
         mToggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //Listeners for pages
+        NavigationView mNavigationView = (NavigationView) findViewById(R.id.navBar);
+        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem){
+                switch (menuItem.getItemId()){
+                    case(R.id.nav_overview):
+                        MapFragment mapFragment = new MapFragment();
+                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.mainFrame, mapFragment, "mapFragment");
+                        fragmentTransaction.commit();
+                        break;
+                    case (R.id.nav_map):
+                        Intent mapActivity = new Intent(getApplicationContext(), AllCabins.class);
+                        startActivity(mapActivity);
+                        break;
+                    case(R.id.nav_waypoints):
+                        Intent waypointActivity = new Intent(getApplicationContext(), AllCabins.class);
+                        startActivity(waypointActivity);
+                        break;
+                    default:
+                        //do nothing
+                        break;
+
+                }
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
     }
 
     @Override
