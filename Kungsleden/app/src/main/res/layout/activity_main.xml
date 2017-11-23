@@ -19,14 +19,9 @@
         <FrameLayout
             android:id="@+id/mainFrame"
             android:layout_width="match_parent"
-            android:layout_height="300dp">
+            android:layout_height="match_parent">
 
         </FrameLayout>
-
-        <org.osmdroid.views.MapView
-            android:id="@+id/map"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" />
 
     </LinearLayout>
 

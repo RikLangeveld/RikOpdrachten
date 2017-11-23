@@ -30,7 +30,7 @@ Ook het wisselen naar de andere activities wordt in deze classe geregeld
  */
 public class MainActivity extends AppCompatActivity {
 
-    private MapView mMap;
+    //private MapView mMap;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
 
@@ -47,11 +47,13 @@ public class MainActivity extends AppCompatActivity {
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
         setContentView(R.layout.activity_main);
 
+        /*
         //initialize streetmaps
         mMap = (MapView) findViewById(R.id.map);
         mMap.setTileSource(TileSourceFactory.MAPNIK);
         mMap.setMultiTouchControls(true);
         setMap();
+        */
 
         mToolbar = (Toolbar) findViewById(R.id.nav_action);
         setSupportActionBar(mToolbar);
@@ -106,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /*
     public void onResume()
     {
         super.onResume();
@@ -159,5 +162,6 @@ public class MainActivity extends AppCompatActivity {
         });
         mMap.getOverlays().add(marker);
     }
+    */
 }
 
