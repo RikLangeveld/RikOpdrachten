@@ -11,18 +11,16 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
 
-
-    <!--String that we are going to use for the Spinner-->
-    <string-array name="travel_notes_trail">
-        <item>Kungsleden</item>
-        <item>West Highland Way</item>
-    </string-array>
     <string name="title_activity_travel_note_details">Travel Note Details</string>
     <string name="title_activity_add_travel_note">Add Travel Note</string>
     <string name="title_activity_modify_travel_note">Modify Travel Note</string>
     <string name="title_activity_show_all_cabins">ShowAllCabins</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Overview categories -->
+    <string name="description">Description</string>
+    <string name="the_challenge">The Challenge</string>
+    <string name="public_transport">Public Transport</string>
+    <string name="accommodations">Accomodations</string>
+    <string name="photo_gallery">Photo Gallery</string>
 
 </resources>
