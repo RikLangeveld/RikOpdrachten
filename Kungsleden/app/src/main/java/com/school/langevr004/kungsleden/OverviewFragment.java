@@ -1,15 +1,13 @@
 package com.school.langevr004.kungsleden;
 
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
-import android.view.animation.ScaleAnimation;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
@@ -19,8 +17,11 @@ public class OverviewFragment extends Fragment {
 
     View rootView;
 
-    List<Button> buttons = new ArrayList<Button>();
-    List<LinearLayout> linearLayouts = new ArrayList<LinearLayout>();
+    //List<Button> buttons = new ArrayList<>();
+    //List<LinearLayout> linearLayouts = new ArrayList<>();
+    //List<FrameLayout> fragments = new ArrayList<>();
+
+    List<OverviewButton> overviewButtons = new ArrayList<>();
 
     public OverviewFragment() {
 
@@ -36,26 +37,40 @@ public class OverviewFragment extends Fragment {
     {
         rootView = inflater.inflate(R.layout.fragment_overview, container, false);
 
-        //NOTE: the first of linearLayouts needs to be for the first button. Make sure the length is the same!
-        linearLayouts.add((LinearLayout) rootView.findViewById(R.id.description_layout));
-        linearLayouts.add((LinearLayout) rootView.findViewById(R.id.the_challange_layout));
-        linearLayouts.add((LinearLayout) rootView.findViewById(R.id.accommodations_layout));
-        linearLayouts.add((LinearLayout) rootView.findViewById(R.id.photo_gallery_layout));
-        linearLayouts.add((LinearLayout) rootView.findViewById(R.id.public_transport_layout));
+        overviewButtons.add(
+                new OverviewButton(
+                        (LinearLayout) rootView.findViewById(R.id.description_layout),
+                        (Button) rootView.findViewById(R.id.description_btn),
+                        null));
 
-        buttons.add((Button) rootView.findViewById(R.id.description_btn));
-        buttons.add((Button) rootView.findViewById(R.id.the_challange_btn));
-        buttons.add((Button) rootView.findViewById(R.id.accommodations_btn));
-        buttons.add((Button) rootView.findViewById(R.id.photo_gallery_btn));
-        buttons.add((Button) rootView.findViewById(R.id.public_transport_btn));
+        overviewButtons.add(
+                new OverviewButton(
+                    (LinearLayout) rootView.findViewById(R.id.the_challange_layout),
+                    (Button) rootView.findViewById(R.id.the_challange_btn),
+                     null));
 
-        for (int i = 0; i < buttons.size(); i++)
+        overviewButtons.add(
+                new OverviewButton(
+                        (LinearLayout) rootView.findViewById(R.id.accommodations_layout),
+                        (Button) rootView.findViewById(R.id.accommodations_btn),
+                        null));
+
+        overviewButtons.add(
+                new OverviewButton(
+                        (LinearLayout) rootView.findViewById(R.id.photo_gallery_layout),
+                        (Button) rootView.findViewById(R.id.photo_gallery_btn),
+                        null));
+
+        overviewButtons.add(
+                new OverviewButton(
+                        (LinearLayout) rootView.findViewById(R.id.public_transport_layout),
+                        (Button) rootView.findViewById(R.id.public_transport_btn),
+                        null));
+
+        for (OverviewButton item : overviewButtons)
         {
-            Button btn = buttons.get(i);
-            LinearLayout linearLayout = linearLayouts.get(i);
-
-            btn.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_expand_more, 0);
-            CreateButtonOnclickEvent(btn, linearLayout);
+            item.button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_expand_more, 0);
+            createButtonOnclickEvent(item.linearLayout, item.button, item.frameLayout);
         }
 
         return rootView;
@@ -67,16 +82,18 @@ public class OverviewFragment extends Fragment {
 
     }
 
-    private void CreateButtonOnclickEvent(final Button button, final LinearLayout content) {
+    private void createButtonOnclickEvent(final LinearLayout linearLayout, final Button button, final FrameLayout frameLayout)
+    {
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (content.getVisibility() == View.VISIBLE)
+                if (linearLayout.getVisibility() == View.VISIBLE)
                 {
                     button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_expand_more, 0);
-                    content.setVisibility(View.GONE);
+                    linearLayout.setVisibility(View.GONE);
+
                 }
                 else
                 {
@@ -87,8 +104,9 @@ public class OverviewFragment extends Fragment {
                     animation.setFillAfter(true);
                     findMagicLl.startAnimation(animation);
                     */
+
                     button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_expand_less, 0);
-                    content.setVisibility(View.VISIBLE);
+                    linearLayout.setVisibility(View.VISIBLE);
                 }
             }
         });

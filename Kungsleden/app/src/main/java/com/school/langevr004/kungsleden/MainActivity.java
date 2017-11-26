@@ -6,6 +6,7 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -58,12 +59,12 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (menuItem.getItemId()){
                     case(R.id.nav_overview):
-                        OverviewFragment overviewFragment = new OverviewFragment();
+                        Fragment overviewFragment = new OverviewFragment();
                         fragmentTransaction.replace(R.id.mainFrame, overviewFragment, "overviewFragment");
                         fragmentTransaction.commit();
                         break;
                     case (R.id.nav_map):
-                        MapFragment mapFragment = new MapFragment();
+                        Fragment mapFragment = new MapFragment();
                         fragmentTransaction.replace(R.id.mainFrame, mapFragment, "mapFragment");
                         fragmentTransaction.commit();
                         break;
