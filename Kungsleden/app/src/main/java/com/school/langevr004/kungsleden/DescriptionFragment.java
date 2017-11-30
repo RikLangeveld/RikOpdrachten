@@ -1,9 +1,6 @@
 package com.school.langevr004.kungsleden;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -11,14 +8,16 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
-import com.google.android.youtube.player.YouTubePlayerView;
 
+/*
+* Deze class bezit een fragment met daarin een youtube video.
+* TO DO: Op het moment dat je de video draait wordt de activity opnieuw gemaakt en in landscape mode gezet. Hiervoor
+* moet ik een oplossing vinden. info: https://stackoverflow.com/questions/20383209/android-youtube-api-video-pause-when-rotate-screen-or-hide-player
+*/
 public class DescriptionFragment extends Fragment {
 
     private FragmentActivity myContext;
@@ -44,7 +43,7 @@ public class DescriptionFragment extends Fragment {
                 {
                     YPlayer = youTubePlayer;
                     YPlayer.loadVideo(YOUTUBE_VIDEO);
-                    YPlayer.setPlaybackEventListener(new MyPlaybackEventListener(YPlayer));
+                    YPlayer.setPlaybackEventListener(new MyPlaybackEventListener(YPlayer, getActivity()));
                 }
             }
 

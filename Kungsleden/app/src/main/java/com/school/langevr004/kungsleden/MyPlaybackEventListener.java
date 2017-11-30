@@ -1,5 +1,8 @@
 package com.school.langevr004.kungsleden;
 
+import android.app.Activity;
+import android.content.pm.ActivityInfo;
+
 import com.google.android.youtube.player.YouTubePlayer;
 
 /**
@@ -9,12 +12,15 @@ import com.google.android.youtube.player.YouTubePlayer;
 
 public class MyPlaybackEventListener implements YouTubePlayer.PlaybackEventListener
 {
+
     private YouTubePlayer YPlayer;
+    private Activity activity;
     private boolean interceptPlay = true;
 
-    public MyPlaybackEventListener(YouTubePlayer Yplayer)
+    public MyPlaybackEventListener(YouTubePlayer Yplayer, Activity activity)
     {
-    this.YPlayer = Yplayer;
+        this.YPlayer = Yplayer;
+        this.activity = activity;
     }
 
     @Override
@@ -29,13 +35,12 @@ public class MyPlaybackEventListener implements YouTubePlayer.PlaybackEventListe
     @Override
     public void onPaused()
     {
-
     }
 
     @Override
     public void onStopped()
     {
-
+        //activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     @Override
