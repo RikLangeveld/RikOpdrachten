@@ -5,14 +5,16 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -26,23 +28,22 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private TextView textview;
     private SensorManager senSensorManager;
     private Sensor senAccelerometer;
-    float xaccel;
-    float yaccel;
-    float zaccel;
+
+    float xaccel, yaccel, zaccel;
+    float xaccelDB, yaccelDB, zaccelDB;
 
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference xaccel1Ref = mRootRef.child("xaccel");
+    DatabaseReference xaccellRef = mRootRef.child("xaccel");
     DatabaseReference yaccellRef = mRootRef.child("yaccel");
     DatabaseReference zaccellRef = mRootRef.child("zaccel");
 
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        textview = (TextView) findViewById(R.id.textView);
+        textview = (TextView) findViewById(R.id.textView1);
         
         senSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -53,52 +54,72 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                xaccel1Ref.setValue(xaccel);
-                yaccellRef.setValue(yaccel);
-                zaccellRef.setValue(zaccel);
+                textview.setText(" X:" + xaccelDB + "\n Y:" + yaccelDB + "\n Z:" + zaccelDB );
             }
         });
     }
+
+        //Runnable object that sends the X Y Z data to database every 20 seconds.
+        //calls itself!
+        Runnable r1 = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(20000);
+                xaccellRef.setValue(xaccel);
+                yaccellRef.setValue(yaccel);
+                zaccellRef.setValue(zaccel);
+                run();
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    };
 
     @Override
     protected void onStart(){
         super.onStart();
 
-        xaccel1Ref.addValueEventListener(new ValueEventListener() {
+        Thread t1 = new Thread(r1, "Thread t1");
+        t1.start();
+
+        xaccellRef.addValueEventListener(new ValueEventListener() {
             //als data veranderd
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                float xaccel = dataSnapshot.getValue(Float.class);
-                textview.setText(String.valueOf(xaccel));
+                xaccelDB = dataSnapshot.getValue(Float.class);
             }
             //als je een error krijgt
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+        yaccellRef.addValueEventListener(new ValueEventListener() {
+            //als data veranderd
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                yaccelDB = dataSnapshot.getValue(Float.class);
+            }
+            //als je een error krijgt
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        zaccellRef.addValueEventListener(new ValueEventListener() {
+            //als data veranderd
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                zaccelDB = dataSnapshot.getValue(Float.class);
+            }
+            //als je een error krijgt
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 
     @Override
@@ -106,16 +127,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
-    private class AccelWork implements Runnable {
-
-        public void run() {
-            // do something with the data to the gui
-        }
-    }
     private Handler myHandler = new Handler();
 
     public void onSensorChanged (final SensorEvent event) {
         myHandler.post(  new Runnable() {
+            @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
             public void run() {
                 // do something with sensordata to gui
 
