@@ -10,12 +10,14 @@ public class OverviewButton
 {
     public LinearLayout linearLayout;
     public Button button;
-    public FrameLayout frameLayout;
+    public int frameLayout;
+    public Fragment fragment;
 
-    public OverviewButton(LinearLayout linearLayout, Button button, FrameLayout frameLayout)
+    public OverviewButton(LinearLayout linearLayout, Button button, int frameLayout, Fragment fragment)
     {
         this.linearLayout = linearLayout;
         this.button = button;
         this.frameLayout = frameLayout;
+        this.fragment = fragment;
     }
 }
