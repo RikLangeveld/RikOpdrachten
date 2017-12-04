@@ -59,18 +59,19 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (menuItem.getItemId()){
                     case(R.id.nav_overview):
-                        Fragment overviewFragment = new OverviewFragment();
-                        fragmentTransaction.replace(R.id.mainFrame, overviewFragment, "overviewFragment");
+                        Fragment overviewFragment = new OverviewFragment(R.layout.fragment_overview);
+                        fragmentTransaction.replace(R.id.mainFrame, overviewFragment);
                         fragmentTransaction.commit();
                         break;
                     case (R.id.nav_map):
                         Fragment mapFragment = new MapFragment();
-                        fragmentTransaction.replace(R.id.mainFrame, mapFragment, "mapFragment");
+                        fragmentTransaction.replace(R.id.mainFrame, mapFragment);
                         fragmentTransaction.commit();
                         break;
                     case(R.id.nav_waypoints):
-                        Intent waypointActivity = new Intent(getApplicationContext(), AllCabins.class);
-                        startActivity(waypointActivity);
+                        Fragment waypointsFragment = new WaypointsFragment(R.layout.fragment_waypoints);
+                        fragmentTransaction.replace(R.id.mainFrame, waypointsFragment);
+                        fragmentTransaction.commit();
                         break;
                     default:
                         //do nothing

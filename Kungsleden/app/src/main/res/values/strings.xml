@@ -23,6 +23,10 @@
     <string name="accommodations">Accomodations</string>
     <string name="photo_gallery">Photo Gallery</string>
 
+    <!-- Waypoint categories -->
+    <string name="supplies">Supplies</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
