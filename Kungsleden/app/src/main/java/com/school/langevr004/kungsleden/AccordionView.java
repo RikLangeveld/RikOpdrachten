@@ -77,7 +77,7 @@ public class AccordionView extends Fragment
                     if(frameLayout != 0 && fragment != null)
                     {
                         fragmentTransaction.replace(frameLayout, fragment);
-                        fragmentTransaction.commit();
+                        fragmentTransaction.addToBackStack("tag").commit();
                     }
 
                     button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_expand_less, 0);

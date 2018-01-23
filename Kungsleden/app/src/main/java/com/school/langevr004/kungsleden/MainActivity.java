@@ -61,17 +61,17 @@ public class MainActivity extends AppCompatActivity {
                     case(R.id.nav_overview):
                         Fragment overviewFragment = new OverviewFragment(R.layout.fragment_overview);
                         fragmentTransaction.replace(R.id.mainFrame, overviewFragment);
-                        fragmentTransaction.commit();
+                        fragmentTransaction.addToBackStack("nav_overview").commit();
                         break;
                     case (R.id.nav_map):
                         Fragment mapFragment = new MapFragment();
                         fragmentTransaction.replace(R.id.mainFrame, mapFragment);
-                        fragmentTransaction.commit();
+                        fragmentTransaction.addToBackStack("nav_map").commit();
                         break;
                     case(R.id.nav_waypoints):
                         Fragment waypointsFragment = new WaypointsFragment(R.layout.fragment_waypoints);
                         fragmentTransaction.replace(R.id.mainFrame, waypointsFragment);
-                        fragmentTransaction.commit();
+                        fragmentTransaction.addToBackStack("nav_waypoints").commit();
                         break;
                     default:
                         //do nothing

@@ -2,7 +2,9 @@ package com.school.langevr004.kungsleden;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -11,13 +13,22 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import org.osmdroid.api.IMapController;
+import org.osmdroid.bonuspack.routing.MapQuestRoadManager;
+import org.osmdroid.bonuspack.routing.OSRMRoadManager;
+import org.osmdroid.bonuspack.routing.Road;
+import org.osmdroid.bonuspack.routing.RoadManager;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
+import org.osmdroid.views.overlay.Polyline;
+import org.osmdroid.views.overlay.infowindow.BasicInfoWindow;
+
+import java.util.ArrayList;
 
 
 public class MapFragment extends Fragment {
@@ -71,7 +82,71 @@ public class MapFragment extends Fragment {
         {
             placeMarker(GeoObject.PRE_DEFINED_CABINS[i], R.drawable.cabin_map_marker, GeoObject.PRE_DEFINED_CABINS[i].title, "", "", i);
         }
+        //new UpdateRoadTask().doInBackground();
+        Thread newThread = new Thread(MAKE_POLYLINE);
+        newThread.start();
     }
+
+
+    /*
+    Create a line created from al the waypoints.
+    Dit moet een apparte Thread gedaan worden omdat het even duurt om het pad te berekenen.
+
+    TODO: Dit is nu niet houdbaar. Er moet een database komen met alle waypoints. Ik moet nog uitzoeken of de snelste route wordt gekozen of dat de volgorde wordt aangehouden.
+    */
+    private Runnable MAKE_POLYLINE = new Runnable() {
+        @Override
+        public void run() {
+            RoadManager roadManager = new MapQuestRoadManager("PkdWCcofeeuvooqoluxg394KY1dAxvNi");
+
+            roadManager.addRequestOption("routeType=pedestrian");
+            ArrayList<GeoPoint> waypoints = new ArrayList<>();
+
+            for (int i = 0; i < 14; i++)
+            {
+                waypoints.add(GeoObject.PRE_DEFINED_CABINS[i].geoPoint);
+            }
+
+            Road road = roadManager.getRoad(waypoints);
+            Polyline roadOverlay1 = roadManager.buildRoadOverlay(road);
+            mMap.getOverlays().add(roadOverlay1);
+
+        }
+    };
+
+    /*
+    /**
+     * Async task to get the road in a separate thread.
+     /*
+    private class UpdateRoadTask extends AsyncTask<Object, Void, Road> {
+
+        protected Road doInBackground(Object... params) {
+            RoadManager roadManager = new MapQuestRoadManager("PkdWCcofeeuvooqoluxg394KY1dAxvNi");
+            roadManager.addRequestOption("routeType=bicycle");
+            ArrayList<GeoPoint> waypoints = new ArrayList<>();
+
+            for (int i = 0; i < GeoObject.PRE_DEFINED_CABINS.length; i++)
+            {
+                waypoints.add(GeoObject.PRE_DEFINED_CABINS[i].geoPoint);
+            }
+
+            return roadManager.getRoad(waypoints);
+        }
+        @Override
+        protected void onPostExecute(Road result) {
+            Road road = result;
+            // showing distance and duration of the road
+            Toast.makeText(getActivity(), "distance="+road.mLength, Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "durée="+road.mDuration, Toast.LENGTH_LONG).show();
+
+            if(road.mStatus != Road.STATUS_OK)
+                Toast.makeText(getActivity(), "Error when loading the road - status="+road.mStatus, Toast.LENGTH_SHORT).show();
+
+            Polyline roadOverlay = RoadManager.buildRoadOverlay(result);
+            mMap.getOverlays().add(roadOverlay);
+        }
+    }
+    */
 
     //All the information stored in a single marker
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
