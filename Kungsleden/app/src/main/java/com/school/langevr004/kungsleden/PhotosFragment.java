@@ -4,10 +4,12 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.Timer;
@@ -17,48 +19,71 @@ public class PhotosFragment extends Fragment {
 
     private View view;
     private ViewPager mSlideViewPager;
-    private LinearLayout mDotLayout;
 
     private ViewPagerAdapter sliderAdapter;
+
+    private LinearLayout dotsLayout;
+    private int dotsCount;
+    private ImageView[] dots;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         view = inflater.inflate(R.layout.fragment_photos, container, false);
-
         mSlideViewPager = (ViewPager) view.findViewById(R.id.ViewPager);
 
-        mDotLayout = (LinearLayout) view.findViewById(R.id.dotsLayout);
+        //Dots for the slider.
+        dotsLayout = (LinearLayout) view.findViewById(R.id.dotsLayout);
+
 
         sliderAdapter = new ViewPagerAdapter(getContext());
-
         mSlideViewPager.setAdapter(sliderAdapter);
 
-        //Timer timer = new Timer();
-        //timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
+        dotsCount = sliderAdapter.getCount();
+        dots = new ImageView[dotsCount];
+
+        for(int i = 0; i < dotsCount; i ++)
+        {
+            dots[i] = new ImageView(getContext());
+            dots[i].setImageDrawable(ContextCompat.getDrawable(getContext().getApplicationContext(), R.drawable.nonactive_dot ));
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+            params.setMargins(8, 0, 8, 0);
+
+            dotsLayout.addView(dots[i], params);
+
+        }
+
+        dots[0].setImageDrawable(ContextCompat.getDrawable(getContext().getApplicationContext(), R.drawable.active_dot));
+
+        mSlideViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position)
+            {
+                for(int i = 0; i < dotsCount; i++)
+                {
+                    dots[i].setImageDrawable(ContextCompat.getDrawable(getContext().getApplicationContext(), R.drawable.nonactive_dot));
+                }
+
+                dots[position].setImageDrawable(ContextCompat.getDrawable(getContext().getApplicationContext(),R.drawable.active_dot));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
 
         return view;
     }
 
-    public class  MyTimerTask extends TimerTask
-    {
-
-        @Override
-        public void run()
-        {
-            if (mSlideViewPager.getCurrentItem() == 0)
-            {
-                mSlideViewPager.setCurrentItem(1);
-            }
-            else if (mSlideViewPager.getCurrentItem() == 1)
-            {
-                mSlideViewPager.setCurrentItem(2);
-            }
-            else
-            {
-                mSlideViewPager.setCurrentItem(0);
-            }
-        }
-    }
 }
 
