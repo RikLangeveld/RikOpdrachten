@@ -26,12 +26,12 @@ public class AllCabins extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        List<GeoObject> mGeoObjects = new ArrayList<>();
-        for (int i = 0; i < GeoObject.PRE_DEFINED_CABINS.length; i++) {
+        List<TrailInformation> mGeoObjects = new ArrayList<>();
+        for (int i = 0; i < TrailInformation.PRE_DEFINED_CABINS.length; i++) {
             mGeoObjects.add(
-                    new GeoObject(GeoObject.PRE_DEFINED_CABINS[i].title
-                    ,"Coördinates \n"  + GeoObject.PRE_DEFINED_CABINS[i].geoPoint.getLatitude() + "\n" + GeoObject.PRE_DEFINED_CABINS[i].geoPoint.getLatitude()
-                    ,GeoObject.PRE_DEFINED_CABINS[i].imagesCabin));
+                    new TrailInformation(TrailInformation.PRE_DEFINED_CABINS[i].title
+                    ,"Coördinates \n"  + TrailInformation.PRE_DEFINED_CABINS[i].geoPoint.getLatitude() + "\n" + TrailInformation.PRE_DEFINED_CABINS[i].geoPoint.getLatitude()
+                    ,TrailInformation.PRE_DEFINED_CABINS[i].imagesCabin));
         }
         RecyclerView mGeoRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1); //2 cells per row

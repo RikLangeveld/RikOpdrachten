@@ -37,33 +37,16 @@ public class PhotosFragment extends Fragment {
         //Dots for the slider.
         dotsLayout = (LinearLayout) view.findViewById(R.id.dotsLayout);
 
-        /*Verplaatst naar constructor*/
         sliderAdapter = new ViewPagerAdapter(getContext(), imagesCabins);
 
         mSlideViewPager.setAdapter(sliderAdapter);
 
-        dotsCount = sliderAdapter.getCount();
-        dots = new ImageView[dotsCount];
-
-        for(int i = 0; i < dotsCount; i ++)
-        {
-            dots[i] = new ImageView(getContext());
-            dots[i].setImageDrawable(ContextCompat.getDrawable(getContext().getApplicationContext(), R.drawable.nonactive_dot ));
-
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-            params.setMargins(8, 0, 8, 0);
-
-            dotsLayout.addView(dots[i], params);
-
-        }
-
-        dots[0].setImageDrawable(ContextCompat.getDrawable(getContext().getApplicationContext(), R.drawable.active_dot));
+        createDots();
 
         mSlideViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+            {
             }
 
             @Override
@@ -78,12 +61,39 @@ public class PhotosFragment extends Fragment {
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {
+            public void onPageScrollStateChanged(int state)
+            {
 
             }
         });
 
         return view;
+    }
+
+    /*
+    Als er meer dan een dot nodig voeg is deze dan toe in een Linear layout group zodat er tussen de afbeeldingen gewisseld kan worden.
+     */
+    private void createDots()
+    {
+        dotsCount = sliderAdapter.getCount();
+        dots = new ImageView[dotsCount];
+
+        if (dotsCount > 1)
+        {
+            for(int i = 0; i < dotsCount; i ++)
+            {
+                dots[i] = new ImageView(getContext());
+                dots[i].setImageDrawable(ContextCompat.getDrawable(getContext().getApplicationContext(), R.drawable.nonactive_dot ));
+
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+                params.setMargins(8, 0, 8, 0);
+
+                dotsLayout.addView(dots[i], params);
+            }
+
+        dots[0].setImageDrawable(ContextCompat.getDrawable(getContext().getApplicationContext(), R.drawable.active_dot));
+        }
     }
 
 }

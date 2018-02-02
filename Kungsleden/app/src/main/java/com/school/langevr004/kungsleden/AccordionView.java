@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -67,13 +69,13 @@ public class AccordionView extends Fragment
                 }
                 else
                 {
-                    //TO DO: Repair animation thats makes sure the content is going in smootly
-                    /*
-                    ScaleAnimation animation = new ScaleAnimation(1f, 1f, 1f, 0f, Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, 0f);
-                    animation.setDuration(180);
+
+                    //Animation thats makes sure the content is going in smootly
+                    ScaleAnimation animation = new ScaleAnimation(1f, 1f, 0f, 1f, Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, 0f);
+                    animation.setDuration(40);
                     animation.setFillAfter(true);
-                    findMagicLl.startAnimation(animation);
-                    */
+                    linearLayout.startAnimation(animation);
+
                     if(frameLayout != 0 && fragment != null)
                     {
                         fragmentTransaction.replace(frameLayout, fragment);

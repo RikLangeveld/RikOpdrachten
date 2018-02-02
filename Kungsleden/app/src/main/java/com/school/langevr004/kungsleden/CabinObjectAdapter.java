@@ -32,10 +32,10 @@ public class CabinObjectAdapter extends RecyclerView.Adapter<CabinObjectViewHold
     }
     /*
     private Context context;
-    public List<GeoObject> listGeoObject;
+    public List<TrailInformation> listGeoObject;
 
 
-    public CabinObjectAdapter(Context context, List<GeoObject> listGeoObject) {
+    public CabinObjectAdapter(Context context, List<TrailInformation> listGeoObject) {
         this.context = context;
         this.listGeoObject = listGeoObject;
     }
@@ -49,7 +49,7 @@ public class CabinObjectAdapter extends RecyclerView.Adapter<CabinObjectViewHold
     @Override
     public void onBindViewHolder(final CabinObjectViewHolder holder, final int position) {
         // Gets a single item in the list from its position
-        final GeoObject geoObject = listGeoObject.get(position);
+        final TrailInformation geoObject = listGeoObject.get(position);
 
         // The holder argument is used to reference the views inside the viewHolder
         // Populate the views with the data from the list
