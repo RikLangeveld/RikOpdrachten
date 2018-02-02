@@ -14,14 +14,17 @@ import android.widget.ImageView;
 
 public class ViewPagerAdapter extends PagerAdapter
 {
-
     private Context context;
     private LayoutInflater layoutInflater;
-    private int[] images = {R.drawable.aktse, R.drawable.abiskojaure, R.drawable.aigert};
+    private int[] images; //De images die getoont moeten worden in de viewpager.
 
-    public ViewPagerAdapter(Context context)
+    /*
+    Constructor heeft 2 paramaters. 1 voor de context van de applicatie, en een tweede voor de Afbeeldingen die op het scherm moeten verschijnen.
+     */
+    public ViewPagerAdapter(Context context, int[] images)
     {
         this.context = context;
+        this.images = images;
     }
 
     @Override
@@ -35,7 +38,7 @@ public class ViewPagerAdapter extends PagerAdapter
     }
 
     @Override
-    public  Object instantiateItem(ViewGroup container, int position)
+    public Object instantiateItem(ViewGroup container, int position)
     {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.slide_picture_layout, null);

@@ -82,28 +82,28 @@ public class GeoObject {
             "Het meest zuidelijke punt van de route"
     };
 
-    //omschijving van de hutten
-    private static final int[] PRE_DEFINED_GEO_OBJECT_IMAGE_IDS = {
-            R.drawable.abisko,
-            R.drawable.abiskojaure,
-            R.drawable.placeholder_cabin,
-            R.drawable.tjaktjapasset,
-            R.drawable.salka,
-            R.drawable.placeholder_cabin,
-            R.drawable.placeholder_cabin,
-            R.drawable.placeholder_cabin,
-            R.drawable.saltoluokta,
-            R.drawable.sitojaure,
-            R.drawable.aktse,
-            R.drawable.parte,
-            R.drawable.kvikkjokk,
-            R.drawable.ammarnas,
-            R.drawable.aigert,
-            R.drawable.serve,
-            R.drawable.tarnasjo,
-            R.drawable.syter,
-            R.drawable.viterskalet,
-            R.drawable.placeholder_cabin,
+    //Afbeeldingen van de hutten.
+    private static final int[][] PRE_DEFINED_GEO_OBJECT_IMAGE_IDS = {
+            new int[] {R.drawable.abisko, R.drawable.abisko, R.drawable.abisko},
+            new int[] {R.drawable.abiskojaure, R.drawable.abisko, R.drawable.abisko},
+            new int[] {R.drawable.placeholder_cabin, R.drawable.abisko, R.drawable.abisko},
+            new int[] {R.drawable.tjaktjapasset, R.drawable.abisko, R.drawable.abisko},
+            new int[] {R.drawable.salka, R.drawable.abisko, R.drawable.abisko},
+            new int[] {R.drawable.placeholder_cabin, R.drawable.abisko, R.drawable.abisko},
+            new int[] {R.drawable.placeholder_cabin, R.drawable.abisko, R.drawable.abisko},
+            new int[] {R.drawable.placeholder_cabin, R.drawable.abisko, R.drawable.abisko},
+            new int[] {R.drawable.saltoluokta, R.drawable.abisko, R.drawable.abisko},
+            new int[] {R.drawable.sitojaure, R.drawable.abisko, R.drawable.abisko},
+            new int[] {R.drawable.aktse, R.drawable.abisko, R.drawable.abisko},
+            new int[] {R.drawable.parte, R.drawable.abisko, R.drawable.abisko},
+            new int[] {R.drawable.kvikkjokk, R.drawable.abisko, R.drawable.abisko},
+            new int[] {R.drawable.ammarnas, R.drawable.abisko, R.drawable.abisko},
+            new int[] {R.drawable.aigert, R.drawable.abisko, R.drawable.abisko},
+            new int[] {R.drawable.serve, R.drawable.abisko, R.drawable.abisko},
+            new int[] {R.drawable.tarnasjo, R.drawable.abisko, R.drawable.abisko},
+            new int[] {R.drawable.syter, R.drawable.abisko, R.drawable.abisko},
+            new int[] {R.drawable.viterskalet, R.drawable.abisko, R.drawable.abisko},
+            new int[] {R.drawable.placeholder_cabin, R.drawable.abisko, R.drawable.abisko},
     };
 
     //Geopoint samengesteld uit de coördinaten
@@ -156,25 +156,28 @@ public class GeoObject {
 
     private String mGeoName;
     private String mCoördinates;
-    private int mGeoImageName;
+    private int[] mGeoImageName;
 
-    public GeoObject(String mGeoName, String mCoördinates, int mGeoImageName) {
+    public GeoObject(String mGeoName, String mCoördinates, int[] mGeoImageName)
+    {
         this.mGeoName = mGeoName;
         this.mGeoImageName = mGeoImageName;
         this.mCoördinates = mCoördinates;
     }
-    public String getmGeoName() {
+    public String getmGeoName()
+    {
         return mGeoName;
     }
     public String getmCoördinatesString(){return mCoördinates;}
     public void setmGeoName(String mGeoName) {
         this.mGeoName = mGeoName;
     }
-    public int getmGeoImageName() {
+    public int[] getmGeoImageName()
+    {
         return mGeoImageName;
     }
-    public void setmGeoImageName(int mGeoImageName) {
+    public void setmGeoImageName(int[] mGeoImageName)
+    {
         this.mGeoImageName = mGeoImageName;
     }
-
 }

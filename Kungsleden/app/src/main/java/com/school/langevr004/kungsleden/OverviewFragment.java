@@ -52,7 +52,7 @@ public class OverviewFragment extends AccordionView {
                         (LinearLayout) rootView.findViewById(R.id.photo_gallery_layout),
                         (Button) rootView.findViewById(R.id.photo_gallery_btn),
                         R.id.photo_gallery_frame,
-                        new PhotosFragment()));
+                        new PhotosFragment(GeoObject.PRE_DEFINED_CABINS[0].imagesCabin)));
 
         categoriesButtons.add(
                 new OverviewButton(

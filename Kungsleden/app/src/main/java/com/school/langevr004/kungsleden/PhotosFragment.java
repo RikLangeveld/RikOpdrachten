@@ -1,7 +1,5 @@
 package com.school.langevr004.kungsleden;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -11,9 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class PhotosFragment extends Fragment {
 
@@ -26,6 +21,12 @@ public class PhotosFragment extends Fragment {
     private int dotsCount;
     private ImageView[] dots;
 
+    private int[] imagesCabins;
+
+    public PhotosFragment(int[] images)
+    {
+        this.imagesCabins = images;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -36,8 +37,9 @@ public class PhotosFragment extends Fragment {
         //Dots for the slider.
         dotsLayout = (LinearLayout) view.findViewById(R.id.dotsLayout);
 
+        /*Verplaatst naar constructor*/
+        sliderAdapter = new ViewPagerAdapter(getContext(), imagesCabins);
 
-        sliderAdapter = new ViewPagerAdapter(getContext());
         mSlideViewPager.setAdapter(sliderAdapter);
 
         dotsCount = sliderAdapter.getCount();
@@ -80,7 +82,6 @@ public class PhotosFragment extends Fragment {
 
             }
         });
-
 
         return view;
     }

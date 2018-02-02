@@ -16,6 +16,7 @@ Deze class (Activity) maakt met behulp van de CabinObjectAdapter een RecyclerVie
  */
 public class AllCabins extends AppCompatActivity {
 
+    /*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +31,7 @@ public class AllCabins extends AppCompatActivity {
             mGeoObjects.add(
                     new GeoObject(GeoObject.PRE_DEFINED_CABINS[i].title
                     ,"Coördinates \n"  + GeoObject.PRE_DEFINED_CABINS[i].geoPoint.getLatitude() + "\n" + GeoObject.PRE_DEFINED_CABINS[i].geoPoint.getLatitude()
-                    ,GeoObject.PRE_DEFINED_CABINS[i].imageCabin));
+                    ,GeoObject.PRE_DEFINED_CABINS[i].imagesCabin));
         }
         RecyclerView mGeoRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1); //2 cells per row
@@ -38,4 +39,5 @@ public class AllCabins extends AppCompatActivity {
         CabinObjectAdapter mAdapter = new CabinObjectAdapter(this, mGeoObjects);
         mGeoRecyclerView.setAdapter(mAdapter);
     }
+    */
 }

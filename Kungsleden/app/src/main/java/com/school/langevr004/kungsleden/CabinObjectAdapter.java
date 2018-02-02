@@ -16,6 +16,21 @@ import java.util.List;
 
 public class CabinObjectAdapter extends RecyclerView.Adapter<CabinObjectViewHolder>
 {
+    @Override
+    public CabinObjectViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return null;
+    }
+
+    @Override
+    public void onBindViewHolder(CabinObjectViewHolder holder, int position) {
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return 0;
+    }
+    /*
     private Context context;
     public List<GeoObject> listGeoObject;
 
@@ -62,4 +77,5 @@ public class CabinObjectAdapter extends RecyclerView.Adapter<CabinObjectViewHold
         return listGeoObject.size();
     }
 
+*/
 }

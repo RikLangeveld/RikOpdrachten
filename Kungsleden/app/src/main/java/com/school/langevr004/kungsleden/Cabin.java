@@ -13,16 +13,16 @@ public class Cabin
     GeoPoint geoPoint;
     String title;
     String description;
-    int imageCabin;
+    int[] imagesCabin;
     int icon;
 
 
-    Cabin(GeoPoint geoPoint, String title, String description, int imageCabin)
+    Cabin(GeoPoint geoPoint, String title, String description, int[] imagesCabin)
     {
         this.geoPoint = geoPoint;
         this.title = title;
         this.description = description;
         this.icon = R.drawable.cabin_map_marker;
-        this.imageCabin = imageCabin;
+        this.imagesCabin = imagesCabin;
     }
 }

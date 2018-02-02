@@ -90,6 +90,5 @@ public class AccordionView extends Fragment
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
-
     }
 }
