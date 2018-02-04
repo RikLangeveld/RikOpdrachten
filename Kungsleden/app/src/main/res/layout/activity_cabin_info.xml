@@ -22,6 +22,13 @@
 
     </FrameLayout>
 
+    <LinearLayout
+        android:id="@+id/geoTypeLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal"></LinearLayout>
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"

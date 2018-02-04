@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
 
+    GeoObject geoObject;
+
     private Toolbar mToolbar;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

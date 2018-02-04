@@ -32,6 +32,8 @@ public class MapFragment extends Fragment {
     private final int START_ZOOM_LEVEL = 8; //Level of zoom on the map on startup
     private final double AKTSE_LAT = 67.14855, AKTSE_LNG = 18.30592; //Start Coördinates map
 
+    private GeoObject geoObject;
+
     public MapFragment() {
         // Required empty public constructor
     }
@@ -71,9 +73,9 @@ public class MapFragment extends Fragment {
         mapController.setCenter(startPoint);
 
         //Place all the markers on the map
-        for (int i = 0; i < TrailInformation.PRE_DEFINED_CABINS.length; i++)
+        for (int i = 0; i < TrailInformation.PRE_DEFINED_GEO_OBJECTS.length; i++)
         {
-            placeMarker(TrailInformation.PRE_DEFINED_CABINS[i], R.drawable.cabin_map_marker, TrailInformation.PRE_DEFINED_CABINS[i].title, "", "", i);
+            placeMarker(TrailInformation.PRE_DEFINED_GEO_OBJECTS[i], TrailInformation.PRE_DEFINED_GEO_OBJECTS[i].title, i);
         }
         //new UpdateRoadTask().doInBackground();
         Thread newThread = new Thread(MAKE_POLYLINE);
@@ -95,9 +97,10 @@ public class MapFragment extends Fragment {
             roadManager.addRequestOption("routeType=pedestrian");
             ArrayList<GeoPoint> waypoints = new ArrayList<>();
 
-            for (int i = 0; i < 14; i++)
+
+            for (int i = 0; i < TrailInformation.PRE_DEFINED_GEO_OBJECTS.length; i++)
             {
-                waypoints.add(TrailInformation.PRE_DEFINED_CABINS[i].geoPoint);
+                waypoints.add(TrailInformation.PRE_DEFINED_GEO_OBJECTS[i].geoPoint);
             }
 
             Road road = roadManager.getRoad(waypoints);
@@ -109,16 +112,15 @@ public class MapFragment extends Fragment {
 
     //All the information stored in a single marker
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void placeMarker(Cabin cabin, int icon, String title, String snippet, String subDescription, final int cabinNumber)
+    private void placeMarker(GeoObject geoObject, String snippet, final int cabinNumber)
     {
-        GeoPoint startPoint = cabin.geoPoint;
+        GeoPoint startPoint = geoObject.geoPoint;
         final Marker marker = new Marker(mMap);
         marker.setPosition(startPoint);
-        marker.setIcon(getResources().getDrawable(icon, getActivity().getApplicationContext().getTheme()));
-        marker.setTitle(title);
+        marker.setIcon(getResources().getDrawable(geoObject.getIcon(geoObject.geoObjectTypes[0]), getActivity().getApplicationContext().getTheme()));
+        marker.setTitle(geoObject.title);
         marker.setSnippet(snippet);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-        marker.setSubDescription(subDescription);
 
         marker.setOnMarkerClickListener(new Marker.OnMarkerClickListener()
         {
