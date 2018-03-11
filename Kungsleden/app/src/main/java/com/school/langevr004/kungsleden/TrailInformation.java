@@ -7,90 +7,55 @@ import org.osmdroid.util.GeoPoint;
  be accesed by whole project.
  */
 
-public class TrailInformation
-{
-    public enum GeoObjectType{
+public class TrailInformation {
+    public enum GeoObjectType {
+        VILLAGE,
+        HOTEL,
         CABIN,
         FOOD,
         BOAT
     }
 
-    public static final int [] BEST_IMAGES = {
-                    R.drawable.abisko, R.drawable.abiskojaure, R.drawable.ammarnas, R.drawable.placeholder_cabin, R.drawable.viterskalet, R.drawable.syter, R.drawable.sitojaure,
-            };
-
-    ///Coördinates van de hutten
-    private static final double
-            ABISKO_LAT = 68.349751, ABISO_LNG = 18.831246,
-            ABISKOJAURE_LAT = 68.286149, ABISKOJAURE_LNG =18.591220,
-            Alesjaurestugorna_LAT = 68.138411, Alesjaurestugorna_LNG = 18.414098;
-
-
-    //namen van de hutten
-    private static final String[] PRE_DEFINED_GEO_OBJECT_NAMES = {
-            "Cabin Abisko",
-            "Cabin ABISKOJAURE",
-            "Cabin Alesjaurestugorna",
+    //Beste Images van de Trail. Wordt onderandere gebruikt voor
+    public static final int[] BEST_IMAGES = {
+            R.drawable.abisko, R.drawable.abiskojaure, R.drawable.ammarnas, R.drawable.placeholder_cabin, R.drawable.viterskalet, R.drawable.syter, R.drawable.sitojaure,
     };
 
-    //descriptions van de hutten
-    private static final String[] PRE_DEFINED_GEO_OBJECT_DESCRIPTIONS = {
-            "Het meest noordelijke punt van de route",
-            "-",
-            "-",
-    };
+    ///Coördinates van de startlocatie
+    public static final double START_LAT = 57.2976, START_LNG = -4.9576;
 
-    //Afbeeldingen van de hutten.
-    private static final int[][] PRE_DEFINED_GEO_OBJECT_IMAGE_IDS = {
-            new int[] {R.drawable.abisko, R.drawable.serve, R.drawable.syter},
-            new int[] {R.drawable.abiskojaure, R.drawable.abisko, R.drawable.abisko},
-            new int[] {R.drawable.placeholder_cabin, R.drawable.abisko, R.drawable.abisko},
-    };
-
-    private static final GeoObjectType[][] PRE_DEFINED_GEO_OBJECT_TYPES = {
-            new GeoObjectType[] {GeoObjectType.CABIN, GeoObjectType.FOOD, GeoObjectType.BOAT},
-            new GeoObjectType[] {GeoObjectType.BOAT},
-            new GeoObjectType[] {GeoObjectType.FOOD}
-    };
-
-    //Geopoint samengesteld uit de coördinaten
-    private static final GeoPoint[] PRE_DEFINED_CABIN_OBJECT_POINT = {
-            new GeoPoint(ABISKO_LAT, ABISO_LNG),
-            new GeoPoint(ABISKOJAURE_LAT, ABISKOJAURE_LNG),
-            new GeoPoint(Alesjaurestugorna_LAT, Alesjaurestugorna_LNG),
-    };
-
-    //final objects van de Cabin class
+    /*
+    * Paramaters uitleg:
+     *1: Geopoint (positie op de kaart)
+     *2: Naam van Gepoint
+     *3: De omschijving van het punt
+     *4: De foto's bij het punt
+     *5: De categoriën dat bij het punt horen.
+    * */
     public static final GeoObject[] PRE_DEFINED_GEO_OBJECTS = {
-            new GeoObject(PRE_DEFINED_CABIN_OBJECT_POINT[0],PRE_DEFINED_GEO_OBJECT_NAMES[0], PRE_DEFINED_GEO_OBJECT_DESCRIPTIONS[0], PRE_DEFINED_GEO_OBJECT_IMAGE_IDS[0], PRE_DEFINED_GEO_OBJECT_TYPES[0]),
-            new GeoObject(PRE_DEFINED_CABIN_OBJECT_POINT[1],PRE_DEFINED_GEO_OBJECT_NAMES[1], PRE_DEFINED_GEO_OBJECT_DESCRIPTIONS[1], PRE_DEFINED_GEO_OBJECT_IMAGE_IDS[1], PRE_DEFINED_GEO_OBJECT_TYPES[1]),
-            new GeoObject(PRE_DEFINED_CABIN_OBJECT_POINT[2],PRE_DEFINED_GEO_OBJECT_NAMES[2], PRE_DEFINED_GEO_OBJECT_DESCRIPTIONS[2], PRE_DEFINED_GEO_OBJECT_IMAGE_IDS[2], PRE_DEFINED_GEO_OBJECT_TYPES[2])
+            new GeoObject(
+                    new GeoPoint(57.33538, -4.47991),
+                    "Drumnadrochit",
+                    "Drumnadrochit (Scottish Gaelic, Druim na Drochaid) is a village in the Highland local government council area of Scotland, " +
+                    "lying on the west shore of Loch Ness, at the foot of Glen Urquhart.",
+                    new int[]{R.drawable.abisko, R.drawable.serve, R.drawable.syter},
+                    new GeoObjectType[]{GeoObjectType.VILLAGE}),
+
+            new GeoObject(
+                    new GeoPoint(57.34682, -4.76431),
+                    "Cannich",
+                    "Cannich (Gaelic: Canaich) is a village at the southern end of Strathglass, in the Highlands of Scotland, " +
+                    "about 26 miles (42 km) west of the city of Inverness. It is at the furthest point of the A831 that loops around the Aird from Beauly to Drumnadrochit.",
+                    new int[]{R.drawable.abisko, R.drawable.serve},
+                    new GeoObjectType[]{GeoObjectType.VILLAGE}),
+
+            new GeoObject(
+                    new GeoPoint(57.23490, -5.38033),
+                    "Morvich",
+                    "Morvich (Gaelic:A’ Mhormhaich[1]) is a very small settlement in Glen Shiel near the southern end of Loch Duich, " +
+                    "and to the north of Kintail, in Lochalsh, in the Highland council area of Scotland. " +
+                    "The name \"Morvich\" may be from the Gaelic for \"sea plain\" or \"the carse\".[1]",
+                    new int[]{R.drawable.abisko, R.drawable.serve},
+                    new GeoObjectType[]{GeoObjectType.VILLAGE})
     };
-
-    private String mGeoName;
-    private String mCoördinates;
-    private int[] mGeoImageName;
-
-    public TrailInformation(String mGeoName, String mCoördinates, int[] mGeoImageName)
-    {
-        this.mGeoName = mGeoName;
-        this.mGeoImageName = mGeoImageName;
-        this.mCoördinates = mCoördinates;
-    }
-    public String getmGeoName()
-    {
-        return mGeoName;
-    }
-    public String getmCoördinatesString(){return mCoördinates;}
-    public void setmGeoName(String mGeoName) {
-        this.mGeoName = mGeoName;
-    }
-    public int[] getmGeoImageName()
-    {
-        return mGeoImageName;
-    }
-    public void setmGeoImageName(int[] mGeoImageName)
-    {
-        this.mGeoImageName = mGeoImageName;
-    }
 }

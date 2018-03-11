@@ -6,9 +6,8 @@ import static com.school.langevr004.kungsleden.TrailInformation.*;
 
 /**
  * Created by Rik on 3-2-2018.
+ * Deze class representeert een point of intrest op de kaart.
  */
-
-
 
 public class GeoObject
 {
@@ -41,6 +40,10 @@ public class GeoObject
                 return R.drawable.ic_food_icon;
             case BOAT:
                 return R.drawable.ic_boats;
+            case HOTEL:
+                return R.drawable.ic_boats;
+            case VILLAGE:
+                return R.drawable.ic_village;
             default:
                 return R.drawable.cabin_map_marker;
 

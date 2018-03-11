@@ -29,8 +29,7 @@ public class MapFragment extends Fragment {
     private MapView mMap;
     private View view;
 
-    private final int START_ZOOM_LEVEL = 8; //Level of zoom on the map on startup
-    private final double AKTSE_LAT = 67.14855, AKTSE_LNG = 18.30592; //Start Coördinates map
+    private final int START_ZOOM_LEVEL = 9; //Level of zoom on the map on startup
 
     private GeoObject geoObject;
 
@@ -69,7 +68,7 @@ public class MapFragment extends Fragment {
         //Set the startpoint of the map
         IMapController mapController = mMap.getController();
         mapController.setZoom(START_ZOOM_LEVEL);
-        GeoPoint startPoint = new GeoPoint(AKTSE_LAT, AKTSE_LNG);
+        GeoPoint startPoint = new GeoPoint(TrailInformation.START_LAT, TrailInformation.START_LNG);
         mapController.setCenter(startPoint);
 
         //Place all the markers on the map

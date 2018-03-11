@@ -35,7 +35,6 @@ public class cabinInfo extends AppCompatActivity {
         geoObjectTypesImages = (LinearLayout) findViewById(R.id.geoTypeLinearLayout);
 
         //ImageView imageView = (ImageView) findViewById(R.id.cabinImageView);
-        TextView textView = (TextView) findViewById(R.id.textViewCabin);
         TextView textViewDescription = (TextView) findViewById(R.id.textViewDescription);
 
         textViewDescription.setText(geoObject.description);
