@@ -29,7 +29,7 @@ public class MapFragment extends Fragment {
     private MapView mMap;
     private View view;
 
-    private final int START_ZOOM_LEVEL = 9; //Level of zoom on the map on startup
+    private final int START_ZOOM_LEVEL = 10; //Level of zoom on the map on startup
 
     private GeoObject geoObject;
 
@@ -49,6 +49,11 @@ public class MapFragment extends Fragment {
         mMap.setTileSource(TileSourceFactory.MAPNIK);
         mMap.setMultiTouchControls(true);
         setMap();
+
+        /*
+
+        */
+
         return view;
     }
 
@@ -95,7 +100,6 @@ public class MapFragment extends Fragment {
 
             roadManager.addRequestOption("routeType=pedestrian");
             ArrayList<GeoPoint> waypoints = new ArrayList<>();
-
 
             for (int i = 0; i < TrailInformation.PRE_DEFINED_GEO_OBJECTS.length; i++)
             {

@@ -11,6 +11,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <ImageButton
+            android:id="@+id/cabins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="0dp"
+            android:scaleType="fitStart"
+            app:srcCompat="@drawable/ic_boats" />
+
         <include
             layout="@layout/navigation_action"
             android:layout_width="match_parent"

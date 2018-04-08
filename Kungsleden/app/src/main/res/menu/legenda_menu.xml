@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/cabins"
         android:checkable="true"
+        android:checked="true"
         android:icon="@mipmap/ic_terrain_white_24dp"
         android:title="Cabins" />
 
     <item
         android:id="@+id/food"
         android:checkable="true"
+        android:checked="true"
         android:icon="@mipmap/ic_map_white_24dp"
         android:title="Food" />
 
     <item
         android:id="@+id/boats"
         android:checkable="true"
+        android:checked="true"
+        android:enabled="true"
         android:icon="@mipmap/ic_place_white_24dp"
         android:title="Boats" />
 
