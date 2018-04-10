@@ -36,6 +36,7 @@
 		{
 			float minDist = 10.0;
 			float maxDist = 150.0;
+			//Tessellation is indicated by tessellate:FunctionName modifier. That function computes triangle edge and inside tessellation factors.
 			return UnityDistanceBasedTess(v0.vertex, v1.vertex, v2.vertex, minDist, maxDist, _Tess);
 		}
 
@@ -45,6 +46,8 @@
 
 		void disp(inout appdata v)
 		{
+			//tex2Dlod - 2D texture lookup with specified level of detail and optional texel offset.
+			//displace the vertex based on the amount of red in the splatmap
 			float d = tex2Dlod(_Splat, float4(v.texcoord.xy,0,0)).r * _Displacement;
 			v.vertex.xyz -= v.normal * d;
 			v.vertex.xyz += v.normal * _Displacement;
@@ -72,13 +75,15 @@
 			// put more per-instance properties here
 		UNITY_INSTANCING_BUFFER_END(Props)
 
-		void surf (Input IN, inout SurfaceOutputStandard o) {
-			// Albedo comes from a texture tinted by color
+		void surf (Input IN, inout SurfaceOutputStandard o) 
+		{
+			// Get the amount of red of the surface
 			half amount = tex2Dlod(_Splat, float4(IN.uv_Splat, 0, 0)).r;
+
+			//Lerp between the to textures based on the amount, calculated by using the splatmap
 			fixed4 c = lerp(tex2D(_UpperTex, IN.uv_UpperTex) * _UpperColor, tex2D(_LowerTex, IN.uv_LowerTex) * _LowerColor, amount);
-			//fixed4 c = tex2D (_UpperTex, IN.uv_UpperTex) * _UpperColor;
+			
 			o.Albedo = c.rgb;
-			// Metallic and smoothness come from slider variables
 			o.Metallic = _Metallic;
 			o.Smoothness = _Glossiness;
 			o.Alpha = c.a;

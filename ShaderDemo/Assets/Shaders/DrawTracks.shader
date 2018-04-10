@@ -50,10 +50,12 @@
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				// sample the texture
 				fixed4 col = tex2D(_MainTex, i.uv);
+				//Return the the distance to the center of the coordiante (If this is to high draw will be 0)
 				float draw = pow(saturate(1 - distance(i.uv, _Coordinate.xy)), 500/_Size);
+				//calculate the amount of red that needs to be added.
 				fixed4 drawCol = _Color * (draw * _Strength);
+				//increase the color of the fragment.
 				return saturate(col + drawCol);
 			}
 			ENDCG
