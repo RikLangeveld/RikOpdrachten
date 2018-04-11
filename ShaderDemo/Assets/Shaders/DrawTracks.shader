@@ -7,6 +7,7 @@
 		_Color("Draw Color", Color) = (1,0,0,0)
 		_Size("Size", Range (1,500)) = 1
 		_Strength("Strength", Range(0,1)) =1
+		_SnowGrowth("Snow Growth", Range(1,3000)) =250
 	}
 
 	SubShader
@@ -37,7 +38,7 @@
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
 			fixed4 _Coordinate, _Color;
-			half _Size, _Strength;
+			half _Size, _Strength, _SnowGrowth;
 
 			
 			v2f vert (appdata v)
@@ -56,7 +57,8 @@
 				//calculate the amount of red that needs to be added.
 				fixed4 drawCol = _Color * (draw * _Strength);
 				//increase the color of the fragment.
-				return saturate(col + drawCol);
+
+				return saturate(col + drawCol - 1/ _SnowGrowth);
 			}
 			ENDCG
 		}

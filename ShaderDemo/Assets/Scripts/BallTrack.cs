@@ -11,6 +11,8 @@ public class BallTrack : MonoBehaviour {
     public float _brushSize;
     [Range(0, 1)]
     public float _brushStrength;
+    [Range(0, 3000)]
+    public float _snowGrowth;
 
     private int _layerMask;
     private RaycastHit _groundHit;
@@ -36,6 +38,7 @@ public class BallTrack : MonoBehaviour {
             _drawMaterial.SetVector("_Coordinate", new Vector4(_groundHit.textureCoord.x, _groundHit.textureCoord.y, 0, 0));
             _drawMaterial.SetFloat("_Strength", _brushStrength);
             _drawMaterial.SetFloat("_Size", _brushSize);
+            _drawMaterial.SetFloat("_SnowGrowth", _snowGrowth);
             RenderTexture temp = RenderTexture.GetTemporary(_splatmap.width, _splatmap.height, 0, RenderTextureFormat.ARGBFloat);
             Graphics.Blit(_splatmap, temp);
             Graphics.Blit(temp, _splatmap, _drawMaterial);
